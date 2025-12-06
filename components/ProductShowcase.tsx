@@ -13,35 +13,35 @@ const products = [
     scale: 'scale-70',
   },
   {
-    image: '/images/tins/tin-250ml.jpg',
+    image: '/images/tins/tin250ml.png',
     sizeKey: '250ml',
     label: '250ml',
     accent: '#8b7355',
     scale: 'scale-80',
   },
   {
-    image: '/images/tins/tin-1l-absolute-matt.jpg',
+    image: '/images/tins/tin1l.png',
     sizeKey: '1l',
     label: '1L',
     accent: '#6b7d6b',
     scale: 'scale-90',
   },
   {
-    image: '/2.5-litre.jpeg',
+    image: '/images/tins/tin2.5l.png',
     sizeKey: '2_5l',
     label: '2.5L',
     accent: '#5a6b5a',
     scale: 'scale-100',
   },
   {
-    image: '/images/tins/tin-5l-absolute-matt.jpg',
+    image: '/images/tins/tin5l.png',
     sizeKey: '5l',
     label: '5L',
     accent: '#2d3e36',
     scale: 'scale-90',
   },
   {
-    image: '/images/tins/tin-10l-absolute-matt.jpg',
+    image: '/images/tins/tin10l.png',
     sizeKey: '10l',
     label: '10L',
     accent: '#4a5d52',
@@ -102,7 +102,7 @@ export default function ProductShowcase() {
                   style={{ backgroundColor: product.accent }}
                 />
                 
-                <div className="relative aspect-square mb-2 sm:mb-3 lg:mb-4 rounded-lg sm:rounded-xl overflow-hidden bg-gradient-to-br from-[#f8f6f3] to-[#ebe7e0]">
+                <div className="relative aspect-square mb-2 sm:mb-3 lg:mb-4 rounded-lg sm:rounded-xl overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
                   <div 
                     className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 hidden sm:block"
                     style={{ background: `radial-gradient(circle at center, ${product.accent}, transparent 70%)` }}
