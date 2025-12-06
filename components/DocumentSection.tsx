@@ -46,6 +46,14 @@ const products: Product[] = [
     image: '/images/moodboards/Flatlay_B&MLG_French_Grey.jpg',
     datasheet: '/documents/ZxYyCoF3NbkBXw2c_11499-LGRAS_EN_2024_WallPrimerSealer.pdf',
   },
+  {
+    id: 'intelligent-asp',
+    name: 'intelligentAsp',
+    category: 'primer',
+    image: '/images/moodboards/Flatlay_B&MLG_Rolling_fog.jpg',
+    datasheet: '/documents/Zr3PPkaF0TcGI9A6_11499-LGRAS_EN_2024_IntASP.pdf',
+    specs: '/documents/Z-P6LXdAxsiBv7RD_LGTDSIntelligentASP_EN24.pdf',
+  },
 ];
 
 const certificatePages = Array.from({ length: 13 }, (_, i) => 
@@ -298,7 +306,9 @@ export default function DocumentSection() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="font-medium text-[#2d3e36] text-sm sm:text-base">{t('prodSpecs')}</div>
-                      <div className="text-xs sm:text-sm text-[#666666]">{t('formats.docxKa')}</div>
+                      <div className="text-xs sm:text-sm text-[#666666]">
+                        {selectedProduct.specs.endsWith('.pdf') ? t('formats.pdfEn') : t('formats.docxKa')}
+                      </div>
                     </div>
                   </div>
                 )}
