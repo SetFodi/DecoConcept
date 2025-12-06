@@ -1,0 +1,119 @@
+{
+  "navigation": {
+    "home": "Home",
+    "paints": "Paints",
+    "contact": "Contact"
+  },
+  "hero": {
+    "tagline": "Premium Paints & Finishes",
+    "subtitle": "Transform your space with exceptional quality",
+    "discoverMore": "Discover More",
+    "viewColors": "View Colors",
+    "colorsCount": "300+ Colors",
+    "available": "Available",
+    "scroll": "Scroll"
+  },
+  "about": {
+    "label": "About Us",
+    "logoTagline": "Premium Paints & Expert Service",
+    "decoTitle": "About Deco Concept LLC",
+    "decoDescription": "Deco Concept LLC is Georgia's premier destination for luxury paints and wall finishes. We bring world-class products to discerning customers who demand nothing but the best for their spaces. Our commitment to quality and expertise sets us apart as the trusted partner for interior designers, architects, and homeowners alike.",
+    "officialPartner": "Official Partner",
+    "partnerName": "Little Greene Paints",
+    "stats": {
+      "colors": "Colors Available",
+      "quality": "Quality Products",
+      "eco": "Friendly Paints",
+      "expert": "Consultation"
+    },
+    "littleGreeneTitle": "Little Greene",
+    "littleGreeneSubtitle": "300 Years of British Heritage",
+    "littleGreeneDescription": "Little Greene is an eco-friendly, family-run business cataloguing 300 years of paint and wallpaper. Based in the UK, they create premium paints using traditional methods and the finest ingredients. Their Intelligent paint range offers exceptional durability and a beautiful finish that stands the test of time.",
+    "tags": {
+      "heritage": "Heritage Colors",
+      "sustainable": "Sustainable",
+      "british": "British Made"
+    }
+  },
+  "products": {
+    "label": "Our Range",
+    "title": "Premium Collection",
+    "subtitle": "Explore our curated selection of premium paints from world-renowned brands",
+    "sizes": {
+      "60ml": "60ml Sample Pot",
+      "250ml": "250ml Sample",
+      "1l": "1 Litre",
+      "2_5l": "2.5 Litres",
+      "5l": "5 Litres",
+      "10l": "10 Litres"
+    }
+  },
+  "gallery": {
+    "label": "Gallery",
+    "title": "Find Your Inspiration",
+    "subtitle": "Explore beautifully curated interiors showcasing the timeless elegance of Little Greene paints"
+  },
+  "documents": {
+    "label": "Resources",
+    "title": "Technical Information",
+    "subtitle": "Certificates & Data Sheets",
+    "productNames": {
+      "intelligentMatt": "Intelligent Matt Emulsion",
+      "intelligentEggshell": "Intelligent Eggshell",
+      "absoluteMatt": "Absolute Matt Emulsion",
+      "wallPrimer": "Wall Primer Sealer"
+    },
+    "categories": {
+      "all": "All Products",
+      "interior": "Interior Paints",
+      "primer": "Primers"
+    },
+    "types": {
+      "interior": "Interior Paint",
+      "primer": "Primer"
+    },
+    "viewDetails": "View Details",
+    "documentCount": "{count, plural, =1 {1 Document} other {# Documents}}",
+    "viewCertificates": "View Certificates",
+    "certTitle": "Little Greene Certification",
+    "certDocName": "Quality & Safety Certificate",
+    "certDocDesc": "Official certification document",
+    "pages": "pages",
+    "page": "Page",
+    "availableDocs": "Available Documents",
+    "techSheet": "Technical Data Sheet",
+    "prodSpecs": "Product Specifications",
+    "formats": {
+      "pdfEn": "PDF • English",
+      "docxKa": "DOCX • Georgian"
+    },
+    "download": "Download"
+  },
+  "paints": {
+    "title": "Paint Collection",
+    "catalog": "Catalog",
+    "brands": "Brands",
+    "allColors": "All Colors",
+    "searchPlaceholder": "Search colors..."
+  },
+  "contact": {
+    "label": "Get in Touch",
+    "title": "Contact Us",
+    "subtitle": "We'd love to hear from you",
+    "detailsTitle": "Contact Details",
+    "followUs": "Follow Us",
+    "whatsappTitle": "Quick Response via WhatsApp",
+    "whatsappDesc": "Connect with us instantly on WhatsApp for personalized color consultations and product inquiries",
+    "whatsappButton": "Chat on WhatsApp",
+    "fastResponse": "Fast Response",
+    "expertAdvice": "Expert Advice",
+    "openMaps": "Open in Google Maps",
+    "address": "Address",
+    "email": "Email",
+    "phone": "Phone"
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "tagline": "Premium Paints & Finishes"
+  }
+}
