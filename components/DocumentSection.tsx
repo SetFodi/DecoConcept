@@ -21,7 +21,7 @@ const products: Product[] = [
     category: 'interior',
     image: '/images/moodboards/Mid Azure Green 96.jpg',
     datasheet: '/documents/Zr3N8UaF0TcGI9AI_11499-LGRAS_EN_2024_IntMattEmulsion.pdf',
-    specs: '/documents/specs/Intelligent-Matt-Specs.docx',
+    specs: '/documents/specs/Intelligent-Matt-Specs.pdf',
   },
   {
     id: 'intelligent-eggshell',
@@ -29,7 +29,7 @@ const products: Product[] = [
     category: 'interior',
     image: '/images/moodboards/Obsidian Green 216.jpg',
     datasheet: '/documents/Zr3NqEaF0TcGI8___11499-LGRAS_EN_2024_IntEggshell.pdf',
-    specs: '/documents/specs/Intelligent-Eggshell-Specs.docx',
+    specs: '/documents/specs/Intelligent-Eggshell-Specs.pdf',
   },
   {
     id: 'absolute-matt',
@@ -37,7 +37,7 @@ const products: Product[] = [
     category: 'interior',
     image: '/images/moodboards/Jewel Beetle 303.jpg',
     datasheet: '/documents/Zr3NeEaF0TcGI8_z_11499-LGRAS_EN_2024_AbsoluteMatt.pdf',
-    specs: '/documents/specs/Intelligent-ASP-Specs.docx',
+    specs: '/documents/specs/Intelligent-ASP-Specs.pdf',
   },
   {
     id: 'wall-primer',
@@ -297,7 +297,12 @@ export default function DocumentSection() {
                 </a>
                 
                 {selectedProduct.specs && (
-                  <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-[#f8f6f3] rounded-xl">
+                  <a
+                    href={selectedProduct.specs}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-[#f8f6f3] rounded-xl hover:bg-[#ebe7e0] active:scale-[0.98] transition-all group"
+                  >
                     <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
                       <svg className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zM6 20V4h7v5h5v11H6z"/>
@@ -310,7 +315,15 @@ export default function DocumentSection() {
                         {selectedProduct.specs.endsWith('.pdf') ? t('formats.pdfEn') : t('formats.docxKa')}
                       </div>
                     </div>
-                  </div>
+                    <svg
+                      className="w-5 h-5 text-[#666666] group-hover:text-[#2a4556] transition-colors flex-shrink-0"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6h8m0 0v8m0-8L10 14M8 8v10a2 2 0 002 2h10" />
+                    </svg>
+                  </a>
                 )}
               </div>
             </div>
