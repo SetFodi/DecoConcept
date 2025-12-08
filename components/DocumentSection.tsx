@@ -37,7 +37,7 @@ const products: Product[] = [
     category: 'interior',
     image: '/images/moodboards/Jewel Beetle 303.jpg',
     datasheet: '/documents/Zr3NeEaF0TcGI8_z_11499-LGRAS_EN_2024_AbsoluteMatt.pdf',
-    specs: '/documents/specs/Intelligent-ASP-Specs.pdf',
+    specs: '/documents/specs/20250000_Intelligent_Matt_Cat_III_2022.pdf',
   },
   {
     id: 'wall-primer',
@@ -51,8 +51,7 @@ const products: Product[] = [
     name: 'intelligentAsp',
     category: 'primer',
     image: '/images/moodboards/Flatlay_B&MLG_Rolling_fog.jpg',
-    datasheet: '/documents/Zr3PPkaF0TcGI9A6_11499-LGRAS_EN_2024_IntASP.pdf',
-    specs: '/documents/Z-P6LXdAxsiBv7RD_LGTDSIntelligentASP_EN24.pdf',
+    datasheet: '/documents/Zr3PPkaF0TcGI9A6_11499-LGRAS_EN_2024_IntASP.pdf'
   },
 ];
 
