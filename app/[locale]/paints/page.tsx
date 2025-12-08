@@ -71,7 +71,7 @@ export default function PaintsPage() {
           quality={90}
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#2d3e36]/90 via-[#2d3e36]/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#2a4556]/90 via-[#2a4556]/50 to-transparent" />
         
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center text-white px-4">
@@ -88,7 +88,7 @@ export default function PaintsPage() {
             </p>
             
             <div className="mt-4 sm:mt-8 flex justify-center gap-2 sm:gap-3">
-              {['#2d3e36', '#6b7d6b', '#8b8178', '#c4a882', '#a07850', '#5a7a6b'].map((color, i) => (
+              {['#2a4556', '#4a7a96', '#8b8178', '#c4a882', '#a07850', '#5a7a6b'].map((color, i) => (
                 <div
                   key={color}
                   className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 rounded-full border-2 border-white/30 shadow-lg transition-transform duration-300"
@@ -109,13 +109,13 @@ export default function PaintsPage() {
       <div className="lg:hidden sticky top-16 z-30 bg-[#f8f6f3] border-b border-[#e8e0d4] px-4 py-3">
         <button
           onClick={() => setSidebarOpen(true)}
-          className="flex items-center gap-2 px-4 py-2.5 bg-white rounded-xl border border-[#e8e0d4] text-[#2d3e36] font-medium text-sm shadow-sm active:scale-[0.98] transition-all"
+          className="flex items-center gap-2 px-4 py-2.5 bg-white rounded-xl border border-[#e8e0d4] text-[#2a4556] font-medium text-sm shadow-sm active:scale-[0.98] transition-all"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
           </svg>
           {t('catalog')}
-          {selectedBrand && <span className="px-2 py-0.5 bg-[#2d3e36] text-white text-xs rounded-full">{selectedBrand}</span>}
+          {selectedBrand && <span className="px-2 py-0.5 bg-[#2a4556] text-white text-xs rounded-full">{selectedBrand}</span>}
         </button>
       </div>
 
@@ -135,12 +135,12 @@ export default function PaintsPage() {
         >
           {/* Mobile Header */}
           <div className="flex items-center justify-between p-4 border-b border-[#e8e0d4] lg:hidden">
-            <h2 className="text-lg font-serif text-[#2d3e36]">
+            <h2 className="text-lg font-serif text-[#2a4556]">
               {t('catalog')}
             </h2>
             <button
               onClick={() => setSidebarOpen(false)}
-              className="p-2 text-[#666666] hover:text-[#2d3e36] active:scale-95 transition-all"
+              className="p-2 text-[#666666] hover:text-[#2a4556] active:scale-95 transition-all"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -149,7 +149,7 @@ export default function PaintsPage() {
           </div>
 
           <div className="p-4 sm:p-6 overflow-y-auto h-[calc(100%-4rem)] lg:h-full">
-            <h2 className="text-xl font-serif text-[#2d3e36] mb-6 hidden lg:block">
+            <h2 className="text-xl font-serif text-[#2a4556] mb-6 hidden lg:block">
               {t('catalog')}
             </h2>
             
@@ -164,8 +164,8 @@ export default function PaintsPage() {
                     onClick={() => handleBrandSelect(brand)}
                     className={`w-full text-left px-4 py-3 rounded-lg transition-all active:scale-[0.98] ${
                       selectedBrand === brand
-                        ? 'bg-[#2d3e36] text-white'
-                        : 'text-[#666666] hover:bg-[#f8f6f3] hover:text-[#2d3e36]'
+                        ? 'bg-[#2a4556] text-white'
+                        : 'text-[#666666] hover:bg-[#f8f6f3] hover:text-[#2a4556]'
                     }`}
                   >
                     {brand}
@@ -181,7 +181,7 @@ export default function PaintsPage() {
                   setSearchQuery('');
                   if (window.innerWidth < 1024) setSidebarOpen(false);
                 }}
-                className="w-full text-left px-4 py-3 rounded-lg text-[#666666] hover:bg-[#f8f6f3] hover:text-[#2d3e36] active:scale-[0.98] transition-all"
+                className="w-full text-left px-4 py-3 rounded-lg text-[#666666] hover:bg-[#f8f6f3] hover:text-[#2a4556] active:scale-[0.98] transition-all"
               >
                 {t('allColors')}
               </button>
@@ -194,7 +194,7 @@ export default function PaintsPage() {
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-6 sm:mb-8">
               <div>
                 <p className="text-sm sm:text-base text-[#666666]">
-                  Showing <span className="font-medium text-[#2d3e36]">{filteredColors.length}</span> colors
+                  Showing <span className="font-medium text-[#2a4556]">{filteredColors.length}</span> colors
                 </p>
               </div>
               
@@ -204,7 +204,7 @@ export default function PaintsPage() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder={t('searchPlaceholder')}
-                  className="w-full px-4 py-2.5 sm:py-3 pl-10 bg-white border border-[#e8e0d4] rounded-xl text-[#333333] placeholder-[#999999] focus:outline-none focus:border-[#2d3e36] focus:ring-2 focus:ring-[#2d3e36]/10 transition-all text-sm sm:text-base"
+                  className="w-full px-4 py-2.5 sm:py-3 pl-10 bg-white border border-[#e8e0d4] rounded-xl text-[#333333] placeholder-[#999999] focus:outline-none focus:border-[#2a4556] focus:ring-2 focus:ring-[#2a4556]/10 transition-all text-sm sm:text-base"
                 />
                 <svg 
                   className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-[#999999]"

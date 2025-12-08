@@ -32,7 +32,7 @@ export default function AboutSection() {
             <div className="flex items-center gap-3 mb-5 sm:mb-6">
               <div className="h-px w-10 sm:w-16 bg-gradient-to-r from-transparent to-[#d4c5b0]" />
               <div className="flex gap-1">
-                {['#2d3e36', '#6b7d6b', '#c4a882'].map((color) => (
+                {['#2a4556', '#4a7a96', '#c4a882'].map((color) => (
                   <div
                     key={color}
                     className="w-1.5 h-1.5 rounded-full transition-all duration-500"
@@ -45,7 +45,7 @@ export default function AboutSection() {
 
             {/* Logo with subtle glow */}
             <div className="relative mb-4 sm:mb-5">
-              <div className="absolute inset-0 bg-[#2d3e36]/3 blur-xl rounded-full scale-150" />
+              <div className="absolute inset-0 bg-[#2a4556]/3 blur-xl rounded-full scale-150" />
               <Image
                 src="/images/deco-concept-logo.png"
                 alt="Deco Concept LLC"
@@ -78,12 +78,12 @@ export default function AboutSection() {
               ref={decoRef}
               className={`reveal-left ${decoRevealed ? 'revealed' : ''}`}
             >
-              <div className="inline-flex items-center gap-2 mb-4 sm:mb-6 text-xs sm:text-sm font-medium text-[#6b7d6b] uppercase tracking-widest">
-                <span className="w-6 sm:w-8 h-px bg-[#6b7d6b]" />
+              <div className="inline-flex items-center gap-2 mb-4 sm:mb-6 text-xs sm:text-sm font-medium text-[#4a7a96] uppercase tracking-widest">
+                <span className="w-6 sm:w-8 h-px bg-[#4a7a96]" />
                 {t('label')}
               </div>
               
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-[#2d3e36] mb-6 sm:mb-8 leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-[#2a4556] mb-6 sm:mb-8 leading-tight">
                 <span className="brush-underline">{t('decoTitle')}</span>
               </h2>
               
@@ -101,8 +101,8 @@ export default function AboutSection() {
                 />
                 <div className="hidden sm:block h-16 w-px bg-[#e8e0d4]" />
                 <div className="sm:border-l sm:border-[#e8e0d4] sm:pl-6 lg:border-none lg:pl-0">
-                  <div className="text-xs sm:text-sm text-[#6b7d6b] font-medium uppercase tracking-wider">{t('officialPartner')}</div>
-                  <div className="text-base sm:text-lg text-[#2d3e36] font-serif">{t('partnerName')}</div>
+                  <div className="text-xs sm:text-sm text-[#4a7a96] font-medium uppercase tracking-wider">{t('officialPartner')}</div>
+                  <div className="text-base sm:text-lg text-[#2a4556] font-serif">{t('partnerName')}</div>
                 </div>
               </div>
             </div>
@@ -118,7 +118,7 @@ export default function AboutSection() {
                     className={`swatch-card text-center p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-[#f8f6f3] to-[#ebe7e0] rounded-xl sm:rounded-2xl border border-[#e8e0d4]/50`}
                     style={{ transitionDelay: `${index * 0.1}s` }}
                   >
-                    <div className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#2d3e36] mb-2 sm:mb-3 gradient-text">
+                    <div className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#2a4556] mb-2 sm:mb-3 gradient-text">
                       {stat.value}
                     </div>
                     <div className="text-xs sm:text-sm text-[#666666] font-medium uppercase tracking-wider">
@@ -134,8 +134,8 @@ export default function AboutSection() {
 
       <section className="relative py-16 sm:py-24 lg:py-32 bg-[#f8f6f3] overflow-hidden noise-texture">
         <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-20 left-10 w-40 h-40 rounded-full bg-[#6b7d6b] organic-blob" />
-          <div className="absolute bottom-20 right-20 w-56 h-56 rounded-full bg-[#2d3e36] organic-blob" style={{ animationDelay: '-4s' }} />
+          <div className="absolute top-20 left-10 w-40 h-40 rounded-full bg-[#4a7a96] organic-blob" />
+          <div className="absolute bottom-20 right-20 w-56 h-56 rounded-full bg-[#2a4556] organic-blob" style={{ animationDelay: '-4s' }} />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -200,8 +200,8 @@ export default function AboutSection() {
                   </div>
                 </div>
 
-                <div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 w-20 h-20 sm:w-32 sm:h-32 bg-[#2d3e36] rounded-xl sm:rounded-2xl -z-10 hidden sm:block" />
-                <div className="absolute -top-4 -right-4 sm:-top-6 sm:-right-6 w-16 h-16 sm:w-24 sm:h-24 bg-[#6b7d6b]/20 rounded-xl sm:rounded-2xl -z-10 hidden sm:block" />
+                <div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 w-20 h-20 sm:w-32 sm:h-32 bg-[#2a4556] rounded-xl sm:rounded-2xl -z-10 hidden sm:block" />
+                <div className="absolute -top-4 -right-4 sm:-top-6 sm:-right-6 w-16 h-16 sm:w-24 sm:h-24 bg-[#4a7a96]/20 rounded-xl sm:rounded-2xl -z-10 hidden sm:block" />
               </div>
             </div>
             
@@ -218,8 +218,8 @@ export default function AboutSection() {
               />
               
               <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-                <div className="h-1 w-8 sm:w-12 bg-gradient-to-r from-[#2d3e36] to-[#6b7d6b] rounded-full" />
-                <span className="text-base sm:text-lg text-[#6b7d6b] font-serif italic">
+                <div className="h-1 w-8 sm:w-12 bg-gradient-to-r from-[#2a4556] to-[#4a7a96] rounded-full" />
+                <span className="text-base sm:text-lg text-[#4a7a96] font-serif italic">
                   {t('littleGreeneSubtitle')}
                 </span>
               </div>
@@ -236,7 +236,7 @@ export default function AboutSection() {
                 ].map((tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/80 backdrop-blur-sm text-[#2d3e36] text-xs sm:text-sm font-medium rounded-full border border-[#e8e0d4] shadow-sm"
+                    className="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/80 backdrop-blur-sm text-[#2a4556] text-xs sm:text-sm font-medium rounded-full border border-[#e8e0d4] shadow-sm"
                   >
                     {tag}
                   </span>

@@ -88,15 +88,15 @@ export default function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`relative text-md font-medium tracking-wide transition-colors hover:text-[#2d3e36] ${
+                  className={`relative text-md font-medium tracking-wide transition-colors hover:text-[#2a4556] ${
                     pathname === link.href
-                      ? 'text-[#2d3e36]'
+                      ? 'text-[#2a4556]'
                       : 'text-[#666666]'
                   }`}
                 >
                   {link.label}
                   <span 
-                    className={`absolute -bottom-1 left-0 h-0.5 bg-[#2d3e36] transition-all duration-300 ${
+                    className={`absolute -bottom-1 left-0 h-0.5 bg-[#2a4556] transition-all duration-300 ${
                       pathname === link.href ? 'w-full' : 'w-0'
                     }`}
                   />
@@ -110,8 +110,8 @@ export default function Header() {
                   onClick={() => handleLocaleChange('en')}
                   className={`px-2.5 py-1.5 sm:px-4 sm:py-2 text-xs font-medium rounded-full transition-all duration-300 ${
                     locale === 'en'
-                      ? 'bg-[#2d3e36] text-white shadow-sm'
-                      : 'text-[#666666] hover:text-[#2d3e36]'
+                      ? 'bg-[#2a4556] text-white shadow-sm'
+                      : 'text-[#666666] hover:text-[#2a4556]'
                   }`}
                 >
                   EN
@@ -120,8 +120,8 @@ export default function Header() {
                   onClick={() => handleLocaleChange('ka')}
                   className={`px-2.5 py-1.5 sm:px-4 sm:py-2 text-xs font-medium rounded-full transition-all duration-300 ${
                     locale === 'ka'
-                      ? 'bg-[#2d3e36] text-white shadow-sm'
-                      : 'text-[#666666] hover:text-[#2d3e36]'
+                      ? 'bg-[#2a4556] text-white shadow-sm'
+                      : 'text-[#666666] hover:text-[#2a4556]'
                   }`}
                 >
                   GE
@@ -130,7 +130,7 @@ export default function Header() {
 
               <button
                 onClick={toggleMenu}
-                className="md:hidden p-2 text-[#666666] hover:text-[#2d3e36] transition-colors relative z-50"
+                className="md:hidden p-2 text-[#666666] hover:text-[#2a4556] transition-colors relative z-50"
                 aria-label="Toggle menu"
                 aria-expanded={mobileMenuOpen}
               >
@@ -183,8 +183,8 @@ export default function Header() {
                 onClick={closeMenu}
                 className={`px-4 py-4 text-base font-medium tracking-wide transition-all duration-200 rounded-xl active:scale-[0.98] ${
                   pathname === link.href
-                    ? 'bg-[#2d3e36] text-white'
-                    : 'text-[#2d3e36] hover:bg-[#f8f6f3] active:bg-[#ebe7e0]'
+                    ? 'bg-[#2a4556] text-white'
+                    : 'text-[#2a4556] hover:bg-[#f8f6f3] active:bg-[#ebe7e0]'
                 }`}
                 style={{ 
                   transitionDelay: mobileMenuOpen ? `${index * 50}ms` : '0ms',

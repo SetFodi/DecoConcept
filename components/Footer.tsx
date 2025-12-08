@@ -38,21 +38,21 @@ export default function Footer() {
   const navT = useTranslations('navigation');
 
   return (
-    <footer className="bg-[#2d3e36] text-white">
+    <footer className="bg-[#2a4556] text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 sm:gap-8">
           <div className="flex flex-col gap-3 sm:gap-4">
             <div className="flex items-center gap-4 sm:gap-6">
               <span className="text-lg sm:text-xl font-serif tracking-wide">Deco Concept LLC</span>
-              <div className="hidden sm:flex gap-2">
-                {['#8b7355', '#6b7d6b', '#c4a882'].map((color) => (
-                  <div
-                    key={color}
-                    className="w-4 h-4 rounded-full border border-white/20"
-                    style={{ backgroundColor: color }}
-                  />
-                ))}
-              </div>
+            <div className="hidden sm:flex gap-2">
+              {['#8b7355', '#4a7a96', '#c4a882'].map((color) => (
+                <div
+                  key={color}
+                  className="w-4 h-4 rounded-full border border-white/20"
+                  style={{ backgroundColor: color }}
+                />
+              ))}
+            </div>
             </div>
             <a 
               href="mailto:decoconceptbatumi@gmail.com" 
@@ -65,27 +65,27 @@ export default function Footer() {
           <div className="flex flex-col items-start md:items-end gap-4 w-full md:w-auto">
             <nav className="flex flex-wrap items-center gap-3 sm:gap-6 text-xs sm:text-sm">
               <Link href="/" className="text-white/70 hover:text-white active:text-white/90 transition-colors">
-                {navT('home')}
-              </Link>
+              {navT('home')}
+            </Link>
               <Link href="/paints" className="text-white/70 hover:text-white active:text-white/90 transition-colors">
-                {navT('paints')}
-              </Link>
+              {navT('paints')}
+            </Link>
               <Link href="/contact" className="text-white/70 hover:text-white active:text-white/90 transition-colors">
-                {navT('contact')}
-              </Link>
+              {navT('contact')}
+            </Link>
               <span className="text-white/30 hidden sm:inline">|</span>
-              <a
-                href="https://www.littlegreene.com"
-                target="_blank"
-                rel="noopener noreferrer"
+            <a
+              href="https://www.littlegreene.com"
+              target="_blank"
+              rel="noopener noreferrer"
                 className="text-white/70 hover:text-white active:text-white/90 transition-colors flex items-center gap-1"
-              >
-                Little Greene
-                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
-            </nav>
+            >
+              Little Greene
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </nav>
 
             <div className="flex items-center gap-2 sm:gap-3">
               {socialLinks.map((social) => (

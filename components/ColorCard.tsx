@@ -21,7 +21,7 @@ export default function ColorCard({ color }: ColorCardProps) {
       </div>
       
       <div className="p-2.5 sm:p-4">
-        <h3 className="text-sm sm:text-base font-serif text-[#2d3e36] sm:group-hover:text-[#3d4f44] transition-colors truncate">
+        <h3 className="text-sm sm:text-base font-serif text-[#2a4556] sm:group-hover:text-[#3a5a6e] transition-colors truncate">
           {color.name}
         </h3>
         <div className="flex items-center justify-between mt-0.5 sm:mt-1">

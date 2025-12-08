@@ -23,7 +23,7 @@ const products = [
     image: '/images/tins/tin1l.png',
     sizeKey: '1l',
     label: '1L',
-    accent: '#6b7d6b',
+    accent: '#4a7a96',
     scale: 'scale-90',
   },
   {
@@ -37,7 +37,7 @@ const products = [
     image: '/images/tins/tin5l.png',
     sizeKey: '5l',
     label: '5L',
-    accent: '#2d3e36',
+    accent: '#2a4556',
     scale: 'scale-90',
   },
   {
@@ -58,7 +58,7 @@ export default function ProductShowcase() {
     <section className="relative py-16 sm:py-24 lg:py-32 bg-gradient-to-b from-[#f8f6f3] via-white to-[#f8f6f3] overflow-hidden">
       <div className="absolute inset-0 opacity-30">
         <div className="absolute top-20 left-10 w-48 sm:w-72 h-48 sm:h-72 bg-[#c4a882]/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-64 sm:w-96 h-64 sm:h-96 bg-[#6b7d6b]/15 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-64 sm:w-96 h-64 sm:h-96 bg-[#4a7a96]/15 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -66,13 +66,13 @@ export default function ProductShowcase() {
           ref={titleRef}
           className={`text-center mb-10 sm:mb-16 lg:mb-20 reveal ${titleRevealed ? 'revealed' : ''}`}
         >
-          <div className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6 text-xs sm:text-sm font-medium text-[#6b7d6b] uppercase tracking-widest">
-            <span className="w-6 sm:w-8 h-px bg-[#6b7d6b]" />
+          <div className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6 text-xs sm:text-sm font-medium text-[#4a7a96] uppercase tracking-widest">
+            <span className="w-6 sm:w-8 h-px bg-[#4a7a96]" />
             {t('label')}
-            <span className="w-6 sm:w-8 h-px bg-[#6b7d6b]" />
+            <span className="w-6 sm:w-8 h-px bg-[#4a7a96]" />
           </div>
           
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-[#2d3e36] mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-[#2a4556] mb-4 sm:mb-6">
             {t('title')}
           </h2>
           
@@ -107,25 +107,25 @@ export default function ProductShowcase() {
                     className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 hidden sm:block"
                     style={{ background: `radial-gradient(circle at center, ${product.accent}, transparent 70%)` }}
                   />
-                  
-                  <Image
-                    src={product.image}
-                    alt={`${product.label} paint tin`}
-                    fill
-                    className={`object-contain p-2 sm:p-3 lg:p-4 transition-all duration-700 sm:group-hover:scale-110 ${product.scale}`}
-                  />
-                </div>
                 
-                <div className="text-center">
+                <Image
+                  src={product.image}
+                  alt={`${product.label} paint tin`}
+                  fill
+                    className={`object-contain p-2 sm:p-3 lg:p-4 transition-all duration-700 sm:group-hover:scale-110 ${product.scale}`}
+                />
+              </div>
+              
+              <div className="text-center">
                   <span 
-                    className="block text-lg sm:text-xl lg:text-2xl font-serif text-[#2d3e36] mb-0.5 sm:mb-1 transition-all duration-300"
+                    className="block text-lg sm:text-xl lg:text-2xl font-serif text-[#2a4556] mb-0.5 sm:mb-1 transition-all duration-300"
                     style={{ color: product.accent }}
                   >
-                    {product.label}
-                  </span>
+                  {product.label}
+                </span>
                   <p className="text-xs sm:text-sm text-[#666666] line-clamp-1">
-                    {t(`sizes.${product.sizeKey}`)}
-                  </p>
+                  {t(`sizes.${product.sizeKey}`)}
+                </p>
                 </div>
               </div>
             </div>

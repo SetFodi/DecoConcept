@@ -31,7 +31,7 @@ export default function Hero() {
 
       <div className="absolute top-28 sm:top-32 left-3 sm:left-4 lg:left-8 hidden sm:block z-10">
         <div className="flex flex-col gap-2">
-          {['#2d3e36', '#6b7d6b', '#8b8178', '#d4cfc7'].map((color, i) => (
+          {['#2a4556', '#4a7a96', '#8b8178', '#d4cfc7'].map((color, i) => (
             <div
               key={color}
               className={`w-2 sm:w-3 h-8 sm:h-12 rounded-full transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}
@@ -51,14 +51,14 @@ export default function Hero() {
               className={`inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-8 transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
               style={{ transitionDelay: '0.2s' }}
             >
-              <span className="w-8 sm:w-12 h-px bg-[#2d3e36]" />
-              <span className="text-xs sm:text-sm font-medium text-[#6b7d6b] uppercase tracking-[0.15em] sm:tracking-[0.2em]">
+              <span className="w-8 sm:w-12 h-px bg-[#2a4556]" />
+              <span className="text-xs sm:text-sm font-medium text-[#4a7a96] uppercase tracking-[0.15em] sm:tracking-[0.2em]">
                 {t('tagline')}
               </span>
             </div>
 
             <h1 
-              className={`text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif text-[#2d3e36] mb-4 sm:mb-8 leading-[1.15] sm:leading-[1.1] transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              className={`text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif text-[#2a4556] mb-4 sm:mb-8 leading-[1.15] sm:leading-[1.1] transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
               style={{ transitionDelay: '0.4s' }}
             >
               {t('tagline')}
@@ -77,7 +77,7 @@ export default function Hero() {
             >
               <a
                 href="#about"
-                className="btn-paint inline-flex items-center justify-center px-6 py-3.5 sm:px-10 sm:py-5 bg-[#2d3e36] text-white font-medium text-base sm:text-lg hover:bg-[#3d4f44] active:scale-[0.98] transition-all duration-300 rounded-sm group"
+                className="btn-paint inline-flex items-center justify-center px-6 py-3.5 sm:px-10 sm:py-5 bg-[#2a4556] text-white font-medium text-base sm:text-lg hover:bg-[#3a5a6e] active:scale-[0.98] transition-all duration-300 rounded-sm group"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   {t('discoverMore')}
@@ -88,7 +88,7 @@ export default function Hero() {
               </a>
               <Link
                 href="/paints"
-                className="inline-flex items-center justify-center px-6 py-3.5 sm:px-10 sm:py-5 border-2 border-[#2d3e36] text-[#2d3e36] font-medium text-base sm:text-lg hover:bg-[#2d3e36] hover:text-white active:scale-[0.98] transition-all duration-300 rounded-sm"
+                className="inline-flex items-center justify-center px-6 py-3.5 sm:px-10 sm:py-5 border-2 border-[#2a4556] text-[#2a4556] font-medium text-base sm:text-lg hover:bg-[#2a4556] hover:text-white active:scale-[0.98] transition-all duration-300 rounded-sm"
               >
                 {t('viewColors')}
               </Link>
@@ -99,7 +99,7 @@ export default function Hero() {
               style={{ transitionDelay: '1s' }}
             >
               <div className="flex -space-x-1.5 sm:-space-x-2">
-                {['#8b7355', '#6b7d6b', '#c4a882', '#2d3e36', '#a07850'].map((color) => (
+                {['#8b7355', '#4a7a96', '#c4a882', '#2a4556', '#a07850'].map((color) => (
                   <div
                     key={color}
                     className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border-2 border-white shadow-md"
@@ -108,7 +108,7 @@ export default function Hero() {
                 ))}
               </div>
               <div className="flex flex-wrap items-center gap-x-1 sm:gap-x-2">
-                <span className="text-xs sm:text-sm font-medium text-[#2d3e36]">{t('colorsCount')}</span>
+                <span className="text-xs sm:text-sm font-medium text-[#2a4556]">{t('colorsCount')}</span>
                 <span className="text-xs sm:text-sm text-[#666666]">{t('available')}</span>
               </div>
             </div>
@@ -124,7 +124,7 @@ export default function Hero() {
       >
         <a 
           href="#about" 
-          className="flex flex-col items-center gap-2 text-[#2d3e36]/60 hover:text-[#2d3e36] transition-colors group"
+          className="flex flex-col items-center gap-2 text-[#2a4556]/60 hover:text-[#2a4556] transition-colors group"
         >
           <span className="text-xs uppercase tracking-[0.2em] font-medium">{t('scroll')}</span>
           <div className="w-6 h-10 border-2 border-current rounded-full flex items-start justify-center p-1">

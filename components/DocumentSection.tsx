@@ -5,14 +5,14 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
-  type Product = {
-    id: string;
-    name: string;
-    category: 'interior' | 'primer';
-    image: string;
-    datasheet: string;
-    specs?: string;
-  };
+type Product = {
+  id: string;
+  name: string;
+  category: 'interior' | 'primer';
+  image: string;
+  datasheet: string;
+  specs?: string;
+};
 
 const products: Product[] = [
   {
@@ -75,21 +75,21 @@ export default function DocumentSection() {
 
   return (
     <section className="relative py-16 sm:py-24 lg:py-32 bg-[#f8f6f3] overflow-hidden noise-texture">
-      <div className="absolute top-10 sm:top-20 right-10 sm:right-20 w-20 sm:w-32 h-20 sm:h-32 rounded-full bg-[#2d3e36]/5 organic-blob" />
-      <div className="absolute bottom-10 sm:bottom-20 left-10 sm:left-20 w-28 sm:w-48 h-28 sm:h-48 rounded-full bg-[#6b7d6b]/5 organic-blob" style={{ animationDelay: '-4s' }} />
+      <div className="absolute top-10 sm:top-20 right-10 sm:right-20 w-20 sm:w-32 h-20 sm:h-32 rounded-full bg-[#2a4556]/5 organic-blob" />
+      <div className="absolute bottom-10 sm:bottom-20 left-10 sm:left-20 w-28 sm:w-48 h-28 sm:h-48 rounded-full bg-[#4a7a96]/5 organic-blob" style={{ animationDelay: '-4s' }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div 
           ref={titleRef}
           className={`text-center mb-8 sm:mb-12 reveal ${titleRevealed ? 'revealed' : ''}`}
         >
-          <div className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6 text-xs sm:text-sm font-medium text-[#6b7d6b] uppercase tracking-widest">
-            <span className="w-6 sm:w-8 h-px bg-[#6b7d6b]" />
+          <div className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6 text-xs sm:text-sm font-medium text-[#4a7a96] uppercase tracking-widest">
+            <span className="w-6 sm:w-8 h-px bg-[#4a7a96]" />
             {t('label')}
-            <span className="w-6 sm:w-8 h-px bg-[#6b7d6b]" />
+            <span className="w-6 sm:w-8 h-px bg-[#4a7a96]" />
           </div>
           
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-[#2d3e36] mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-[#2a4556] mb-4 sm:mb-6">
             {t('title')}
           </h2>
           
@@ -108,8 +108,8 @@ export default function DocumentSection() {
                 onClick={() => setActiveCategory(cat.key as typeof activeCategory)}
                 className={`px-3 sm:px-6 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-full transition-all duration-300 whitespace-nowrap ${
                   activeCategory === cat.key
-                    ? 'bg-[#2d3e36] text-white'
-                    : 'text-[#666666] hover:text-[#2d3e36]'
+                    ? 'bg-[#2a4556] text-white'
+                    : 'text-[#666666] hover:text-[#2a4556]'
                 }`}
               >
                 {cat.label}
@@ -136,7 +136,7 @@ export default function DocumentSection() {
                   fill
                   className="object-cover transition-transform duration-700 sm:group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#2d3e36]/80 via-[#2d3e36]/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#2a4556]/80 via-[#2a4556]/20 to-transparent" />
                 <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4">
                   <span className="inline-block px-2 sm:px-3 py-0.5 sm:py-1 bg-white/20 backdrop-blur-sm text-white text-[10px] sm:text-xs font-medium rounded-full mb-1 sm:mb-2">
                     {product.category === 'interior' ? t('types.interior') : t('types.primer')}
@@ -149,7 +149,7 @@ export default function DocumentSection() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div className="w-7 h-7 sm:w-8 sm:h-8 bg-[#f8f6f3] rounded-lg flex items-center justify-center">
-                      <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#2d3e36]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#2a4556]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                       </svg>
                     </div>
@@ -158,7 +158,7 @@ export default function DocumentSection() {
                     </span>
                   </div>
                   
-                  <span className="text-xs sm:text-sm font-medium text-[#2d3e36] sm:group-hover:underline flex items-center gap-1">
+                  <span className="text-xs sm:text-sm font-medium text-[#2a4556] sm:group-hover:underline flex items-center gap-1">
                     {t('viewDetails')}
                     <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform duration-300 sm:group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -173,7 +173,7 @@ export default function DocumentSection() {
         <div className="text-center">
           <button
             onClick={() => setShowCertificates(!showCertificates)}
-            className="btn-paint inline-flex items-center gap-2 sm:gap-3 px-5 sm:px-8 py-3 sm:py-4 bg-white border-2 border-[#2d3e36] text-[#2d3e36] font-medium rounded-xl hover:bg-[#2d3e36] hover:text-white active:scale-[0.98] transition-all duration-300 shadow-sm text-sm sm:text-base"
+            className="btn-paint inline-flex items-center gap-2 sm:gap-3 px-5 sm:px-8 py-3 sm:py-4 bg-white border-2 border-[#2a4556] text-[#2a4556] font-medium rounded-xl hover:bg-[#2a4556] hover:text-white active:scale-[0.98] transition-all duration-300 shadow-sm text-sm sm:text-base"
           >
             <svg className="w-5 h-5 sm:w-6 sm:h-6 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
@@ -196,7 +196,7 @@ export default function DocumentSection() {
           }`}
         >
           <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-[#e8e0d4]/50">
-            <h3 className="text-lg sm:text-xl font-serif text-[#2d3e36] mb-4 sm:mb-6 text-center">{t('certTitle')}</h3>
+            <h3 className="text-lg sm:text-xl font-serif text-[#2a4556] mb-4 sm:mb-6 text-center">{t('certTitle')}</h3>
             
             {/* Single certificate document card */}
             <div className="max-w-md mx-auto">
@@ -205,13 +205,13 @@ export default function DocumentSection() {
                 className="w-full bg-[#f8f6f3] rounded-xl overflow-hidden border border-[#e8e0d4]/50 group hover:shadow-xl active:scale-[0.98] transition-all duration-300"
               >
                 <div className="relative aspect-[4/3] overflow-hidden">
-                  <Image
+                <Image
                     src={certificatePages[0]}
                     alt="Little Greene Certificate"
-                    fill
+                  fill
                     className="object-cover transition-transform duration-500 sm:group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#2d3e36]/80 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#2a4556]/80 via-transparent to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4 text-left">
                     <div className="flex items-center gap-2 text-white">
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -223,10 +223,10 @@ export default function DocumentSection() {
                 </div>
                 <div className="p-4 flex items-center justify-between">
                   <div className="text-left">
-                    <div className="font-medium text-[#2d3e36]">{t('certDocName')}</div>
+                    <div className="font-medium text-[#2a4556]">{t('certDocName')}</div>
                     <div className="text-xs text-[#666666]">{t('certDocDesc')}</div>
                   </div>
-                  <div className="w-10 h-10 bg-[#2d3e36] rounded-full flex items-center justify-center text-white group-hover:bg-[#3d4f44] transition-colors">
+                  <div className="w-10 h-10 bg-[#2a4556] rounded-full flex items-center justify-center text-white group-hover:bg-[#3a5a6e] transition-colors">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -234,7 +234,7 @@ export default function DocumentSection() {
                   </div>
                 </div>
               </button>
-            </div>
+          </div>
           </div>
         </div>
       </div>
@@ -255,7 +255,7 @@ export default function DocumentSection() {
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#2d3e36] via-[#2d3e36]/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#2a4556] via-[#2a4556]/40 to-transparent" />
               <button
                 onClick={() => setSelectedProduct(null)}
                 className="absolute top-3 right-3 sm:top-4 sm:right-4 w-9 h-9 sm:w-10 sm:h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 active:scale-95 transition-all"
@@ -273,7 +273,7 @@ export default function DocumentSection() {
             </div>
             
             <div className="p-4 sm:p-6 overflow-y-auto max-h-[calc(85vh-10rem)] sm:max-h-[calc(90vh-14rem)]">
-              <h4 className="text-xs sm:text-sm font-medium text-[#2d3e36] uppercase tracking-wider mb-3 sm:mb-4">{t('availableDocs')}</h4>
+              <h4 className="text-xs sm:text-sm font-medium text-[#2a4556] uppercase tracking-wider mb-3 sm:mb-4">{t('availableDocs')}</h4>
               
               <div className="space-y-2 sm:space-y-3">
                 <a
@@ -288,10 +288,10 @@ export default function DocumentSection() {
                     </svg>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="font-medium text-[#2d3e36] text-sm sm:text-base">{t('techSheet')}</div>
+                    <div className="font-medium text-[#2a4556] text-sm sm:text-base">{t('techSheet')}</div>
                     <div className="text-xs sm:text-sm text-[#666666]">{t('formats.pdfEn')}</div>
                   </div>
-                  <svg className="w-5 h-5 text-[#666666] group-hover:text-[#2d3e36] transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-[#666666] group-hover:text-[#2a4556] transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                   </svg>
                 </a>
@@ -305,7 +305,7 @@ export default function DocumentSection() {
                       </svg>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="font-medium text-[#2d3e36] text-sm sm:text-base">{t('prodSpecs')}</div>
+                      <div className="font-medium text-[#2a4556] text-sm sm:text-base">{t('prodSpecs')}</div>
                       <div className="text-xs sm:text-sm text-[#666666]">
                         {selectedProduct.specs.endsWith('.pdf') ? t('formats.pdfEn') : t('formats.docxKa')}
                       </div>
@@ -330,9 +330,9 @@ export default function DocumentSection() {
               className="absolute -top-12 sm:-top-14 right-0 text-white/80 hover:text-white active:scale-95 transition-all p-2 z-10"
             >
               <svg className="w-7 h-7 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
 
             {/* Previous button */}
             <button
@@ -364,11 +364,11 @@ export default function DocumentSection() {
               </svg>
             </button>
 
-            <Image
+              <Image
               src={selectedCertImage}
-              alt="Certificate"
-              width={800}
-              height={1100}
+                alt="Certificate"
+                width={800}
+                height={1100}
               className="max-h-[75vh] sm:max-h-[85vh] w-auto mx-auto object-contain rounded-lg sm:rounded-xl shadow-2xl"
             />
             
@@ -378,9 +378,9 @@ export default function DocumentSection() {
                 {t('page')} {certificatePages.indexOf(selectedCertImage) + 1} / {certificatePages.length}
               </span>
             </div>
+            </div>
           </div>
-        </div>
-      )}
+        )}
     </section>
   );
 }

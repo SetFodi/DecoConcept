@@ -4,15 +4,15 @@
   --color-white: #ffffff;
   --color-cream: #f8f6f3;
   --color-cream-dark: #ebe7e0;
-  --color-dark-green: #2d3e36;
-  --color-forest: #3d4f44;
-  --color-sage: #6b7d6b;
+  --color-dark-green: #2a4556;
+  --color-forest: #3a5a6e;
+  --color-sage: #4a7a96;
   --color-charcoal: #1a1a1a;
   --color-warm-gray: #8b8178;
   --color-light-gray: #d4cfc7;
   --color-text: #333333;
   --color-text-light: #666666;
-  --color-navy: #1e3a5f;
+  --color-navy: #2a4556;
 }
 
 @theme inline {
@@ -352,7 +352,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .swatch-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(45, 62, 54, 0.15);
+  box-shadow: 0 20px 40px rgba(42, 69, 86, 0.15);
 }
 
 /* Smooth Button Transitions */

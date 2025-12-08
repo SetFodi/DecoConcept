@@ -39,7 +39,7 @@ export default function PaintLoader() {
       
       <div className="relative w-64 h-2 bg-[#e8e0d4] rounded-full overflow-hidden">
         <div 
-          className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#2d3e36] via-[#3d4f44] to-[#6b7d6b] rounded-full transition-all duration-100 ease-out"
+          className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#2a4556] via-[#3a5a6e] to-[#4a7a96] rounded-full transition-all duration-100 ease-out"
           style={{ width: `${paintProgress}%` }}
         />
         <div 
@@ -56,7 +56,7 @@ export default function PaintLoader() {
         {[0, 1, 2].map((i) => (
           <div
             key={i}
-            className="w-2 h-2 rounded-full bg-[#2d3e36]"
+            className="w-2 h-2 rounded-full bg-[#2a4556]"
             style={{
               animation: `paintDrop 1.2s ease-in-out infinite`,
               animationDelay: `${i * 0.2}s`
