@@ -4,15 +4,6 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
-const galleryImages = [
-  { src: '/images/moodboards/Ashes of Roses 6.jpg', name: 'Ashes of Roses', spanMobile: 'col-span-2 row-span-2', spanDesktop: 'md:col-span-2 md:row-span-2' },
-  { src: '/images/moodboards/Ultra Blue 264-Linen Wash.jpg', name: 'Ultra Blue', spanMobile: 'col-span-1 row-span-1', spanDesktop: 'md:col-span-1 md:row-span-1' },
-  { src: '/images/moodboards/Adventurer 7.jpg', name: 'Adventurer', spanMobile: 'col-span-1 row-span-1', spanDesktop: 'md:col-span-1 md:row-span-1' },
-  { src: '/images/moodboards/Dock Blue 252, Three Farm Green 306.jpg', name: 'Dock Blue', spanMobile: 'col-span-1 row-span-1', spanDesktop: 'md:col-span-1 md:row-span-2' },
-  { src: '/images/moodboards/Flatlay_B&MLG_Rolling_fog.jpg', name: 'Rolling Fog', spanMobile: 'col-span-1 row-span-1', spanDesktop: 'md:col-span-1 md:row-span-1' },
-  { src: '/images/moodboards/Flatlay_vertical_B&MLG_Chemise.jpg', name: 'Chemise', spanMobile: 'col-span-2 row-span-1', spanDesktop: 'md:col-span-1 md:row-span-1' },
-];
-
 export default function InspirationGallery() {
   const t = useTranslations('gallery');
   const [ref, revealed] = useScrollReveal<HTMLElement>();
@@ -37,28 +28,117 @@ export default function InspirationGallery() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[120px] sm:auto-rows-[160px] md:auto-rows-[200px] gap-2 sm:gap-3 md:gap-4">
-          {galleryImages.map((img, index) => (
-            <div
-              key={img.name}
-              className={`${img.spanMobile} ${img.spanDesktop} image-hover-zoom relative rounded-xl sm:rounded-2xl overflow-hidden group cursor-pointer`}
-              style={{ transitionDelay: `${index * 0.1}s` }}
-            >
+        {/* Custom masonry-like grid */}
+        <div className="flex flex-col lg:flex-row gap-3 sm:gap-4">
+          {/* Left column - Large portrait image */}
+          <div className="lg:w-[45%] flex-shrink-0">
+            <div className="image-hover-zoom relative rounded-xl sm:rounded-2xl overflow-hidden group cursor-pointer h-[300px] sm:h-[400px] lg:h-full">
               <Image
-                src={img.src}
-                alt={img.name}
+                src="/images/moodboards/Jewel Beetle 303 - Detail.jpg"
+                alt="Jewel Beetle"
                 fill
                 className="object-cover"
-                sizes="(max-width: 640px) 50vw, (max-width: 768px) 50vw, 25vw"
+                sizes="(max-width: 1024px) 100vw, 45vw"
+                quality={90}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#2a4556]/80 via-[#2a4556]/20 to-transparent opacity-0 group-hover:opacity-100 sm:transition-all sm:duration-500" />
-              <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-6 text-white sm:translate-y-full sm:group-hover:translate-y-0 sm:transition-transform sm:duration-500">
-                <span className="text-sm sm:text-base lg:text-lg font-serif drop-shadow-lg">{img.name}</span>
+              <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 text-white sm:translate-y-full sm:group-hover:translate-y-0 sm:transition-transform sm:duration-500">
+                <span className="text-base sm:text-lg lg:text-xl font-serif drop-shadow-lg">Jewel Beetle</span>
               </div>
-              {/* Mobile overlay - always visible */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent sm:hidden" />
             </div>
-          ))}
+          </div>
+
+          {/* Right columns */}
+          <div className="lg:w-[55%] flex flex-col gap-3 sm:gap-4">
+            {/* Top row - 2 square images */}
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              <div className="image-hover-zoom relative rounded-xl sm:rounded-2xl overflow-hidden group cursor-pointer aspect-square">
+                <Image
+                  src="/images/moodboards/Ultra Blue 264-Linen Wash.jpg"
+                  alt="Ultra Blue"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 50vw, 27vw"
+                  quality={90}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#2a4556]/80 via-[#2a4556]/20 to-transparent opacity-0 group-hover:opacity-100 sm:transition-all sm:duration-500" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 text-white sm:translate-y-full sm:group-hover:translate-y-0 sm:transition-transform sm:duration-500">
+                  <span className="text-sm sm:text-base font-serif drop-shadow-lg">Ultra Blue</span>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent sm:hidden" />
+              </div>
+              <div className="image-hover-zoom relative rounded-xl sm:rounded-2xl overflow-hidden group cursor-pointer aspect-square">
+                <Image
+                  src="/images/moodboards/Flatlay_B&MLG_Royal_Navy.jpg"
+                  alt="Royal Navy"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 50vw, 27vw"
+                  quality={90}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#2a4556]/80 via-[#2a4556]/20 to-transparent opacity-0 group-hover:opacity-100 sm:transition-all sm:duration-500" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 text-white sm:translate-y-full sm:group-hover:translate-y-0 sm:transition-transform sm:duration-500">
+                  <span className="text-sm sm:text-base font-serif drop-shadow-lg">Royal Navy</span>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent sm:hidden" />
+              </div>
+            </div>
+
+            {/* Bottom row - tall + 2 squares */}
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 flex-1">
+              <div className="image-hover-zoom relative rounded-xl sm:rounded-2xl overflow-hidden group cursor-pointer row-span-2 lg:row-span-1 aspect-[3/4] lg:aspect-auto lg:h-full">
+                <Image
+                  src="/images/moodboards/Dock Blue 252, Three Farm Green 306.jpg"
+                  alt="Dock Blue"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 50vw, 18vw"
+                  quality={90}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#2a4556]/80 via-[#2a4556]/20 to-transparent opacity-0 group-hover:opacity-100 sm:transition-all sm:duration-500" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 text-white sm:translate-y-full sm:group-hover:translate-y-0 sm:transition-transform sm:duration-500">
+                  <span className="text-sm sm:text-base font-serif drop-shadow-lg">Dock Blue</span>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent sm:hidden" />
+              </div>
+              
+              <div className="flex flex-col gap-3 sm:gap-4 lg:col-span-2">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 flex-1">
+                  <div className="image-hover-zoom relative rounded-xl sm:rounded-2xl overflow-hidden group cursor-pointer aspect-square">
+                    <Image
+                      src="/images/moodboards/Flatlay_B&MLG_Rolling_fog.jpg"
+                      alt="Rolling Fog"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 50vw, 18vw"
+                      quality={90}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#2a4556]/80 via-[#2a4556]/20 to-transparent opacity-0 group-hover:opacity-100 sm:transition-all sm:duration-500" />
+                    <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 text-white sm:translate-y-full sm:group-hover:translate-y-0 sm:transition-transform sm:duration-500">
+                      <span className="text-sm sm:text-base font-serif drop-shadow-lg">Rolling Fog</span>
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent sm:hidden" />
+                  </div>
+                  <div className="image-hover-zoom relative rounded-xl sm:rounded-2xl overflow-hidden group cursor-pointer aspect-square">
+                    <Image
+                      src="/images/moodboards/Flatlay_B&MLG_Bassoon.jpg"
+                      alt="Bassoon"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 50vw, 18vw"
+                      quality={90}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#2a4556]/80 via-[#2a4556]/20 to-transparent opacity-0 group-hover:opacity-100 sm:transition-all sm:duration-500" />
+                    <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 text-white sm:translate-y-full sm:group-hover:translate-y-0 sm:transition-transform sm:duration-500">
+                      <span className="text-sm sm:text-base font-serif drop-shadow-lg">Bassoon</span>
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent sm:hidden" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

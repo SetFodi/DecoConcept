@@ -115,7 +115,7 @@ export default function AboutSection() {
                 {stats.map((stat, index) => (
                   <div
                     key={stat.label}
-                    className={`swatch-card text-center p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-[#f8f6f3] to-[#ebe7e0] rounded-xl sm:rounded-2xl border border-[#e8e0d4]/50`}
+                    className={`swatch-card text-center p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl sm:rounded-2xl border border-[#e8e0d4]/50`}
                     style={{ transitionDelay: `${index * 0.1}s` }}
                   >
                     <div className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#2a4556] mb-2 sm:mb-3 gradient-text">
