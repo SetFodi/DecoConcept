@@ -5,11 +5,15 @@ import type { Color } from '@/lib/colors';
 
 type ColorCardProps = {
   color: Color;
+  onClick?: () => void;
 };
 
-export default function ColorCard({ color }: ColorCardProps) {
+export default function ColorCard({ color, onClick }: ColorCardProps) {
   return (
-    <div className="group bg-white rounded-lg sm:rounded-xl overflow-hidden border border-[#e8e0d4] hover:shadow-lg active:scale-[0.98] sm:active:scale-100 transition-all duration-300">
+    <div 
+      className="group bg-white rounded-lg sm:rounded-xl overflow-hidden border border-[#e8e0d4] hover:shadow-lg active:scale-[0.98] sm:active:scale-100 transition-all duration-300 cursor-pointer"
+      onClick={onClick}
+    >
       <div className="relative aspect-[4/3] overflow-hidden">
         <Image
           src={`/images/swatches/${color.filename}`}

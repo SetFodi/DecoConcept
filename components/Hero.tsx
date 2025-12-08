@@ -107,10 +107,7 @@ export default function Hero() {
                   />
                 ))}
               </div>
-              <div className="flex flex-wrap items-center gap-x-1 sm:gap-x-2">
-                <span className="text-xs sm:text-sm font-medium text-[#2a4556]">{t('colorsCount')}</span>
-                <span className="text-xs sm:text-sm text-[#666666]">{t('available')}</span>
-              </div>
+              <span className="text-xs sm:text-sm font-medium text-[#2a4556]">{t('colorsCount')}</span>
             </div>
           </div>
 

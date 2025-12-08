@@ -9,8 +9,7 @@
     "subtitle": "Transform your space with exceptional quality",
     "discoverMore": "Discover More",
     "viewColors": "View Colors",
-    "colorsCount": "300+ Colors",
-    "available": "Available",
+    "colorsCount": "300+ Exculusive Colors",
     "scroll": "Scroll"
   },
   "about": {
@@ -21,7 +20,7 @@
     "officialPartner": "Official Representative",
     "partnerName": "Little Greene Paints",
     "stats": {
-      "colors": "Colors Available",
+      "colors": "Exclusive Colors",
       "quality": "Quality Products",
       "eco": "Friendly Paints",
       "expert": "Consultation"
@@ -95,7 +94,12 @@
     "catalog": "Catalog",
     "brands": "Brands",
     "allColors": "All Colors",
-    "searchPlaceholder": "Search colors..."
+    "searchPlaceholder": "Search colors...",
+    "sampleTitle": "Sample this Colour",
+    "sampleDescription": "We recommend testing a colour before purchase to ensure you are happy with the final result as colours may vary on screen.",
+    "samplePot": "60ml Sample Pot",
+    "interiorExterior": "Interior & Exterior",
+    "ecoFriendly": "Eco-Friendly"
   },
   "contact": {
     "label": "Get in Touch",

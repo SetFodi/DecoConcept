@@ -3,14 +3,22 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import { colors, brands, searchColors } from '@/lib/colors';
+import { colors, brands, searchColors, type Color } from '@/lib/colors';
 import ColorCard from '@/components/ColorCard';
+
+// Sample pot filename mapping - handles the naming convention
+function getSamplePotFilename(color: Color): string {
+  // Pad IDs < 100 with leading zero, otherwise use as-is
+  const paddedId = color.id < 10 ? `0${color.id}` : color.id.toString();
+  return `${paddedId} ${color.name}_500px.png`;
+}
 
 export default function PaintsPage() {
   const t = useTranslations('paints');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBrand, setSelectedBrand] = useState<string>('Little Greene');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [selectedColor, setSelectedColor] = useState<Color | null>(null);
 
   // Close sidebar on larger screens by default, open by default on desktop
   useEffect(() => {
@@ -24,9 +32,9 @@ export default function PaintsPage() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Prevent body scroll when mobile sidebar is open
+  // Prevent body scroll when mobile sidebar is open or modal is open
   useEffect(() => {
-    if (sidebarOpen && window.innerWidth < 1024) {
+    if ((sidebarOpen && window.innerWidth < 1024) || selectedColor) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
@@ -34,7 +42,7 @@ export default function PaintsPage() {
     return () => {
       document.body.style.overflow = '';
     };
-  }, [sidebarOpen]);
+  }, [sidebarOpen, selectedColor]);
 
   const filteredColors = useMemo(() => {
     let result = colors;
@@ -219,7 +227,11 @@ export default function PaintsPage() {
 
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 lg:gap-6">
               {filteredColors.map((color) => (
-                <ColorCard key={color.id} color={color} />
+                <ColorCard 
+                  key={color.id} 
+                  color={color} 
+                  onClick={() => setSelectedColor(color)}
+                />
               ))}
             </div>
 
@@ -241,6 +253,89 @@ export default function PaintsPage() {
           </div>
         </main>
       </div>
+
+      {/* Color Detail Modal */}
+      {selectedColor && (
+        <div 
+          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-6"
+          onClick={() => setSelectedColor(null)}
+        >
+          <div 
+            className="bg-[#faf9f7] rounded-2xl sm:rounded-3xl w-full max-w-4xl max-h-[90vh] overflow-hidden shadow-2xl animate-scale-in relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedColor(null)}
+              className="absolute top-3 right-3 sm:top-5 sm:right-5 z-20 w-9 h-9 sm:w-11 sm:h-11 bg-white rounded-full flex items-center justify-center text-[#2a4556] hover:bg-[#2a4556] hover:text-white active:scale-95 transition-all shadow-md border border-[#e8e0d4]"
+            >
+              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            <div className="flex flex-col lg:flex-row">
+              {/* Left side - Large Color Swatch (image already contains color name) */}
+              <div className="lg:w-[55%] relative bg-[#f5f3f0]">
+                <div className="relative w-full h-full min-h-[320px] sm:min-h-[400px] lg:min-h-[520px]">
+                  <Image
+                    src={`/images/swatches/${selectedColor.filename}`}
+                    alt={selectedColor.name}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 1024px) 100vw, 55vw"
+                    quality={95}
+                  />
+                </div>
+              </div>
+
+              {/* Right side - Info Panel */}
+              <div className="lg:w-[45%] p-5 sm:p-7 lg:p-8 flex flex-col bg-white lg:bg-[#faf9f7]">
+                {/* Sample Pot Section - Redesigned */}
+                <div className="flex-1 flex flex-col items-center justify-center text-center">
+                  {/* Sample Pot Image */}
+                  <div className="w-28 h-28 sm:w-36 sm:h-36 lg:w-40 lg:h-40 relative mb-4 sm:mb-5">
+                    <Image
+                      src={`/Sample Pots/${getSamplePotFilename(selectedColor)}`}
+                      alt={`${selectedColor.name} Sample Pot`}
+                      fill
+                      className="object-contain drop-shadow-lg"
+                      sizes="160px"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                      }}
+                    />
+                  </div>
+
+                  {/* Sample Text */}
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-serif text-[#2a4556] mb-2 sm:mb-3">
+                    <span className="italic">{t('sampleTitle')}</span>
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#666666] leading-relaxed max-w-sm">
+                    {t('sampleDescription')}
+                  </p>
+                </div>
+
+                {/* Tags */}
+                <div className="mt-5 sm:mt-6 pt-4 sm:pt-5 border-t border-[#e8e0d4]/60">
+                  <div className="flex flex-wrap justify-center gap-2">
+                    <span className="px-3 py-1.5 bg-[#2a4556] text-white text-xs font-medium rounded-full">
+                      {t('samplePot')}
+                    </span>
+                    <span className="px-3 py-1.5 bg-[#4a7a96]/10 text-[#2a4556] text-xs font-medium rounded-full border border-[#4a7a96]/20">
+                      {t('interiorExterior')}
+                    </span>
+                    <span className="px-3 py-1.5 bg-[#4a7a96]/10 text-[#2a4556] text-xs font-medium rounded-full border border-[#4a7a96]/20">
+                      {t('ecoFriendly')}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
