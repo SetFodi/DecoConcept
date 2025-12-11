@@ -73,7 +73,10 @@ export default function DocumentSection() {
     : products.filter(p => p.category === activeCategory);
 
   return (
-    <section className="relative py-16 sm:py-24 lg:py-32 bg-[#f8f6f3] overflow-hidden noise-texture">
+    <section
+      id="technical-information"
+      className="relative py-16 sm:py-24 lg:py-32 bg-[#f8f6f3] overflow-hidden noise-texture"
+    >
       <div className="absolute top-10 sm:top-20 right-10 sm:right-20 w-20 sm:w-32 h-20 sm:h-32 rounded-full bg-[#2a4556]/5 organic-blob" />
       <div className="absolute bottom-10 sm:bottom-20 left-10 sm:left-20 w-28 sm:w-48 h-28 sm:h-48 rounded-full bg-[#4a7a96]/5 organic-blob" style={{ animationDelay: '-4s' }} />
 

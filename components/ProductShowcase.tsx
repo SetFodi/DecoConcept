@@ -55,7 +55,10 @@ export default function ProductShowcase() {
   const [gridRef, gridRevealed] = useScrollReveal<HTMLDivElement>();
 
   return (
-    <section className="relative py-16 sm:py-24 lg:py-32 bg-gradient-to-b from-[#f8f6f3] via-white to-[#f8f6f3] overflow-hidden">
+    <section
+      id="product-showcase"
+      className="relative py-16 sm:py-24 lg:py-32 bg-gradient-to-b from-[#f8f6f3] via-white to-[#f8f6f3] overflow-hidden"
+    >
       <div className="absolute inset-0 opacity-30">
         <div className="absolute top-20 left-10 w-48 sm:w-72 h-48 sm:h-72 bg-[#c4a882]/20 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-10 w-64 sm:w-96 h-64 sm:h-96 bg-[#4a7a96]/15 rounded-full blur-3xl" />

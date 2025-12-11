@@ -3,21 +3,52 @@
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { useRouter } from '@/i18n/navigation';
+
+type StatKey = 'colors' | 'quality' | 'eco' | 'expert';
 
 export default function AboutSection() {
   const t = useTranslations('about');
+  const router = useRouter();
   const [logoRef, logoRevealed] = useScrollReveal<HTMLDivElement>();
   const [decoRef, decoRevealed] = useScrollReveal<HTMLDivElement>();
   const [statsRef, statsRevealed] = useScrollReveal<HTMLDivElement>();
   const [lgRef, lgRevealed] = useScrollReveal<HTMLDivElement>();
   const [galleryRef, galleryRevealed] = useScrollReveal<HTMLDivElement>();
 
-  const stats = [
-    { value: '300+', label: t('stats.colors') },
-    { value: 'Premium', label: t('stats.quality') },
-    { value: 'Eco', label: t('stats.eco') },
-    { value: 'Expert', label: t('stats.expert') },
+  const stats: { key: StatKey; value: string; label: string }[] = [
+    { key: 'colors', value: '300+', label: t('stats.colors') },
+    { key: 'quality', value: 'Premium', label: t('stats.quality') },
+    { key: 'eco', value: 'Eco', label: t('stats.eco') },
+    { key: 'expert', value: 'Expert', label: t('stats.expert') },
   ];
+
+  const handleStatClick = (key: StatKey) => {
+    switch (key) {
+      case 'colors': {
+        router.push('/paints');
+        break;
+      }
+      case 'quality': {
+        if (typeof document !== 'undefined') {
+          const el = document.getElementById('product-showcase');
+          el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        break;
+      }
+      case 'eco': {
+        if (typeof document !== 'undefined') {
+          const el = document.getElementById('technical-information');
+          el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        break;
+      }
+      case 'expert': {
+        router.push('/contact');
+        break;
+      }
+    }
+  };
 
   return (
     <>
@@ -114,8 +145,17 @@ export default function AboutSection() {
               <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
                 {stats.map((stat, index) => (
                   <div
-                    key={stat.label}
-                    className={`swatch-card text-center p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl sm:rounded-2xl border border-[#e8e0d4]/50`}
+                    key={stat.key}
+                    onClick={() => handleStatClick(stat.key)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleStatClick(stat.key);
+                      }
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    className={`swatch-card text-center p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl sm:rounded-2xl border border-[#e8e0d4]/50 cursor-pointer hover:-translate-y-1 hover:shadow-lg transition-all duration-300`}
                     style={{ transitionDelay: `${index * 0.1}s` }}
                   >
                     <div className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#2a4556] mb-2 sm:mb-3 gradient-text">
