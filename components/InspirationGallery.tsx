@@ -96,15 +96,24 @@ export default function InspirationGallery() {
               className={`group block w-full mb-3 sm:mb-4 break-inside-avoid bg-transparent p-0 text-left focus:outline-none transition-transform duration-500 ease-out will-change-transform hover:-translate-y-1 active:translate-y-0 motion-reduce:transition-none ${getStaggerClass(index)}`}
               aria-label={`View ${img.title}`}
             >
-              <Image
-                src={encodePublicPath(img.src)}
-                alt={img.title}
-                width={getPlaceholderSize(img).width}
-                height={getPlaceholderSize(img).height}
-                className="w-full h-auto transition-transform duration-700 ease-out will-change-transform group-hover:scale-[1.02] group-hover:rotate-[0.15deg] motion-reduce:transition-none"
-                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                quality={90}
-              />
+              <div className="relative">
+                <Image
+                  src={encodePublicPath(img.src)}
+                  alt={img.title}
+                  width={getPlaceholderSize(img).width}
+                  height={getPlaceholderSize(img).height}
+                  className="w-full h-auto transition-transform duration-700 ease-out will-change-transform group-hover:scale-[1.02] group-hover:rotate-[0.15deg] motion-reduce:transition-none"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  quality={90}
+                />
+
+                {/* Hover-only label (keeps the “just photos” look until hover) */}
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 p-2 sm:p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="inline-flex max-w-full px-2.5 py-1 rounded-full bg-black/45 text-white text-xs sm:text-sm font-medium backdrop-blur-sm truncate">
+                    {img.title}
+                  </span>
+                </div>
+              </div>
             </button>
           ))}
         </div>
