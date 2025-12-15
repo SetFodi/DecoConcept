@@ -33,6 +33,18 @@ function createImage(
   };
 }
 
+function createIntImage(
+  filename: string,
+  orientation: MoodboardOrientation
+): MoodboardImage {
+  return {
+    src: `/INT/${filename}`,
+    title: titleFromFilename(filename),
+    kind: 'interior',
+    orientation
+  };
+}
+
 // Keep this list in sync with `public/images/moodboards`.
 // We intentionally keep it explicit so the UI is predictable and easy to curate.
 export const moodboardImages: MoodboardImage[] = [
@@ -100,7 +112,31 @@ export const moodboardImages: MoodboardImage[] = [
   createImage('Thai Saphire 116.jpg', 'interior', 'landscape'),
   createImage('Adventurer 7.jpg', 'interior', 'landscape'),
   createImage('Atomic Red 190, Brighton 203.jpg', 'moodboard', 'landscape'),
-  createImage('Flatlay_Vertical_B&MLG_Rolling_Fog.jpg', 'flatlay', 'portrait')
+  createImage('Flatlay_Vertical_B&MLG_Rolling_Fog.jpg', 'flatlay', 'portrait'),
+
+  createIntImage('05 Royal Navy-Bassoon Bathroom.jpg', 'landscape'),
+  createIntImage('13 Aquamarine CS and Purple Brown Kitchen.jpg', 'landscape'),
+  createIntImage('15 Chemise Bathroom.jpg', 'landscape'),
+  createIntImage('01 Livid Basin.jpg', 'landscape'),
+  createIntImage('03 Rolling Fog CS Basin.jpg', 'landscape'),
+  createIntImage('16 Livid POS.jpg', 'landscape'),
+  createIntImage('LG_basson_glazed_bathroom.jpg', 'landscape'),
+  createIntImage('LG_basson_rolling_fog.jpg', 'landscape'),
+  createIntImage('LG_French_grey_aquamarine_rolling_fog_chemise.jpg', 'landscape'),
+  createIntImage('LG_French_Grey_glazed_bathroom.jpg', 'landscape'),
+  createIntImage('LG_purple_brown.jpg', 'landscape'),
+  createIntImage("Hicks' Blue 208 Bathroom.jpg", 'landscape'),
+  createIntImage('James 108 Rocking Horse.jpg', 'landscape'),
+  createIntImage('Sage & Onions Chair.jpg', 'landscape'),
+  createIntImage('Ulla, North Brink Grey_1.jpg', 'landscape'),
+
+  // A few more interiors from `/public/INT` (curated, not all)
+  createIntImage('18 Eco Matt 2025 - Portland Stone-Celestial Blue-Etruria.jpg', 'landscape'),
+  createIntImage('20 Eco Matt 2025 - Joanna-Roman Plaster.jpg', 'landscape'),
+  createIntImage('15 LG Sweet Treats_LO.jpg', 'landscape'),
+  createIntImage('Arras, Bronze Red, Mushroom.jpg', 'landscape'),
+  createIntImage('Cape Red 279 and Jack Black 119.jpg', 'landscape'),
+  createIntImage('LG_French_grey_aquamarine_rolling_fog_chemise-2.jpg', 'landscape')
 ];
 
 export function countMoodboardsByKind(images: MoodboardImage[]): Record<MoodboardKind, number> {
