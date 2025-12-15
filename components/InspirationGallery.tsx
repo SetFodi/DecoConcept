@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { moodboardImages, type MoodboardImage } from '@/lib/moodboards';
 
@@ -37,10 +38,46 @@ export default function InspirationGallery() {
   const [ref, revealed] = useScrollReveal<HTMLElement>();
   const [expanded, setExpanded] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [lightboxLoaded, setLightboxLoaded] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   const images = moodboardImages;
   const visibleCount = expanded ? images.length : Math.min(24, images.length);
   const visibleImages = images.slice(0, visibleCount);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Lock page scroll while the lightbox is open (prevents scroll jumping / blank gaps).
+  useEffect(() => {
+    const isOpen = activeIndex !== null;
+    if (!isOpen) return;
+
+    setLightboxLoaded(false);
+
+    const scrollY = window.scrollY;
+    const body = document.body;
+    const prev = {
+      position: body.style.position,
+      top: body.style.top,
+      width: body.style.width,
+      overflow: body.style.overflow
+    };
+
+    body.style.position = 'fixed';
+    body.style.top = `-${scrollY}px`;
+    body.style.width = '100%';
+    body.style.overflow = 'hidden';
+
+    return () => {
+      body.style.position = prev.position;
+      body.style.top = prev.top;
+      body.style.width = prev.width;
+      body.style.overflow = prev.overflow;
+      window.scrollTo(0, scrollY);
+    };
+  }, [activeIndex]);
 
   useEffect(() => {
     if (activeIndex === null) return;
@@ -49,12 +86,14 @@ export default function InspirationGallery() {
       if (activeIndex === null) return;
       if (e.key === 'Escape') setActiveIndex(null);
       if (e.key === 'ArrowLeft') {
+        setLightboxLoaded(false);
         setActiveIndex((prev) => {
           if (prev === null) return prev;
           return prev > 0 ? prev - 1 : images.length - 1;
         });
       }
       if (e.key === 'ArrowRight') {
+        setLightboxLoaded(false);
         setActiveIndex((prev) => {
           if (prev === null) return prev;
           return prev < images.length - 1 ? prev + 1 : 0;
@@ -93,6 +132,7 @@ export default function InspirationGallery() {
               key={img.src}
               type="button"
               onClick={() => setActiveIndex(index)}
+              onContextMenu={(e) => e.preventDefault()}
               className={`group block w-full mb-3 sm:mb-4 break-inside-avoid bg-transparent p-0 text-left focus:outline-none transition-transform duration-500 ease-out will-change-transform hover:-translate-y-1 active:translate-y-0 motion-reduce:transition-none ${getStaggerClass(index)}`}
               aria-label={`View ${img.title}`}
             >
@@ -105,6 +145,9 @@ export default function InspirationGallery() {
                   className="w-full h-auto transition-transform duration-700 ease-out will-change-transform group-hover:scale-[1.02] group-hover:rotate-[0.15deg] motion-reduce:transition-none"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   quality={90}
+                  draggable={false}
+                  onContextMenu={(e) => e.preventDefault()}
+                  onDragStart={(e) => e.preventDefault()}
                 />
 
                 {/* Hover-only label (keeps the “just photos” look until hover) */}
@@ -141,78 +184,99 @@ export default function InspirationGallery() {
       </div>
 
       {/* Lightbox */}
-      {activeIndex !== null && images[activeIndex] && (
-        <div
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-2 sm:p-6"
-          onClick={() => setActiveIndex(null)}
-          role="dialog"
-          aria-modal="true"
-        >
+      {mounted &&
+        activeIndex !== null &&
+        images[activeIndex] &&
+        createPortal(
           <div
-            className="relative w-full max-w-6xl max-h-[92vh] flex items-center justify-center"
-            onClick={(e) => e.stopPropagation()}
+            className="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center p-2 sm:p-6 overflow-hidden overscroll-contain"
+            onClick={() => setActiveIndex(null)}
+            onContextMenu={(e) => e.preventDefault()}
+            role="dialog"
+            aria-modal="true"
           >
-            {/* Close */}
-            <button
-              type="button"
-              onClick={() => setActiveIndex(null)}
-              className="absolute -top-12 sm:-top-14 right-0 text-white/80 hover:text-white active:scale-95 transition-all p-2 z-10"
-              aria-label="Close"
+            <div
+              className="relative w-full max-w-6xl h-[calc(100dvh-2rem)] sm:h-[calc(100dvh-3rem)] flex items-center justify-center pt-10 sm:pt-12"
+              onClick={(e) => e.stopPropagation()}
             >
-              <svg className="w-7 h-7 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
+              {/* Close */}
+              <button
+                type="button"
+                onClick={() => setActiveIndex(null)}
+                className="absolute top-2 sm:top-3 right-2 sm:right-3 text-white/80 hover:text-white active:scale-95 transition-all p-2 z-20"
+                aria-label="Close"
+              >
+                <svg className="w-7 h-7 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
 
-            {/* Prev */}
-            <button
-              type="button"
-              onClick={() => setActiveIndex((prev) => (prev === null ? prev : prev > 0 ? prev - 1 : images.length - 1))}
-              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all z-10"
-              aria-label="Previous image"
-            >
-              <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
+              {/* Prev */}
+              <button
+                type="button"
+                onClick={() => {
+                  setLightboxLoaded(false);
+                  setActiveIndex((prev) => (prev === null ? prev : prev > 0 ? prev - 1 : images.length - 1));
+                }}
+                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all z-10"
+                aria-label="Previous image"
+              >
+                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
 
-            {/* Next */}
-            <button
-              type="button"
-              onClick={() => setActiveIndex((prev) => (prev === null ? prev : prev < images.length - 1 ? prev + 1 : 0))}
-              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all z-10"
-              aria-label="Next image"
-            >
-              <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
+              {/* Next */}
+              <button
+                type="button"
+                onClick={() => {
+                  setLightboxLoaded(false);
+                  setActiveIndex((prev) => (prev === null ? prev : prev < images.length - 1 ? prev + 1 : 0));
+                }}
+                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all z-10"
+                aria-label="Next image"
+              >
+                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
 
-            <div className="relative w-full max-h-[86vh]">
-              <div className="relative w-full h-[86vh]">
-                <Image
-                  src={encodePublicPath(images[activeIndex].src)}
-                  alt={images[activeIndex].title}
-                  fill
-                  className="object-contain rounded-lg sm:rounded-xl shadow-2xl bg-black"
-                  quality={95}
-                  sizes="100vw"
-                  priority
-                />
-              </div>
+              <div className="relative w-full h-full flex items-center justify-center">
+                <div className="relative w-full h-full">
+                  <Image
+                    src={encodePublicPath(images[activeIndex].src)}
+                    alt={images[activeIndex].title}
+                    fill
+                    className="object-contain rounded-lg sm:rounded-xl shadow-2xl bg-black"
+                    quality={95}
+                    sizes="100vw"
+                    priority
+                    draggable={false}
+                    onContextMenu={(e) => e.preventDefault()}
+                    onDragStart={(e) => e.preventDefault()}
+                    onLoadingComplete={() => setLightboxLoaded(true)}
+                  />
+                </div>
 
-              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/50 backdrop-blur-sm rounded-full px-4 py-2 text-white text-sm flex items-center gap-3">
-                <span className="font-medium">
-                  {images[activeIndex].title}
-                </span>
-                <span className="text-white/70">
-                  {activeIndex + 1} / {images.length}
-                </span>
+                {!lightboxLoaded && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="px-4 py-2 rounded-full bg-white/10 text-white/80 text-sm backdrop-blur-sm">
+                      Loading…
+                    </div>
+                  </div>
+                )}
+
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/50 backdrop-blur-sm rounded-full px-4 py-2 text-white text-sm flex items-center gap-3">
+                  <span className="font-medium">{images[activeIndex].title}</span>
+                  <span className="text-white/70">
+                    {activeIndex + 1} / {images.length}
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body
+        )}
     </section>
   );
 }
