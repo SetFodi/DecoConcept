@@ -13,6 +13,7 @@
   --color-text: #333333;
   --color-text-light: #666666;
   --color-navy: #2a4556;
+  color-scheme: light;
 }
 
 @theme inline {

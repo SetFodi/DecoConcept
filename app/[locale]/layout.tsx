@@ -42,6 +42,9 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html lang={locale}>
+      <head>
+        <meta name="color-scheme" content="light" />
+      </head>
       <body 
         className={`${playfair.variable} ${sourceSans.variable} antialiased`}
         suppressHydrationWarning
