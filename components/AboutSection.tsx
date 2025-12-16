@@ -74,7 +74,6 @@ export default function AboutSection() {
               <div className="h-px w-10 sm:w-16 bg-gradient-to-l from-transparent to-[#d4c5b0]" />
             </div>
 
-            {/* Logo with subtle glow */}
             <div className="relative mb-4 sm:mb-5">
               <div className="absolute inset-0 bg-[#2a4556]/3 blur-xl rounded-full scale-150" />
               <Image
@@ -82,7 +81,7 @@ export default function AboutSection() {
                 alt="Deco Concept LLC"
                 width={200}
                 height={90}
-                className="relative w-[140px] sm:w-[180px] lg:w-[200px] h-auto"
+                className="relative w-[140px] sm:w-[180px] lg:w-[200px] h-auto dark:brightness-0 dark:invert"
                 priority
               />
             </div>
@@ -128,7 +127,7 @@ export default function AboutSection() {
                   alt="Deco Concept LLC"
                   width={120}
                   height={68}
-                  className="object-contain sm:w-[140px] sm:h-[80px] dark:brightness-110"
+                  className="object-contain sm:w-[140px] sm:h-[80px] dark:brightness-0 dark:invert"
                 />
                 <div className="hidden sm:block h-16 w-px bg-[var(--color-border)]" />
                 <div className="sm:border-l sm:border-[var(--color-border)] sm:pl-6 lg:border-none lg:pl-0">

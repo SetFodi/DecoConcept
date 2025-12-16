@@ -43,7 +43,9 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 sm:gap-8">
           <div className="flex flex-col gap-3 sm:gap-4">
             <div className="flex items-center gap-4 sm:gap-6">
-              <span className="text-lg sm:text-xl font-serif tracking-wide text-white">Deco Concept LLC</span>
+              <span className="text-lg sm:text-xl font-serif tracking-wide text-white" style={{ color: 'white' }}>
+                Deco Concept LLC
+              </span>
             <div className="hidden sm:flex gap-2">
               {['#8b7355', '#4a7a96', '#c4a882'].map((color) => (
                 <div

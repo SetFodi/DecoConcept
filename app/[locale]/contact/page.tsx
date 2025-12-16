@@ -76,7 +76,7 @@ export default function ContactPage() {
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-4 sm:mb-6">
               {t('title')}
             </h1>
-            <p className="text-base sm:text-lg text-white/80 max-w-2xl mx-auto px-4 sm:px-0">
+            <p className="text-base sm:text-lg text-white max-w-2xl mx-auto px-4 sm:px-0">
               {t('subtitle')}
             </p>
           </div>

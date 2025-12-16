@@ -88,10 +88,10 @@ export default function PaintsPage() {
               Premium Collection
               <span className="w-4 sm:w-8 h-px bg-white/50" />
             </div>
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-serif mb-3 sm:mb-6">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-serif mb-3 sm:mb-6 text-white">
               {t('title')}
             </h1>
-            <p className="text-sm sm:text-lg lg:text-xl text-white/80 max-w-2xl mx-auto px-4 sm:px-0">
+            <p className="text-sm sm:text-lg lg:text-xl text-white max-w-2xl mx-auto px-4 sm:px-0">
               Explore our curated selection of premium paints from world-renowned brands
             </p>
             
