@@ -11,7 +11,7 @@ type ColorCardProps = {
 export default function ColorCard({ color, onClick }: ColorCardProps) {
   return (
     <div 
-      className="group bg-white rounded-lg sm:rounded-xl overflow-hidden border border-[#e8e0d4] hover:shadow-lg active:scale-[0.98] sm:active:scale-100 transition-all duration-300 cursor-pointer"
+      className="group bg-[var(--color-surface)] rounded-lg sm:rounded-xl overflow-hidden border border-[var(--color-border)] hover:shadow-lg dark:hover:shadow-black/30 active:scale-[0.98] sm:active:scale-100 transition-all duration-300 cursor-pointer"
       onClick={onClick}
     >
       <div className="relative aspect-[4/3] overflow-hidden">
@@ -25,14 +25,14 @@ export default function ColorCard({ color, onClick }: ColorCardProps) {
       </div>
       
       <div className="p-2.5 sm:p-4">
-        <h3 className="text-sm sm:text-base font-serif text-[#2a4556] sm:group-hover:text-[#3a5a6e] transition-colors truncate">
+        <h3 className="text-sm sm:text-base font-serif text-[var(--color-accent)] sm:group-hover:text-[var(--color-accent-hover)] transition-colors truncate">
           {color.name}
         </h3>
         <div className="flex items-center justify-between mt-0.5 sm:mt-1">
-          <span className="text-xs sm:text-sm text-[#666666]">
+          <span className="text-xs sm:text-sm text-[var(--color-text-secondary)]">
             #{color.id}
           </span>
-          <span className="text-[10px] sm:text-xs text-[#999999] hidden sm:block">
+          <span className="text-[10px] sm:text-xs text-[var(--color-text-muted)] hidden sm:block">
             {color.brand}
           </span>
         </div>

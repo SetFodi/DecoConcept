@@ -38,12 +38,12 @@ export default function Footer() {
   const navT = useTranslations('navigation');
 
   return (
-    <footer className="bg-[#2a4556] text-white">
+    <footer className="bg-[#1a2a36] text-white" style={{ color: 'white' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 sm:gap-8">
           <div className="flex flex-col gap-3 sm:gap-4">
             <div className="flex items-center gap-4 sm:gap-6">
-              <span className="text-lg sm:text-xl font-serif tracking-wide">Deco Concept LLC</span>
+              <span className="text-lg sm:text-xl font-serif tracking-wide text-white">Deco Concept LLC</span>
             <div className="hidden sm:flex gap-2">
               {['#8b7355', '#4a7a96', '#c4a882'].map((color) => (
                 <div
@@ -57,6 +57,7 @@ export default function Footer() {
             <a 
               href="mailto:decoconceptbatumi@gmail.com" 
               className="text-white/60 hover:text-white transition-colors text-xs sm:text-sm break-all"
+              style={{ color: 'rgba(255,255,255,0.6)' }}
             >
               decoconceptbatumi@gmail.com
             </a>
@@ -64,21 +65,22 @@ export default function Footer() {
 
           <div className="flex flex-col items-start md:items-end gap-4 w-full md:w-auto">
             <nav className="flex flex-wrap items-center gap-3 sm:gap-6 text-xs sm:text-sm">
-              <Link href="/" className="text-white/70 hover:text-white active:text-white/90 transition-colors">
+              <Link href="/" className="text-white/70 hover:text-white active:text-white/90 transition-colors" style={{ color: 'rgba(255,255,255,0.7)' }}>
               {navT('home')}
             </Link>
-              <Link href="/paints" className="text-white/70 hover:text-white active:text-white/90 transition-colors">
+              <Link href="/paints" className="text-white/70 hover:text-white active:text-white/90 transition-colors" style={{ color: 'rgba(255,255,255,0.7)' }}>
               {navT('paints')}
             </Link>
-              <Link href="/contact" className="text-white/70 hover:text-white active:text-white/90 transition-colors">
+              <Link href="/contact" className="text-white/70 hover:text-white active:text-white/90 transition-colors" style={{ color: 'rgba(255,255,255,0.7)' }}>
               {navT('contact')}
             </Link>
-              <span className="text-white/30 hidden sm:inline">|</span>
+              <span className="text-white/30 hidden sm:inline" style={{ color: 'rgba(255,255,255,0.3)' }}>|</span>
             <a
               href="https://www.littlegreene.com"
               target="_blank"
               rel="noopener noreferrer"
                 className="text-white/70 hover:text-white active:text-white/90 transition-colors flex items-center gap-1"
+                style={{ color: 'rgba(255,255,255,0.7)' }}
             >
               Little Greene
               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -94,8 +96,9 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 active:scale-95 transition-all duration-300"
+                  className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 active:scale-95 transition-all duration-300 text-white"
                   aria-label={social.name}
+                  style={{ color: 'white' }}
                 >
                   {social.icon}
                 </a>
@@ -104,9 +107,9 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-[10px] sm:text-xs text-white/40 text-center sm:text-left">
-          <p>© {new Date().getFullYear()} Deco Concept LLC. {t('rights')}.</p>
-          <p>{t('tagline')}</p>
+        <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-[10px] sm:text-xs text-white/40 text-center sm:text-left" style={{ color: 'rgba(255,255,255,0.4)' }}>
+          <p style={{ color: 'rgba(255,255,255,0.4)' }}>© {new Date().getFullYear()} Deco Concept LLC. {t('rights')}.</p>
+          <p style={{ color: 'rgba(255,255,255,0.4)' }}>{t('tagline')}</p>
         </div>
       </div>
     </footer>

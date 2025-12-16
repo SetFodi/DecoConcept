@@ -4,12 +4,14 @@ import { useTranslations, useLocale } from 'next-intl';
 import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export default function Header() {
   const t = useTranslations('navigation');
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
+  const { theme, toggleTheme, mounted } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -66,8 +68,8 @@ export default function Header() {
     <header 
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-sm' 
-          : 'bg-white/80 backdrop-blur-sm'
+          ? 'bg-[var(--color-bg)]/95 backdrop-blur-md shadow-sm dark:shadow-black/20' 
+          : 'bg-[var(--color-bg)]/80 backdrop-blur-sm'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -78,7 +80,7 @@ export default function Header() {
               alt="Deco Concept LLC"
               width={100}
               height={45}
-                className="object-contain w-[90px] sm:w-[120px] h-auto"
+                className="object-contain w-[90px] sm:w-[120px] h-auto dark:brightness-0 dark:invert"
               priority
             />
           </Link>
@@ -88,15 +90,15 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                  className={`relative text-md font-medium tracking-wide transition-colors hover:text-[#2a4556] ${
+                  className={`relative text-md font-medium tracking-wide transition-colors hover:text-[var(--color-accent)] ${
                   pathname === link.href
-                      ? 'text-[#2a4556]'
-                    : 'text-[#666666]'
+                      ? 'text-[var(--color-accent)]'
+                    : 'text-[var(--color-text-secondary)]'
                 }`}
               >
                 {link.label}
                 <span 
-                    className={`absolute -bottom-1 left-0 h-0.5 bg-[#2a4556] transition-all duration-300 ${
+                    className={`absolute -bottom-1 left-0 h-0.5 bg-[var(--color-accent)] transition-all duration-300 ${
                     pathname === link.href ? 'w-full' : 'w-0'
                   }`}
                 />
@@ -104,14 +106,33 @@ export default function Header() {
             ))}
           </nav>
 
-            <div className="flex items-center gap-2 sm:gap-4">
-              <div className="flex items-center gap-0.5 sm:gap-1 bg-[#f8f6f3] rounded-full p-0.5 sm:p-1">
+            <div className="flex items-center gap-2 sm:gap-3">
+              {/* Theme Toggle */}
+              <button
+                onClick={toggleTheme}
+                className="p-2 sm:p-2.5 rounded-full bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-all duration-300 hover:scale-105 active:scale-95"
+                aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+                suppressHydrationWarning
+              >
+                {(!mounted || theme === 'light') ? (
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                  </svg>
+                ) : (
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                )}
+              </button>
+
+              {/* Language Switcher */}
+              <div className="flex items-center gap-0.5 sm:gap-1 bg-[var(--color-bg-secondary)] rounded-full p-0.5 sm:p-1">
               <button
                 onClick={() => handleLocaleChange('en')}
                   className={`px-2.5 py-1.5 sm:px-4 sm:py-2 text-xs font-medium rounded-full transition-all duration-300 ${
                   locale === 'en'
-                      ? 'bg-[#2a4556] text-white shadow-sm'
-                      : 'text-[#666666] hover:text-[#2a4556]'
+                      ? 'bg-[var(--color-accent)] text-[var(--color-bg)] shadow-sm'
+                      : 'text-[var(--color-text-secondary)] hover:text-[var(--color-accent)]'
                 }`}
               >
                 EN
@@ -120,17 +141,18 @@ export default function Header() {
                 onClick={() => handleLocaleChange('ka')}
                   className={`px-2.5 py-1.5 sm:px-4 sm:py-2 text-xs font-medium rounded-full transition-all duration-300 ${
                   locale === 'ka'
-                      ? 'bg-[#2a4556] text-white shadow-sm'
-                      : 'text-[#666666] hover:text-[#2a4556]'
+                      ? 'bg-[var(--color-accent)] text-[var(--color-bg)] shadow-sm'
+                      : 'text-[var(--color-text-secondary)] hover:text-[var(--color-accent)]'
                 }`}
               >
                 GE
               </button>
             </div>
 
+              {/* Mobile Menu Button */}
             <button
                 onClick={toggleMenu}
-                className="md:hidden p-2 text-[#666666] hover:text-[#2a4556] transition-colors relative z-50"
+                className="md:hidden p-2 text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors relative z-50"
               aria-label="Toggle menu"
                 aria-expanded={mobileMenuOpen}
             >
@@ -168,13 +190,13 @@ export default function Header() {
 
       {/* Mobile Menu Panel */}
       <div 
-        className={`fixed top-16 left-0 right-0 bg-white z-40 md:hidden shadow-xl transition-all duration-300 ease-out ${
+        className={`fixed top-16 left-0 right-0 bg-[var(--color-bg)] z-40 md:hidden shadow-xl dark:shadow-black/30 transition-all duration-300 ease-out ${
           mobileMenuOpen 
             ? 'translate-y-0 opacity-100' 
             : '-translate-y-4 opacity-0 pointer-events-none'
           }`}
         >
-        <nav className="py-4 px-4 border-t border-[#e8e0d4]/50 max-h-[calc(100vh-4rem)] overflow-y-auto">
+        <nav className="py-4 px-4 border-t border-[var(--color-border-light)] max-h-[calc(100vh-4rem)] overflow-y-auto">
           <div className="flex flex-col gap-2">
               {navLinks.map((link, index) => (
                 <Link
@@ -183,8 +205,8 @@ export default function Header() {
                 onClick={closeMenu}
                 className={`px-4 py-4 text-base font-medium tracking-wide transition-all duration-200 rounded-xl active:scale-[0.98] ${
                     pathname === link.href
-                    ? 'bg-[#2a4556] text-white'
-                    : 'text-[#2a4556] hover:bg-[#f8f6f3] active:bg-[#ebe7e0]'
+                    ? 'bg-[var(--color-accent)] text-[var(--color-bg)]'
+                    : 'text-[var(--color-accent)] hover:bg-[var(--color-bg-secondary)] active:bg-[var(--color-bg-tertiary)]'
                   }`}
                 style={{ 
                   transitionDelay: mobileMenuOpen ? `${index * 50}ms` : '0ms',

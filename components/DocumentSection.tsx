@@ -75,31 +75,31 @@ export default function DocumentSection() {
   return (
     <section
       id="technical-information"
-      className="relative py-16 sm:py-24 lg:py-32 bg-[#f8f6f3] overflow-hidden noise-texture"
+      className="relative py-16 sm:py-24 lg:py-32 bg-[var(--color-bg-secondary)] overflow-hidden noise-texture"
     >
-      <div className="absolute top-10 sm:top-20 right-10 sm:right-20 w-20 sm:w-32 h-20 sm:h-32 rounded-full bg-[#2a4556]/5 organic-blob" />
-      <div className="absolute bottom-10 sm:bottom-20 left-10 sm:left-20 w-28 sm:w-48 h-28 sm:h-48 rounded-full bg-[#4a7a96]/5 organic-blob" style={{ animationDelay: '-4s' }} />
+      <div className="absolute top-10 sm:top-20 right-10 sm:right-20 w-20 sm:w-32 h-20 sm:h-32 rounded-full bg-[var(--color-accent)]/5 organic-blob" />
+      <div className="absolute bottom-10 sm:bottom-20 left-10 sm:left-20 w-28 sm:w-48 h-28 sm:h-48 rounded-full bg-[var(--color-accent-muted)]/5 organic-blob" style={{ animationDelay: '-4s' }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div 
           ref={titleRef}
           className={`text-center mb-8 sm:mb-12 reveal ${titleRevealed ? 'revealed' : ''}`}
         >
-          <div className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6 text-xs sm:text-sm font-medium text-[#4a7a96] uppercase tracking-widest">
-            <span className="w-6 sm:w-8 h-px bg-[#4a7a96]" />
+          <div className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6 text-xs sm:text-sm font-medium text-[var(--color-accent-muted)] uppercase tracking-widest">
+            <span className="w-6 sm:w-8 h-px bg-[var(--color-accent-muted)]" />
             {t('label')}
-            <span className="w-6 sm:w-8 h-px bg-[#4a7a96]" />
+            <span className="w-6 sm:w-8 h-px bg-[var(--color-accent-muted)]" />
           </div>
           
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-[#2a4556] mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-[var(--color-accent)] mb-4 sm:mb-6">
             {t('title')}
           </h2>
           
-          <p className="text-base sm:text-lg lg:text-xl text-[#666666] max-w-2xl mx-auto leading-relaxed mb-6 sm:mb-8 px-4 sm:px-0">
+          <p className="text-base sm:text-lg lg:text-xl text-[var(--color-text-secondary)] max-w-2xl mx-auto leading-relaxed mb-6 sm:mb-8 px-4 sm:px-0">
             {t('subtitle')}
           </p>
 
-          <div className="inline-flex items-center gap-1 sm:gap-2 p-1 bg-white rounded-full shadow-sm overflow-x-auto max-w-full">
+          <div className="inline-flex items-center gap-1 sm:gap-2 p-1 bg-[var(--color-surface)] rounded-full shadow-sm dark:shadow-black/20 overflow-x-auto max-w-full">
             {[
               { key: 'all', label: t('categories.all') },
               { key: 'interior', label: t('categories.interior') },
@@ -110,8 +110,8 @@ export default function DocumentSection() {
                 onClick={() => setActiveCategory(cat.key as typeof activeCategory)}
                 className={`px-3 sm:px-6 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-full transition-all duration-300 whitespace-nowrap ${
                   activeCategory === cat.key
-                    ? 'bg-[#2a4556] text-white'
-                    : 'text-[#666666] hover:text-[#2a4556]'
+                    ? 'bg-[var(--color-accent)] text-[var(--color-bg)]'
+                    : 'text-[var(--color-text-secondary)] hover:text-[var(--color-accent)]'
                 }`}
               >
                 {cat.label}
@@ -128,7 +128,7 @@ export default function DocumentSection() {
             <div
               key={product.id}
               onClick={() => setSelectedProduct(product)}
-              className="group cursor-pointer bg-white rounded-xl sm:rounded-2xl overflow-hidden border border-[#e8e0d4]/50 shadow-sm active:scale-[0.98] sm:active:scale-100 sm:hover:shadow-xl transition-all duration-500"
+              className="group cursor-pointer bg-[var(--color-surface)] rounded-xl sm:rounded-2xl overflow-hidden border border-[var(--color-border)]/50 shadow-sm dark:shadow-black/20 active:scale-[0.98] sm:active:scale-100 sm:hover:shadow-xl dark:sm:hover:shadow-black/30 transition-all duration-500"
               style={{ transitionDelay: `${index * 0.1}s` }}
             >
               <div className="relative h-36 sm:h-48 overflow-hidden">
@@ -150,17 +150,17 @@ export default function DocumentSection() {
               <div className="p-4 sm:p-6">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 sm:w-8 sm:h-8 bg-[#f8f6f3] rounded-lg flex items-center justify-center">
-                      <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#2a4556]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 bg-[var(--color-bg-secondary)] rounded-lg flex items-center justify-center">
+                      <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[var(--color-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                       </svg>
                     </div>
-                    <span className="text-[10px] sm:text-xs text-[#666666]">
+                    <span className="text-[10px] sm:text-xs text-[var(--color-text-secondary)]">
                       {t('documentCount', { count: product.specs ? 2 : 1 })}
                     </span>
                   </div>
                   
-                  <span className="text-xs sm:text-sm font-medium text-[#2a4556] sm:group-hover:underline flex items-center gap-1">
+                  <span className="text-xs sm:text-sm font-medium text-[var(--color-accent)] sm:group-hover:underline flex items-center gap-1">
                     {t('viewDetails')}
                     <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform duration-300 sm:group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -175,7 +175,7 @@ export default function DocumentSection() {
         <div className="text-center">
           <button
             onClick={() => setShowCertificates(!showCertificates)}
-            className="btn-paint inline-flex items-center gap-2 sm:gap-3 px-5 sm:px-8 py-3 sm:py-4 bg-white border-2 border-[#2a4556] text-[#2a4556] font-medium rounded-xl hover:bg-[#2a4556] hover:text-white active:scale-[0.98] transition-all duration-300 shadow-sm text-sm sm:text-base"
+            className="btn-paint inline-flex items-center gap-2 sm:gap-3 px-5 sm:px-8 py-3 sm:py-4 bg-[var(--color-surface)] border-2 border-[var(--color-accent)] text-[var(--color-accent)] font-medium rounded-xl hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)] active:scale-[0.98] transition-all duration-300 shadow-sm dark:shadow-black/20 text-sm sm:text-base"
           >
             <svg className="w-5 h-5 sm:w-6 sm:h-6 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
@@ -197,14 +197,14 @@ export default function DocumentSection() {
             showCertificates ? 'max-h-[2000px] opacity-100 mt-8 sm:mt-12' : 'max-h-0 opacity-0 mt-0'
           }`}
         >
-          <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-[#e8e0d4]/50">
-            <h3 className="text-lg sm:text-xl font-serif text-[#2a4556] mb-4 sm:mb-6 text-center">{t('certTitle')}</h3>
+          <div className="bg-[var(--color-surface)] rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-[var(--color-border)]/50">
+            <h3 className="text-lg sm:text-xl font-serif text-[var(--color-accent)] mb-4 sm:mb-6 text-center">{t('certTitle')}</h3>
             
             {/* Single certificate document card */}
             <div className="max-w-md mx-auto">
               <button
                 onClick={() => setSelectedCertImage(certificatePages[0])}
-                className="w-full bg-[#f8f6f3] rounded-xl overflow-hidden border border-[#e8e0d4]/50 group hover:shadow-xl active:scale-[0.98] transition-all duration-300"
+                className="w-full bg-[var(--color-bg-secondary)] rounded-xl overflow-hidden border border-[var(--color-border)]/50 group hover:shadow-xl dark:hover:shadow-black/30 active:scale-[0.98] transition-all duration-300"
               >
                 <div className="relative aspect-[4/3] overflow-hidden">
                 <Image
@@ -225,10 +225,10 @@ export default function DocumentSection() {
                 </div>
                 <div className="p-4 flex items-center justify-between">
                   <div className="text-left">
-                    <div className="font-medium text-[#2a4556]">{t('certDocName')}</div>
-                    <div className="text-xs text-[#666666]">{t('certDocDesc')}</div>
+                    <div className="font-medium text-[var(--color-accent)]">{t('certDocName')}</div>
+                    <div className="text-xs text-[var(--color-text-secondary)]">{t('certDocDesc')}</div>
                   </div>
-                  <div className="w-10 h-10 bg-[#2a4556] rounded-full flex items-center justify-center text-white group-hover:bg-[#3a5a6e] transition-colors">
+                  <div className="w-10 h-10 bg-[var(--color-accent)] rounded-full flex items-center justify-center text-[var(--color-bg)] group-hover:bg-[var(--color-accent-hover)] transition-colors">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -247,7 +247,7 @@ export default function DocumentSection() {
           onClick={() => setSelectedProduct(null)}
         >
           <div 
-            className="bg-white rounded-t-2xl sm:rounded-2xl w-full sm:max-w-2xl max-h-[85vh] sm:max-h-[90vh] overflow-hidden shadow-2xl animate-scale-in"
+            className="bg-[var(--color-surface)] rounded-t-2xl sm:rounded-2xl w-full sm:max-w-2xl max-h-[85vh] sm:max-h-[90vh] overflow-hidden shadow-2xl animate-scale-in"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="relative h-40 sm:h-56">
@@ -275,25 +275,25 @@ export default function DocumentSection() {
             </div>
             
             <div className="p-4 sm:p-6 overflow-y-auto max-h-[calc(85vh-10rem)] sm:max-h-[calc(90vh-14rem)]">
-              <h4 className="text-xs sm:text-sm font-medium text-[#2a4556] uppercase tracking-wider mb-3 sm:mb-4">{t('availableDocs')}</h4>
+              <h4 className="text-xs sm:text-sm font-medium text-[var(--color-accent)] uppercase tracking-wider mb-3 sm:mb-4">{t('availableDocs')}</h4>
               
               <div className="space-y-2 sm:space-y-3">
                 <a
                   href={selectedProduct.datasheet}
                   download
-                  className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-[#f8f6f3] rounded-xl hover:bg-[#ebe7e0] active:scale-[0.98] transition-all group"
+                  className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-[var(--color-bg-secondary)] rounded-xl hover:bg-[var(--color-bg-tertiary)] active:scale-[0.98] transition-all group"
                 >
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-red-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 sm:w-6 sm:h-6 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-red-500/10 dark:bg-red-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <svg className="w-5 h-5 sm:w-6 sm:h-6 text-red-600 dark:text-red-400" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zM6 20V4h7v5h5v11H6z"/>
                       <path d="M8 12h8v2H8zM8 16h5v2H8z"/>
                     </svg>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="font-medium text-[#2a4556] text-sm sm:text-base">{t('techSheet')}</div>
-                    <div className="text-xs sm:text-sm text-[#666666]">{t('formats.pdfEn')}</div>
+                    <div className="font-medium text-[var(--color-accent)] text-sm sm:text-base">{t('techSheet')}</div>
+                    <div className="text-xs sm:text-sm text-[var(--color-text-secondary)]">{t('formats.pdfEn')}</div>
                   </div>
-                  <svg className="w-5 h-5 text-[#666666] group-hover:text-[#2a4556] transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-[var(--color-text-secondary)] group-hover:text-[var(--color-accent)] transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                   </svg>
                 </a>
@@ -303,22 +303,22 @@ export default function DocumentSection() {
                     href={selectedProduct.specs}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-[#f8f6f3] rounded-xl hover:bg-[#ebe7e0] active:scale-[0.98] transition-all group"
+                    className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-[var(--color-bg-secondary)] rounded-xl hover:bg-[var(--color-bg-tertiary)] active:scale-[0.98] transition-all group"
                   >
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <svg className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-500/10 dark:bg-blue-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <svg className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 dark:text-blue-400" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zM6 20V4h7v5h5v11H6z"/>
                         <path d="M8 12h8v2H8zM8 16h5v2H8z"/>
                       </svg>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="font-medium text-[#2a4556] text-sm sm:text-base">{t('prodSpecs')}</div>
-                      <div className="text-xs sm:text-sm text-[#666666]">
+                      <div className="font-medium text-[var(--color-accent)] text-sm sm:text-base">{t('prodSpecs')}</div>
+                      <div className="text-xs sm:text-sm text-[var(--color-text-secondary)]">
                         {selectedProduct.specs.endsWith('.pdf') ? t('formats.pdfEn') : t('formats.docxKa')}
                       </div>
                     </div>
                     <svg
-                      className="w-5 h-5 text-[#666666] group-hover:text-[#2a4556] transition-colors flex-shrink-0"
+                      className="w-5 h-5 text-[var(--color-text-secondary)] group-hover:text-[var(--color-accent)] transition-colors flex-shrink-0"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"

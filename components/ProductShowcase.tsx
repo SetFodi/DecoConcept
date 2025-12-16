@@ -57,7 +57,7 @@ export default function ProductShowcase() {
   return (
     <section
       id="product-showcase"
-      className="relative py-16 sm:py-24 lg:py-32 bg-gradient-to-b from-[#f8f6f3] via-white to-[#f8f6f3] overflow-hidden"
+      className="relative py-16 sm:py-24 lg:py-32 bg-gradient-to-b from-[var(--color-bg-secondary)] via-[var(--color-bg)] to-[var(--color-bg-secondary)] overflow-hidden"
     >
       <div className="absolute inset-0 opacity-30">
         <div className="absolute top-20 left-10 w-48 sm:w-72 h-48 sm:h-72 bg-[#c4a882]/20 rounded-full blur-3xl" />
@@ -69,17 +69,17 @@ export default function ProductShowcase() {
           ref={titleRef}
           className={`text-center mb-10 sm:mb-16 lg:mb-20 reveal ${titleRevealed ? 'revealed' : ''}`}
         >
-          <div className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6 text-xs sm:text-sm font-medium text-[#4a7a96] uppercase tracking-widest">
-            <span className="w-6 sm:w-8 h-px bg-[#4a7a96]" />
+          <div className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6 text-xs sm:text-sm font-medium text-[var(--color-accent-muted)] uppercase tracking-widest">
+            <span className="w-6 sm:w-8 h-px bg-[var(--color-accent-muted)]" />
             {t('label')}
-            <span className="w-6 sm:w-8 h-px bg-[#4a7a96]" />
+            <span className="w-6 sm:w-8 h-px bg-[var(--color-accent-muted)]" />
           </div>
           
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-[#2a4556] mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-[var(--color-accent)] mb-4 sm:mb-6">
             {t('title')}
           </h2>
           
-          <p className="text-base sm:text-lg lg:text-xl text-[#666666] max-w-2xl mx-auto leading-relaxed px-4 sm:px-0">
+          <p className="text-base sm:text-lg lg:text-xl text-[var(--color-text-secondary)] max-w-2xl mx-auto leading-relaxed px-4 sm:px-0">
             {t('subtitle')}
           </p>
         </div>
@@ -99,13 +99,13 @@ export default function ProductShowcase() {
                 style={{ backgroundColor: `${product.accent}30` }}
               />
               
-              <div className="relative bg-white rounded-xl sm:rounded-2xl p-2 sm:p-3 lg:p-4 shadow-md sm:shadow-lg shadow-black/5 border border-[#e8e0d4]/50 overflow-hidden transition-all duration-500 sm:group-hover:shadow-2xl sm:group-hover:shadow-black/10 sm:group-hover:-translate-y-2 active:scale-[0.98] sm:active:scale-100">
+              <div className="relative bg-[var(--color-surface)] rounded-xl sm:rounded-2xl p-2 sm:p-3 lg:p-4 shadow-md sm:shadow-lg shadow-black/5 dark:shadow-black/20 border border-[var(--color-border)]/50 overflow-hidden transition-all duration-500 sm:group-hover:shadow-2xl sm:group-hover:shadow-black/10 dark:sm:group-hover:shadow-black/40 sm:group-hover:-translate-y-2 active:scale-[0.98] sm:active:scale-100">
                 <div 
                   className="absolute top-0 left-0 w-full h-0.5 sm:h-1 transition-all duration-300 group-hover:h-1 sm:group-hover:h-1.5"
                   style={{ backgroundColor: product.accent }}
                 />
                 
-                <div className="relative aspect-square mb-2 sm:mb-3 lg:mb-4 rounded-lg sm:rounded-xl overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+                <div className="relative aspect-square mb-2 sm:mb-3 lg:mb-4 rounded-lg sm:rounded-xl overflow-hidden bg-gradient-to-br from-[var(--color-bg-secondary)] to-[var(--color-bg-tertiary)]">
                   <div 
                     className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 hidden sm:block"
                     style={{ background: `radial-gradient(circle at center, ${product.accent}, transparent 70%)` }}
@@ -121,12 +121,12 @@ export default function ProductShowcase() {
               
               <div className="text-center">
                   <span 
-                    className="block text-lg sm:text-xl lg:text-2xl font-serif text-[#2a4556] mb-0.5 sm:mb-1 transition-all duration-300"
+                    className="block text-lg sm:text-xl lg:text-2xl font-serif text-[var(--color-accent)] mb-0.5 sm:mb-1 transition-all duration-300"
                     style={{ color: product.accent }}
                   >
                   {product.label}
                 </span>
-                  <p className="text-xs sm:text-sm text-[#666666] line-clamp-1">
+                  <p className="text-xs sm:text-sm text-[var(--color-text-secondary)] line-clamp-1">
                   {t(`sizes.${product.sizeKey}`)}
                 </p>
                 </div>

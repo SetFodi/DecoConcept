@@ -108,19 +108,19 @@ export default function InspirationGallery() {
   return (
     <section 
       ref={ref}
-      className={`py-16 sm:py-20 lg:py-24 bg-white reveal ${revealed ? 'revealed' : ''}`}
+      className={`py-16 sm:py-20 lg:py-24 bg-[var(--color-bg)] reveal ${revealed ? 'revealed' : ''}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10 sm:mb-12 lg:mb-16">
-          <div className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6 text-xs sm:text-sm font-medium text-[#4a7a96] uppercase tracking-widest">
-            <span className="w-6 sm:w-8 h-px bg-[#4a7a96]" />
+          <div className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6 text-xs sm:text-sm font-medium text-[var(--color-accent-muted)] uppercase tracking-widest">
+            <span className="w-6 sm:w-8 h-px bg-[var(--color-accent-muted)]" />
             {t('label')}
-            <span className="w-6 sm:w-8 h-px bg-[#4a7a96]" />
+            <span className="w-6 sm:w-8 h-px bg-[var(--color-accent-muted)]" />
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-[#2a4556] mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-[var(--color-accent)] mb-4 sm:mb-6">
             {t('title')}
           </h2>
-          <p className="text-base sm:text-lg lg:text-xl text-[#666666] max-w-2xl mx-auto px-4 sm:px-0">
+          <p className="text-base sm:text-lg lg:text-xl text-[var(--color-text-secondary)] max-w-2xl mx-auto px-4 sm:px-0">
             {t('subtitle')}
           </p>
         </div>
@@ -167,7 +167,7 @@ export default function InspirationGallery() {
             <button
               type="button"
               onClick={() => setExpanded((v) => !v)}
-              className="btn-paint inline-flex items-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 bg-white border-2 border-[#2a4556] text-[#2a4556] font-medium rounded-xl hover:bg-[#2a4556] hover:text-white active:scale-[0.98] transition-all duration-300 shadow-sm"
+              className="btn-paint inline-flex items-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 bg-[var(--color-surface)] border-2 border-[var(--color-accent)] text-[var(--color-accent)] font-medium rounded-xl hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)] active:scale-[0.98] transition-all duration-300 shadow-sm"
             >
               {expanded ? 'Show less' : `Show more (${images.length - 24})`}
               <svg

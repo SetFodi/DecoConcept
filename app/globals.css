@@ -1,6 +1,29 @@
 @import "tailwindcss";
 
+/* Enable class-based dark mode for Tailwind v4 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* 
+ * LIGHT MODE (Default for everyone)
+ * Premium paint website with warm, elegant tones
+ * Light mode is the default - dark mode only when .dark class is on html
+ */
 :root {
+  --color-bg: #ffffff;
+  --color-bg-secondary: #f8f6f3;
+  --color-bg-tertiary: #ebe7e0;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f8f6f3;
+  --color-accent: #2a4556;
+  --color-accent-hover: #3a5a6e;
+  --color-accent-muted: #4a7a96;
+  --color-text: #333333;
+  --color-text-secondary: #666666;
+  --color-text-muted: #8b8178;
+  --color-border: #d4cfc7;
+  --color-border-light: #ebe7e0;
+  
+  /* Legacy variables for compatibility */
   --color-white: #ffffff;
   --color-cream: #f8f6f3;
   --color-cream-dark: #ebe7e0;
@@ -10,10 +33,45 @@
   --color-charcoal: #1a1a1a;
   --color-warm-gray: #8b8178;
   --color-light-gray: #d4cfc7;
-  --color-text: #333333;
   --color-text-light: #666666;
   --color-navy: #2a4556;
+  
   color-scheme: light;
+}
+
+/*
+ * DARK MODE - Only activated via .dark class on html element
+ * User must explicitly choose dark mode via theme toggle
+ */
+:root.dark {
+  --color-bg: #0f1419;
+  --color-bg-secondary: #1a1f26;
+  --color-bg-tertiary: #242b35;
+  --color-surface: #1a1f26;
+  --color-surface-hover: #242b35;
+  --color-accent: #5a9bc9;
+  --color-accent-hover: #7ab4db;
+  --color-accent-muted: #4a8ab8;
+  --color-text: #e8e6e3;
+  --color-text-secondary: #a8a29e;
+  --color-text-muted: #78716c;
+  --color-border: #2d3748;
+  --color-border-light: #1e2530;
+  
+  /* Legacy variables updated for dark mode */
+  --color-white: #0f1419;
+  --color-cream: #1a1f26;
+  --color-cream-dark: #242b35;
+  --color-dark-green: #5a9bc9;
+  --color-forest: #7ab4db;
+  --color-sage: #4a8ab8;
+  --color-charcoal: #e8e6e3;
+  --color-warm-gray: #78716c;
+  --color-light-gray: #2d3748;
+  --color-text-light: #a8a29e;
+  --color-navy: #5a9bc9;
+  
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -27,9 +85,10 @@
 
 body {
   font-family: var(--font-source-sans), system-ui, sans-serif;
-  background-color: var(--color-white);
+  background-color: var(--color-bg);
   color: var(--color-text);
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -46,8 +105,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ::selection {
-  background-color: var(--color-dark-green);
-  color: var(--color-white);
+  background-color: var(--color-accent);
+  color: var(--color-bg);
 }
 
 ::-webkit-scrollbar {
@@ -55,16 +114,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-cream);
+  background: var(--color-bg-secondary);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-warm-gray);
+  background: var(--color-text-muted);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-sage);
+  background: var(--color-accent-muted);
 }
 
 /* Paint Loader Animations */
@@ -403,11 +462,15 @@ h1, h2, h3, h4, h5, h6 {
   pointer-events: none;
 }
 
-/* Glass Morphism */
+/* Glass Morphism - adapts to color scheme */
 .glass {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+}
+
+.dark .glass {
+  background: rgba(26, 31, 38, 0.8);
 }
 
 /* Subtle Noise Texture */

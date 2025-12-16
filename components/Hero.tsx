@@ -26,7 +26,7 @@ export default function Hero() {
           quality={90}
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#f8f6f3] via-[#f8f6f3]/95 to-[#f8f6f3]/60 sm:via-[#f8f6f3]/90 sm:to-[#f8f6f3]/30 lg:to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-bg-secondary)] via-[var(--color-bg-secondary)]/95 to-[var(--color-bg-secondary)]/60 sm:via-[var(--color-bg-secondary)]/90 sm:to-[var(--color-bg-secondary)]/30 lg:to-transparent" />
       </div>
 
       <div className="absolute top-28 sm:top-32 left-3 sm:left-4 lg:left-8 hidden sm:block z-10">
@@ -51,21 +51,21 @@ export default function Hero() {
               className={`inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-8 transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
               style={{ transitionDelay: '0.2s' }}
             >
-              <span className="w-8 sm:w-12 h-px bg-[#2a4556]" />
-              <span className="text-xs sm:text-sm font-medium text-[#4a7a96] uppercase tracking-[0.15em] sm:tracking-[0.2em]">
+              <span className="w-8 sm:w-12 h-px bg-[var(--color-accent)]" />
+              <span className="text-xs sm:text-sm font-medium text-[var(--color-accent-muted)] uppercase tracking-[0.15em] sm:tracking-[0.2em]">
                 {t('tagline')}
               </span>
             </div>
 
             <h1 
-              className={`text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif text-[#2a4556] mb-4 sm:mb-8 leading-[1.15] sm:leading-[1.1] transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              className={`text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif text-[var(--color-accent)] mb-4 sm:mb-8 leading-[1.15] sm:leading-[1.1] transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
               style={{ transitionDelay: '0.4s' }}
             >
               {t('tagline')}
             </h1>
             
             <p 
-              className={`text-base sm:text-lg md:text-xl text-[#666666] max-w-lg mb-6 sm:mb-10 leading-relaxed transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              className={`text-base sm:text-lg md:text-xl text-[var(--color-text-secondary)] max-w-lg mb-6 sm:mb-10 leading-relaxed transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
               style={{ transitionDelay: '0.6s' }}
             >
               {t('subtitle')}
@@ -77,7 +77,7 @@ export default function Hero() {
             >
               <a
                 href="#about"
-                className="btn-paint inline-flex items-center justify-center px-6 py-3.5 sm:px-10 sm:py-5 bg-[#2a4556] text-white font-medium text-base sm:text-lg hover:bg-[#3a5a6e] active:scale-[0.98] transition-all duration-300 rounded-sm group"
+                className="btn-paint inline-flex items-center justify-center px-6 py-3.5 sm:px-10 sm:py-5 bg-[var(--color-accent)] text-[var(--color-bg)] font-medium text-base sm:text-lg hover:bg-[var(--color-accent-hover)] active:scale-[0.98] transition-all duration-300 rounded-sm group"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   {t('discoverMore')}
@@ -88,7 +88,7 @@ export default function Hero() {
               </a>
               <Link
                 href="/paints"
-                className="inline-flex items-center justify-center px-6 py-3.5 sm:px-10 sm:py-5 border-2 border-[#2a4556] text-[#2a4556] font-medium text-base sm:text-lg hover:bg-[#2a4556] hover:text-white active:scale-[0.98] transition-all duration-300 rounded-sm"
+                className="inline-flex items-center justify-center px-6 py-3.5 sm:px-10 sm:py-5 border-2 border-[var(--color-accent)] text-[var(--color-accent)] font-medium text-base sm:text-lg hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)] active:scale-[0.98] transition-all duration-300 rounded-sm"
               >
                 {t('viewColors')}
               </Link>
@@ -102,12 +102,12 @@ export default function Hero() {
                 {['#8b7355', '#4a7a96', '#c4a882', '#2a4556', '#a07850'].map((color) => (
                   <div
                     key={color}
-                    className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border-2 border-white shadow-md"
+                    className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border-2 border-[var(--color-bg)] shadow-md"
                     style={{ backgroundColor: color }}
                   />
                 ))}
               </div>
-              <span className="text-xs sm:text-sm font-medium text-[#2a4556]">{t('colorsCount')}</span>
+              <span className="text-xs sm:text-sm font-medium text-[var(--color-accent)]">{t('colorsCount')}</span>
             </div>
           </div>
 
@@ -121,7 +121,7 @@ export default function Hero() {
       >
         <a 
           href="#about" 
-          className="flex flex-col items-center gap-2 text-[#2a4556]/60 hover:text-[#2a4556] transition-colors group"
+          className="flex flex-col items-center gap-2 text-[var(--color-accent)]/60 hover:text-[var(--color-accent)] transition-colors group"
         >
           <span className="text-xs uppercase tracking-[0.2em] font-medium">{t('scroll')}</span>
           <div className="w-6 h-10 border-2 border-current rounded-full flex items-start justify-center p-1">

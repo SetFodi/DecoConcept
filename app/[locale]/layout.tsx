@@ -8,6 +8,7 @@ import "../globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PaintLoader from "@/components/PaintLoader";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -41,22 +42,25 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
       <head>
-        <meta name="color-scheme" content="light" />
+        <meta name="color-scheme" content="light dark" />
+        <meta name="theme-color" content="#ffffff" />
       </head>
       <body 
-        className={`${playfair.variable} ${sourceSans.variable} antialiased`}
+        className={`${playfair.variable} ${sourceSans.variable} antialiased bg-[var(--color-bg)] text-[var(--color-text)]`}
         suppressHydrationWarning
       >
-        <NextIntlClientProvider messages={messages}>
-          <PaintLoader />
-          <Header />
-          <main>
-            {children}
-          </main>
-          <Footer />
-        </NextIntlClientProvider>
+        <ThemeProvider>
+          <NextIntlClientProvider messages={messages}>
+            <PaintLoader />
+            <Header />
+            <main className="bg-[var(--color-bg)]">
+              {children}
+            </main>
+            <Footer />
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
