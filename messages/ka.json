@@ -38,6 +38,17 @@
     "label": "ჩვენი ასორტიმენტი",
     "title": "პრემიუმ კოლექცია",
     "subtitle": "აღმოაჩინეთ პრემიუმ საღებავების ჩვენი რჩეული კოლექცია მსოფლიოში ცნობილი ბრენდებისგან",
+    "allSizes": "ყველა ზომა",
+    "availableSizes": "ხელმისაწვდომია",
+    "onlyTheseSizes": "ამ კატეგორიისთვის ხელმისაწვდომია მხოლოდ ეს ზომები",
+    "categories": {
+      "allSizes": "ყველა ზომა",
+      "absoluteMatt": "Absolute Matt",
+      "intelligentEggshell": "Intelligent Eggshell",
+      "intelligentMatt": "Intelligent Matt",
+      "intelligentASP": "Intelligent ASP",
+      "wallPrimerSealer": "Wall Primer Sealer"
+    },
     "sizes": {
       "60ml": "60მლ ტესტერი",
       "250ml": "250მლ ტესტერი",

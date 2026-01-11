@@ -38,6 +38,17 @@
     "label": "Our Range",
     "title": "Premium Collection",
     "subtitle": "Explore our curated selection of premium paints from world-renowned brands",
+    "allSizes": "All Sizes",
+    "availableSizes": "Available in",
+    "onlyTheseSizes": "Only these sizes are available for this category",
+    "categories": {
+      "allSizes": "All Sizes",
+      "absoluteMatt": "Absolute Matt",
+      "intelligentEggshell": "Intelligent Eggshell",
+      "intelligentMatt": "Intelligent Matt",
+      "intelligentASP": "Intelligent ASP",
+      "wallPrimerSealer": "Wall Primer Sealer"
+    },
     "sizes": {
       "60ml": "60ml Sample Pot",
       "250ml": "250ml Sample",
