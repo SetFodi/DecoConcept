@@ -278,10 +278,24 @@ export default function PaintsPage() {
             </button>
 
             <div className="flex flex-col lg:flex-row">
-              {/* Left side - Large Color Swatch / room scene */}
-              <div className="lg:w-[55%] relative bg-[var(--color-bg-secondary)]">
+              {/* Left side - Large Color Swatch / room scene / colour video */}
+              <div
+                className="lg:w-[55%] relative bg-[var(--color-bg-secondary)]"
+                style={selectedColor.hex ? { backgroundColor: selectedColor.hex } : undefined}
+              >
                 <div className="relative w-full h-full min-h-[320px] sm:min-h-[400px] lg:min-h-[520px]">
-                  {selectedColor.hex ? (
+                  {selectedColor.video ? (
+                    <video
+                      key={selectedColor.video}
+                      src={selectedColor.video}
+                      poster={selectedColor.scene}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="absolute inset-0 w-full h-full object-contain"
+                    />
+                  ) : selectedColor.hex ? (
                     selectedColor.scene ? (
                       <Image
                         src={selectedColor.scene}
