@@ -85,14 +85,14 @@ export default function PaintsPage() {
           <div className="text-center text-white px-4">
             <div className="inline-flex items-center gap-2 sm:gap-3 mb-3 sm:mb-6 text-[10px] sm:text-sm font-medium text-white/70 uppercase tracking-widest">
               <span className="w-4 sm:w-8 h-px bg-white/50" />
-              Premium Collection
+              {t('premiumCollection')}
               <span className="w-4 sm:w-8 h-px bg-white/50" />
             </div>
             <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-serif mb-3 sm:mb-6 text-white">
               {t('title')}
             </h1>
             <p className="text-sm sm:text-lg lg:text-xl text-white/80 max-w-2xl mx-auto px-4 sm:px-0">
-              Explore our curated selection of premium paints from world-renowned brands
+              {t('subtitle')}
             </p>
             
             <div className="mt-4 sm:mt-8 flex justify-center gap-2 sm:gap-3">
@@ -202,7 +202,10 @@ export default function PaintsPage() {
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-6 sm:mb-8">
               <div>
                 <p className="text-sm sm:text-base text-[var(--color-text-secondary)]">
-                  Showing <span className="font-medium text-[var(--color-accent)]">{filteredColors.length}</span> colors
+                  {t.rich('showing', {
+                    count: filteredColors.length,
+                    b: (chunks) => <span className="font-medium text-[var(--color-accent)]">{chunks}</span>,
+                  })}
                 </p>
               </div>
               
@@ -228,7 +231,7 @@ export default function PaintsPage() {
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 lg:gap-6">
               {filteredColors.map((color) => (
                 <ColorCard 
-                  key={color.id} 
+                  key={`${color.brand}-${color.id}`} 
                   color={color} 
                   onClick={() => setSelectedColor(color)}
                 />
@@ -246,7 +249,7 @@ export default function PaintsPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <p className="text-[var(--color-text-secondary)] text-base sm:text-lg">
-                  No colors found matching your search
+                  {t('noColors')}
                 </p>
               </div>
             )}
@@ -275,17 +278,32 @@ export default function PaintsPage() {
             </button>
 
             <div className="flex flex-col lg:flex-row">
-              {/* Left side - Large Color Swatch (image already contains color name) */}
+              {/* Left side - Large Color Swatch / room scene */}
               <div className="lg:w-[55%] relative bg-[var(--color-bg-secondary)]">
                 <div className="relative w-full h-full min-h-[320px] sm:min-h-[400px] lg:min-h-[520px]">
-                  <Image
-                    src={`/images/swatches/${selectedColor.filename}`}
-                    alt={selectedColor.name}
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 1024px) 100vw, 55vw"
-                    quality={95}
-                  />
+                  {selectedColor.hex ? (
+                    selectedColor.scene ? (
+                      <Image
+                        src={selectedColor.scene}
+                        alt={selectedColor.name}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 100vw, 55vw"
+                        quality={85}
+                      />
+                    ) : (
+                      <div className="w-full h-full" style={{ backgroundColor: selectedColor.hex }} />
+                    )
+                  ) : (
+                    <Image
+                      src={`/images/swatches/${selectedColor.filename}`}
+                      alt={selectedColor.name}
+                      fill
+                      className="object-contain"
+                      sizes="(max-width: 1024px) 100vw, 55vw"
+                      quality={95}
+                    />
+                  )}
                 </div>
               </div>
 
@@ -293,20 +311,36 @@ export default function PaintsPage() {
               <div className="lg:w-[45%] p-5 sm:p-7 lg:p-8 flex flex-col bg-[var(--color-surface)]">
                 {/* Sample Pot Section - Redesigned */}
                 <div className="flex-1 flex flex-col items-center justify-center text-center">
-                  {/* Sample Pot Image */}
-                  <div className="w-28 h-28 sm:w-36 sm:h-36 lg:w-40 lg:h-40 relative mb-4 sm:mb-5">
-                    <Image
-                      src={`/Sample Pots/${getSamplePotFilename(selectedColor)}`}
-                      alt={`${selectedColor.name} Sample Pot`}
-                      fill
-                      className="object-contain drop-shadow-lg"
-                      sizes="160px"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                      }}
-                    />
-                  </div>
+                  {selectedColor.hex ? (
+                    /* LOGGIA: solid colour disc + name */
+                    <>
+                      <div
+                        className="w-28 h-28 sm:w-36 sm:h-36 lg:w-40 lg:h-40 rounded-full mb-4 sm:mb-5 shadow-lg ring-1 ring-black/5"
+                        style={{ backgroundColor: selectedColor.hex }}
+                      />
+                      <h3 className="text-xl sm:text-2xl font-serif text-[var(--color-accent)] mb-1">
+                        {selectedColor.name}
+                      </h3>
+                      <span className="text-xs sm:text-sm text-[var(--color-text-secondary)] tracking-wider uppercase mb-3 sm:mb-4">
+                        {selectedColor.hex.toUpperCase()} · {selectedColor.brand}
+                      </span>
+                    </>
+                  ) : (
+                    /* Little Greene: sample pot image */
+                    <div className="w-28 h-28 sm:w-36 sm:h-36 lg:w-40 lg:h-40 relative mb-4 sm:mb-5">
+                      <Image
+                        src={`/Sample Pots/${getSamplePotFilename(selectedColor)}`}
+                        alt={`${selectedColor.name} Sample Pot`}
+                        fill
+                        className="object-contain drop-shadow-lg"
+                        sizes="160px"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                        }}
+                      />
+                    </div>
+                  )}
 
                   {/* Sample Text */}
                   <h3 className="text-lg sm:text-xl lg:text-2xl font-serif text-[var(--color-accent)] mb-2 sm:mb-3">
@@ -321,7 +355,7 @@ export default function PaintsPage() {
                 <div className="mt-5 sm:mt-6 pt-4 sm:pt-5 border-t border-[var(--color-border)]/60">
                   <div className="flex flex-wrap justify-center gap-2">
                     <span className="px-3 py-1.5 bg-[var(--color-accent)] text-[var(--color-bg)] text-xs font-medium rounded-full">
-                      {t('samplePot')}
+                      {selectedColor.hex ? t('decorativeFinish') : t('samplePot')}
                     </span>
                     <span className="px-3 py-1.5 bg-[var(--color-accent-muted)]/10 text-[var(--color-accent)] text-xs font-medium rounded-full border border-[var(--color-accent-muted)]/20">
                       {t('interiorExterior')}

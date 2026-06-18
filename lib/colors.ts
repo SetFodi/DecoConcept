@@ -1,8 +1,13 @@
 export type Color = {
   id: number;
   name: string;
-  filename: string;
   brand: string;
+  /** Little Greene: printed swatch image in /public/images/swatches */
+  filename?: string;
+  /** LOGGIA: flat colour value used to render the swatch tile */
+  hex?: string;
+  /** LOGGIA: optional room scene shown in the colour detail modal */
+  scene?: string;
 };
 
 const colorFilenames = [
@@ -238,12 +243,103 @@ function parseColorFromFilename(filename: string): Color | null {
   };
 }
 
-export const colors: Color[] = colorFilenames
+const littleGreeneColors: Color[] = colorFilenames
   .map(parseColorFromFilename)
   .filter((c): c is Color => c !== null)
   .sort((a, b) => a.id - b.id);
 
-export const brands = ['Little Greene'] as const;
+// LOGGIA decorative finishes — 84-colour palette (GOCCE COLORATE).
+// Swatches render from `hex`; `scene` is an optional painted-room photo.
+const loggiaColors: Color[] = [
+  { id: 1, name: "Almond Chip", brand: "LOGGIA", hex: "#d6c5b0", scene: "/images/loggia/scenes/almond-chip.jpg" },
+  { id: 2, name: "Autumn White", brand: "LOGGIA", hex: "#ffe3ce", scene: "/images/loggia/scenes/autumn-white.jpg" },
+  { id: 3, name: "Background Beige", brand: "LOGGIA", hex: "#d0bb9b", scene: "/images/loggia/scenes/background-beige.jpg" },
+  { id: 4, name: "Blue Country", brand: "LOGGIA", hex: "#7695aa", scene: "/images/loggia/scenes/blue-country.jpg" },
+  { id: 5, name: "Blue Trace", brand: "LOGGIA", hex: "#d3eff1", scene: "/images/loggia/scenes/blue-trace.jpg" },
+  { id: 6, name: "Blue Vision", brand: "LOGGIA", hex: "#c7e2e4", scene: "/images/loggia/scenes/blue-vision.jpg" },
+  { id: 7, name: "Bradford Beige", brand: "LOGGIA", hex: "#d3aba0", scene: "/images/loggia/scenes/bradford-beige.jpg" },
+  { id: 8, name: "Bradford Brown", brand: "LOGGIA", hex: "#41353b", scene: "/images/loggia/scenes/bradford-brown.jpg" },
+  { id: 9, name: "Chaff", brand: "LOGGIA", hex: "#e2c4a2", scene: "/images/loggia/scenes/chaff.jpg" },
+  { id: 10, name: "Chateau Rose", brand: "LOGGIA", hex: "#ab6e6d", scene: "/images/loggia/scenes/chateau-rose.jpg" },
+  { id: 11, name: "Chinchilla", brand: "LOGGIA", hex: "#b2a9a9", scene: "/images/loggia/scenes/chinchilla.jpg" },
+  { id: 12, name: "Cloud Mist", brand: "LOGGIA", hex: "#b7b3b4", scene: "/images/loggia/scenes/cloud-mist.jpg" },
+  { id: 13, name: "Coachlight", brand: "LOGGIA", hex: "#f0c083", scene: undefined },
+  { id: 14, name: "Cotillion Red", brand: "LOGGIA", hex: "#883030", scene: "/images/loggia/scenes/cotillion-red.jpg" },
+  { id: 15, name: "Cozy Corner", brand: "LOGGIA", hex: "#7aa8c0", scene: "/images/loggia/scenes/cozy-corner.jpg" },
+  { id: 16, name: "Creamy White", brand: "LOGGIA", hex: "#fff5dd", scene: "/images/loggia/scenes/creamy-white.jpg" },
+  { id: 17, name: "Crete Barrel", brand: "LOGGIA", hex: "#7c715b", scene: "/images/loggia/scenes/crete-barrel.jpg" },
+  { id: 18, name: "Desert View", brand: "LOGGIA", hex: "#e0bfac", scene: "/images/loggia/scenes/desert-view.jpg" },
+  { id: 19, name: "Drifting Cloud", brand: "LOGGIA", hex: "#e9dcd4", scene: "/images/loggia/scenes/drifting-cloud.jpg" },
+  { id: 20, name: "Evening Pool", brand: "LOGGIA", hex: "#004447", scene: "/images/loggia/scenes/evening-pool.jpg" },
+  { id: 21, name: "Fresh Biscuit", brand: "LOGGIA", hex: "#dfb991", scene: "/images/loggia/scenes/fresh-biscuit.jpg" },
+  { id: 22, name: "Garden Dust", brand: "LOGGIA", hex: "#aa9591", scene: "/images/loggia/scenes/garden-dust.jpg" },
+  { id: 23, name: "Gazebo", brand: "LOGGIA", hex: "#9a9071", scene: "/images/loggia/scenes/gazebo.jpg" },
+  { id: 24, name: "Gray Foam", brand: "LOGGIA", hex: "#d7d4ce", scene: "/images/loggia/scenes/gray-foam.jpg" },
+  { id: 25, name: "Gray Night", brand: "LOGGIA", hex: "#4b555f", scene: "/images/loggia/scenes/gray-night.jpg" },
+  { id: 26, name: "Heart Of Palm", brand: "LOGGIA", hex: "#beb99e", scene: "/images/loggia/scenes/heart-of-palm.jpg" },
+  { id: 27, name: "Hint Of Blue", brand: "LOGGIA", hex: "#b2d4d5", scene: "/images/loggia/scenes/hint-of-blue.jpg" },
+  { id: 28, name: "Hubbard Squash", brand: "LOGGIA", hex: "#b0734b", scene: "/images/loggia/scenes/hubbard-squash.jpg" },
+  { id: 29, name: "Ivory Porcelain", brand: "LOGGIA", hex: "#e3d4b5", scene: "/images/loggia/scenes/ivory-porcelain.jpg" },
+  { id: 30, name: "Ivory Yellow", brand: "LOGGIA", hex: "#fff2cb", scene: "/images/loggia/scenes/ivory-yellow.jpg" },
+  { id: 31, name: "Liberty Grey", brand: "LOGGIA", hex: "#646b7a", scene: "/images/loggia/scenes/liberty-grey.jpg" },
+  { id: 32, name: "Light Approach", brand: "LOGGIA", hex: "#e3dbc9", scene: "/images/loggia/scenes/light-approach.jpg" },
+  { id: 33, name: "Little Angel", brand: "LOGGIA", hex: "#eee5cb", scene: "/images/loggia/scenes/little-angel.jpg" },
+  { id: 34, name: "Little Little", brand: "LOGGIA", hex: "#b1c3a5", scene: "/images/loggia/scenes/little-little.jpg" },
+  { id: 35, name: "Manila", brand: "LOGGIA", hex: "#8f7a62", scene: "/images/loggia/scenes/manila.jpg" },
+  { id: 36, name: "Mature Gray", brand: "LOGGIA", hex: "#d0cdc9", scene: "/images/loggia/scenes/mature-gray.jpg" },
+  { id: 37, name: "Mauve Bisque", brand: "LOGGIA", hex: "#e1cbbc", scene: "/images/loggia/scenes/mauve-bisque.jpg" },
+  { id: 38, name: "Misty Shadow", brand: "LOGGIA", hex: "#b3a58c", scene: "/images/loggia/scenes/misty-shadow.jpg" },
+  { id: 39, name: "Mobe Pearl", brand: "LOGGIA", hex: "#f0e0d4", scene: "/images/loggia/scenes/mobe-pearl.jpg" },
+  { id: 40, name: "Morning Moss", brand: "LOGGIA", hex: "#645d41", scene: "/images/loggia/scenes/morning-moss.jpg" },
+  { id: 41, name: "Musing", brand: "LOGGIA", hex: "#ffd3a8", scene: "/images/loggia/scenes/musing.jpg" },
+  { id: 42, name: "Orchid Scent", brand: "LOGGIA", hex: "#c9bec6", scene: "/images/loggia/scenes/orchid-scent.jpg" },
+  { id: 43, name: "Outpost Gray", brand: "LOGGIA", hex: "#62565e", scene: "/images/loggia/scenes/outpost-gray.jpg" },
+  { id: 44, name: "Peach Pinch", brand: "LOGGIA", hex: "#f6e9d0", scene: undefined },
+  { id: 45, name: "Perfect Plum", brand: "LOGGIA", hex: "#3a2c3a", scene: "/images/loggia/scenes/perfect-plum.jpg" },
+  { id: 46, name: "Pioneer Red", brand: "LOGGIA", hex: "#843f43", scene: "/images/loggia/scenes/pioneer-red.jpg" },
+  { id: 47, name: "Platinum", brand: "LOGGIA", hex: "#969391", scene: "/images/loggia/scenes/platinum.jpg" },
+  { id: 48, name: "Pueblo Peach", brand: "LOGGIA", hex: "#fbc2b5", scene: "/images/loggia/scenes/pueblo-peach.jpg" },
+  { id: 49, name: "Quilter's Threads", brand: "LOGGIA", hex: "#cbc1b8", scene: "/images/loggia/scenes/quilter-s-threads.jpg" },
+  { id: 50, name: "Ripe Wheat", brand: "LOGGIA", hex: "#e5c18a", scene: "/images/loggia/scenes/ripe-wheat.jpg" },
+  { id: 51, name: "Robust Vine", brand: "LOGGIA", hex: "#19372c", scene: "/images/loggia/scenes/robust-vine.jpg" },
+  { id: 52, name: "Rosy Dawn", brand: "LOGGIA", hex: "#e6d8d0", scene: "/images/loggia/scenes/rosy-dawn.jpg" },
+  { id: 53, name: "Rye", brand: "LOGGIA", hex: "#c59f75", scene: "/images/loggia/scenes/rye.jpg" },
+  { id: 54, name: "Saddle Brown", brand: "LOGGIA", hex: "#3d312a", scene: "/images/loggia/scenes/saddle-brown.jpg" },
+  { id: 55, name: "Saddle Sheen", brand: "LOGGIA", hex: "#866745", scene: "/images/loggia/scenes/saddle-sheen.jpg" },
+  { id: 56, name: "Sea Nymph Green", brand: "LOGGIA", hex: "#a5ddde", scene: undefined },
+  { id: 57, name: "Silent Bliss", brand: "LOGGIA", hex: "#f4d7b9", scene: "/images/loggia/scenes/silent-bliss.jpg" },
+  { id: 58, name: "Silver Coin", brand: "LOGGIA", hex: "#cbc7c1", scene: "/images/loggia/scenes/silver-coin.jpg" },
+  { id: 59, name: "Silver Skates", brand: "LOGGIA", hex: "#a8b6bd", scene: "/images/loggia/scenes/silver-skates.jpg" },
+  { id: 60, name: "Smokey Taupe", brand: "LOGGIA", hex: "#af9590", scene: "/images/loggia/scenes/smokey-taupe.jpg" },
+  { id: 61, name: "Spoonbread", brand: "LOGGIA", hex: "#ffdeb8", scene: "/images/loggia/scenes/spoonbread.jpg" },
+  { id: 62, name: "Spring Kissed", brand: "LOGGIA", hex: "#ccd0a2", scene: "/images/loggia/scenes/spring-kissed.jpg" },
+  { id: 63, name: "Stairstep", brand: "LOGGIA", hex: "#907a6a", scene: "/images/loggia/scenes/stairstep.jpg" },
+  { id: 64, name: "Stone Fence", brand: "LOGGIA", hex: "#313c46", scene: "/images/loggia/scenes/stone-fence.jpg" },
+  { id: 65, name: "Stormy Sky", brand: "LOGGIA", hex: "#605b57", scene: "/images/loggia/scenes/stormy-sky.jpg" },
+  { id: 66, name: "Stucco Beige", brand: "LOGGIA", hex: "#ab9b89", scene: "/images/loggia/scenes/stucco-beige.jpg" },
+  { id: 67, name: "Swan Wing", brand: "LOGGIA", hex: "#f9f0de", scene: "/images/loggia/scenes/swan-wing.jpg" },
+  { id: 68, name: "Tempest Brown", brand: "LOGGIA", hex: "#473237", scene: "/images/loggia/scenes/tempest-brown.jpg" },
+  { id: 69, name: "Tigerstripe", brand: "LOGGIA", hex: "#a05b3e", scene: "/images/loggia/scenes/tigerstripe.jpg" },
+  { id: 70, name: "Turned Earth", brand: "LOGGIA", hex: "#36353d", scene: "/images/loggia/scenes/turned-earth.jpg" },
+  { id: 71, name: "Versatile Neutral", brand: "LOGGIA", hex: "#d5cbb1", scene: "/images/loggia/scenes/versatile-neutral.jpg" },
+  { id: 72, name: "Victorian Gray", brand: "LOGGIA", hex: "#afaaa6", scene: "/images/loggia/scenes/victorian-gray.jpg" },
+  { id: 73, name: "Violet Whisper", brand: "LOGGIA", hex: "#e7e9e4", scene: "/images/loggia/scenes/violet-whisper.jpg" },
+  { id: 74, name: "Vulcan Blue", brand: "LOGGIA", hex: "#2a3c4b", scene: "/images/loggia/scenes/vulcan-blue.jpg" },
+  { id: 75, name: "Walden White", brand: "LOGGIA", hex: "#dfd8ca", scene: "/images/loggia/scenes/walden-white.jpg" },
+  { id: 76, name: "Weak Tea", brand: "LOGGIA", hex: "#f8c2a6", scene: "/images/loggia/scenes/weak-tea.jpg" },
+  { id: 77, name: "Weatherbelt", brand: "LOGGIA", hex: "#79858b", scene: "/images/loggia/scenes/weatherbelt.jpg" },
+  { id: 78, name: "Wesley Blue", brand: "LOGGIA", hex: "#446477", scene: "/images/loggia/scenes/wesley-blue.jpg" },
+  { id: 79, name: "White Castle", brand: "LOGGIA", hex: "#cecac4", scene: "/images/loggia/scenes/white-castle.jpg" },
+  { id: 80, name: "White Lace", brand: "LOGGIA", hex: "#f1ebde", scene: "/images/loggia/scenes/white-lace.jpg" },
+  { id: 81, name: "White Whale", brand: "LOGGIA", hex: "#afb4b6", scene: "/images/loggia/scenes/white-whale.jpg" },
+  { id: 82, name: "White Wing", brand: "LOGGIA", hex: "#ded6d1", scene: "/images/loggia/scenes/white-wing.jpg" },
+  { id: 83, name: "Wintersweet Berry", brand: "LOGGIA", hex: "#ba7369", scene: "/images/loggia/scenes/wintersweet-berry.jpg" },
+  { id: 84, name: "Wise Sage", brand: "LOGGIA", hex: "#c0b69c", scene: "/images/loggia/scenes/wise-sage.jpg" },
+];
+
+export const colors: Color[] = [...littleGreeneColors, ...loggiaColors];
+
+export const brands = ['Little Greene', 'LOGGIA'] as const;
 
 export type Brand = typeof brands[number];
 

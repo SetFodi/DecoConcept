@@ -19,7 +19,7 @@ const products: Product[] = [
     id: 'intelligent-matt',
     name: 'intelligentMatt',
     category: 'interior',
-    image: '/images/moodboards/Mid Azure Green 96.jpg',
+    image: '/images/buckets/intelligent-matt.png',
     datasheet: '/documents/Zr3N8UaF0TcGI9AI_11499-LGRAS_EN_2024_IntMattEmulsion.pdf',
     specs: '/documents/specs/Intelligent-Matt-Specs.pdf',
   },
@@ -27,7 +27,7 @@ const products: Product[] = [
     id: 'intelligent-eggshell',
     name: 'intelligentEggshell',
     category: 'interior',
-    image: '/images/moodboards/Obsidian Green 216.jpg',
+    image: '/images/buckets/intelligent-eggshell.png',
     datasheet: '/documents/Zr3NqEaF0TcGI8___11499-LGRAS_EN_2024_IntEggshell.pdf',
     specs: '/documents/specs/Intelligent-Eggshell-Specs.pdf',
   },
@@ -35,7 +35,7 @@ const products: Product[] = [
     id: 'absolute-matt',
     name: 'absoluteMatt',
     category: 'interior',
-    image: '/images/moodboards/Jewel Beetle 303.jpg',
+    image: '/images/buckets/absolute-matt.png',
     datasheet: '/documents/Zr3NeEaF0TcGI8_z_11499-LGRAS_EN_2024_AbsoluteMatt.pdf',
     specs: '/documents/specs/20250000_Intelligent_Matt_Cat_III_2022.pdf',
   },
@@ -43,14 +43,14 @@ const products: Product[] = [
     id: 'wall-primer',
     name: 'wallPrimer',
     category: 'primer',
-    image: '/images/moodboards/Flatlay_B&MLG_French_Grey.jpg',
+    image: '/images/buckets/wall-primer.png',
     datasheet: '/documents/ZxYyCoF3NbkBXw2c_11499-LGRAS_EN_2024_WallPrimerSealer.pdf',
   },
   {
     id: 'intelligent-asp',
     name: 'intelligentAsp',
     category: 'primer',
-    image: '/images/moodboards/Flatlay_B&MLG_Rolling_fog.jpg',
+    image: '/images/buckets/intelligent-asp.png',
     datasheet: '/documents/Zr3PPkaF0TcGI9A6_11499-LGRAS_EN_2024_IntASP.pdf'
   },
 ];
@@ -131,23 +131,20 @@ export default function DocumentSection() {
               className="group cursor-pointer bg-[var(--color-surface)] rounded-xl sm:rounded-2xl overflow-hidden border border-[var(--color-border)]/50 shadow-sm dark:shadow-black/20 active:scale-[0.98] sm:active:scale-100 sm:hover:shadow-xl dark:sm:hover:shadow-black/30 transition-all duration-500"
               style={{ transitionDelay: `${index * 0.1}s` }}
             >
-              <div className="relative h-36 sm:h-48 overflow-hidden">
+              <div className="relative h-44 sm:h-56 overflow-hidden bg-gradient-to-b from-[#faf8f5] to-[#efe9e0] flex items-center justify-center border-b border-[var(--color-border)]/40">
                 <Image
                   src={product.image}
-                  alt={product.name}
+                  alt={t(`productNames.${product.name}`)}
                   fill
-                  className="object-cover transition-transform duration-700 sm:group-hover:scale-110"
+                  className="object-contain p-5 sm:p-6 drop-shadow-[0_14px_18px_rgba(42,69,86,0.20)] transition-transform duration-700 sm:group-hover:scale-[1.07]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#2a4556]/80 via-[#2a4556]/20 to-transparent" />
-                <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4">
-                  <span className="inline-block px-2 sm:px-3 py-0.5 sm:py-1 bg-white/20 backdrop-blur-sm text-white text-[10px] sm:text-xs font-medium rounded-full mb-1 sm:mb-2">
-                    {product.category === 'interior' ? t('types.interior') : t('types.primer')}
-                  </span>
-                  <h3 className="text-base sm:text-xl font-serif text-white">{t(`productNames.${product.name}`)}</h3>
-                </div>
+                <span className="absolute top-3 left-3 inline-block px-2 sm:px-3 py-0.5 sm:py-1 bg-white/80 backdrop-blur-sm text-[#2a4556] text-[10px] sm:text-xs font-medium rounded-full shadow-sm ring-1 ring-[#2a4556]/10">
+                  {product.category === 'interior' ? t('types.interior') : t('types.primer')}
+                </span>
               </div>
-              
+
               <div className="p-4 sm:p-6">
+                <h3 className="text-base sm:text-xl font-serif text-[var(--color-accent)] mb-3 sm:mb-4">{t(`productNames.${product.name}`)}</h3>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div className="w-7 h-7 sm:w-8 sm:h-8 bg-[var(--color-bg-secondary)] rounded-lg flex items-center justify-center">
@@ -250,31 +247,28 @@ export default function DocumentSection() {
             className="bg-[var(--color-surface)] rounded-t-2xl sm:rounded-2xl w-full sm:max-w-2xl max-h-[85vh] sm:max-h-[90vh] overflow-hidden shadow-2xl animate-scale-in"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative h-40 sm:h-56">
+            <div className="relative h-48 sm:h-64 bg-gradient-to-b from-[#faf8f5] to-[#efe9e0] flex items-center justify-center">
               <Image
                 src={selectedProduct.image}
-                alt={selectedProduct.name}
+                alt={t(`productNames.${selectedProduct.name}`)}
                 fill
-                className="object-cover"
+                className="object-contain p-5 sm:p-7 drop-shadow-[0_16px_22px_rgba(42,69,86,0.20)]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#2a4556] via-[#2a4556]/40 to-transparent" />
               <button
                 onClick={() => setSelectedProduct(null)}
-                className="absolute top-3 right-3 sm:top-4 sm:right-4 w-9 h-9 sm:w-10 sm:h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 active:scale-95 transition-all"
+                className="absolute top-3 right-3 sm:top-4 sm:right-4 w-9 h-9 sm:w-10 sm:h-10 bg-[#2a4556] rounded-full flex items-center justify-center text-white hover:bg-[#3a5a6e] active:scale-95 transition-all shadow-md"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
-              <div className="absolute bottom-3 left-4 right-4 sm:bottom-4 sm:left-6 sm:right-6">
-                <span className="inline-block px-2 sm:px-3 py-0.5 sm:py-1 bg-white/20 backdrop-blur-sm text-white text-[10px] sm:text-xs font-medium rounded-full mb-1 sm:mb-2">
-                  {selectedProduct.category === 'interior' ? t('types.interior') : t('types.primer')}
-                </span>
-                <h3 className="text-lg sm:text-2xl font-serif text-white">{t(`productNames.${selectedProduct.name}`)}</h3>
-              </div>
+              <span className="absolute top-3 left-3 sm:top-4 sm:left-4 inline-block px-2 sm:px-3 py-0.5 sm:py-1 bg-white/80 backdrop-blur-sm text-[#2a4556] text-[10px] sm:text-xs font-medium rounded-full shadow-sm ring-1 ring-[#2a4556]/10">
+                {selectedProduct.category === 'interior' ? t('types.interior') : t('types.primer')}
+              </span>
             </div>
-            
-            <div className="p-4 sm:p-6 overflow-y-auto max-h-[calc(85vh-10rem)] sm:max-h-[calc(90vh-14rem)]">
+
+            <div className="p-4 sm:p-6 overflow-y-auto max-h-[calc(85vh-11rem)] sm:max-h-[calc(90vh-15rem)]">
+              <h3 className="text-lg sm:text-2xl font-serif text-[var(--color-accent)] mb-4 sm:mb-5">{t(`productNames.${selectedProduct.name}`)}</h3>
               <h4 className="text-xs sm:text-sm font-medium text-[var(--color-accent)] uppercase tracking-wider mb-3 sm:mb-4">{t('availableDocs')}</h4>
               
               <div className="space-y-2 sm:space-y-3">

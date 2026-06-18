@@ -102,6 +102,10 @@
   },
   "paints": {
     "title": "Paint Collection",
+    "premiumCollection": "Premium Collection",
+    "subtitle": "Explore our curated selection of premium paints from world-renowned brands",
+    "showing": "Showing <b>{count}</b> colors",
+    "noColors": "No colors found matching your search",
     "catalog": "Catalog",
     "brands": "Brands",
     "allColors": "All Colors",
@@ -109,6 +113,7 @@
     "sampleTitle": "Sample this Colour",
     "sampleDescription": "We recommend testing a colour before purchase to ensure you are happy with the final result as colours may vary on screen. Deco Concept is not responsible for discrepancies between the colors shown and the actual product, nor for any errors arising from product application.",
     "samplePot": "60ml Sample Pot",
+    "decorativeFinish": "Decorative Finish",
     "interiorExterior": "Interior & Exterior",
     "ecoFriendly": "Eco-Friendly"
   },

@@ -15,7 +15,7 @@ const productCategories = [
       { label: '60ml', image: '/images/80-Sage-Green_500px.png', descKey: '60ml', scale: 'scale-70' },
       { label: '250ml', image: '/images/tins/tin250ml.png', descKey: '250ml', scale: 'scale-80' },
       { label: '1L', image: '/images/tins/tin1l.png', descKey: '1l', scale: 'scale-90' },
-      { label: '2.5L', image: '/images/tins/tin2.5l.png', descKey: '2_5l', scale: 'scale-100' },
+      { label: '2.5L', image: '/images/tins/tin-2.5l-absolute-matt.png', descKey: '2_5l', scale: 'scale-100' },
       { label: '5L', image: '/images/tins/tin5l.png', descKey: '5l', scale: 'scale-90' },
       { label: '10L', image: '/images/tins/tin10l.png', descKey: '10l', scale: 'scale-100' },
     ],

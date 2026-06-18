@@ -349,6 +349,12 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 2px;
 }
 
+/* Georgian glyphs sit lower and have descenders, so drop the stroke
+   to keep it from touching the text. */
+html[lang="ka"] .brush-underline::after {
+  bottom: -12px;
+}
+
 /* Paint Drip Effect */
 .paint-drip {
   position: relative;
