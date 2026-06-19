@@ -2,7 +2,24 @@
   "navigation": {
     "home": "Home",
     "paints": "Paints",
+    "tools": "Tools",
     "contact": "Contact"
+  },
+  "tools": {
+    "eyebrow": "Professional Tools",
+    "title": "Blue Dolphin Tools",
+    "subtitle": "Professional painting tools, rollers, brushes and tapes by Blue Dolphin",
+    "catalog": "Catalog",
+    "categories": "Categories",
+    "allCategories": "All Tools",
+    "subcategories": "Subcategories",
+    "all": "All",
+    "searchPlaceholder": "Search tools...",
+    "showing": "Showing <b>{count}</b> products",
+    "noResults": "No tools found matching your search",
+    "watchVideo": "Watch video",
+    "gallery": "Gallery",
+    "viewDetails": "View details"
   },
   "hero": {
     "tagline": "Premium Paints & Finishes",
