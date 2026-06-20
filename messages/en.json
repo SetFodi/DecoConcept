@@ -45,6 +45,9 @@
     "littleGreeneTitle": "Little Greene",
     "littleGreeneSubtitle": "300 Years of British Heritage",
     "littleGreeneDescription": "Little Greene is an eco-friendly, family-run business cataloguing 300 years of paint and wallpaper. Based in the UK, they create premium paints using traditional methods and the finest ingredients. Their Intelligent paint range offers exceptional durability and a beautiful finish that stands the test of time.",
+    "royalPaintSubtitle": "Italian Decorative Paint",
+    "royalPaintDescription": "Royal Paint by Loggia brings Italian craftsmanship to your walls — premium washable finishes, luminous decorative effects, and a curated palette of 84 designer colours. From velvety super-matte interiors to metallic Mantra textures, every surface becomes a statement.",
+    "royalTags": { "italian": "Italian Craftsmanship", "decorative": "Decorative Finishes", "colors": "84 Colours" },
     "tags": {
       "heritage": "Heritage Colors",
       "sustainable": "Sustainable",
@@ -54,17 +57,27 @@
   "products": {
     "label": "Our Range",
     "title": "Premium Collection",
-    "subtitle": "Explore our curated selection of premium paints from world-renowned brands",
+    "subtitle": "Explore premium paints from Little Greene and Royal Paint",
     "allSizes": "All Sizes",
     "availableSizes": "Available in",
     "onlyTheseSizes": "Only these sizes are available for this category",
+    "brands": {
+      "littleGreene": "Little Greene",
+      "royalPaint": "Royal Paint"
+    },
     "categories": {
       "allSizes": "All Sizes",
+      "allProducts": "All Products",
       "absoluteMatt": "Absolute Matt",
       "intelligentEggshell": "Intelligent Eggshell",
       "intelligentMatt": "Intelligent Matt",
       "intelligentASP": "Intelligent ASP",
-      "wallPrimerSealer": "Wall Primer Sealer"
+      "wallPrimerSealer": "Wall Primer Sealer",
+      "lavabileSuperOpaca": "Lavabile Super Opaca",
+      "fastClean": "Fast Clean",
+      "smaltoSuperOpaco": "Smalto Super Opaco",
+      "supreme": "Supreme",
+      "eggShell": "Egg Shell"
     },
     "sizes": {
       "60ml": "60ml Sample Pot",
@@ -73,6 +86,28 @@
       "2_5l": "2.5 Litres",
       "5l": "5 Litres",
       "10l": "10 Litres"
+    },
+    "royalProducts": {
+      "lavabileSuperOpaca": {
+        "title": "Lavabile Super Opaca",
+        "description": "Super-matt washable wall paint with strong coverage and a water-repellent finish."
+      },
+      "fastClean": {
+        "title": "Fast Clean",
+        "description": "Matte wall paint made for easy stain cleaning without damaging the finish."
+      },
+      "smaltoSuperOpaco": {
+        "title": "Smalto Super Opaco",
+        "description": "Water-based acrylic enamel for interior and exterior ultra-matt surfaces."
+      },
+      "supreme": {
+        "title": "Supreme",
+        "description": "Acrylic-siloxane exterior paint with breathable, water-repellent protection."
+      },
+      "eggShell": {
+        "title": "Egg Shell",
+        "description": "Satin wall enamel for interior walls with an elegant semi-gloss finish."
+      }
     }
   },
   "gallery": {

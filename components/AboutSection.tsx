@@ -15,6 +15,8 @@ export default function AboutSection() {
   const [statsRef, statsRevealed] = useScrollReveal<HTMLDivElement>();
   const [lgRef, lgRevealed] = useScrollReveal<HTMLDivElement>();
   const [galleryRef, galleryRevealed] = useScrollReveal<HTMLDivElement>();
+  const [rpTextRef, rpTextRevealed] = useScrollReveal<HTMLDivElement>();
+  const [rpGalleryRef, rpGalleryRevealed] = useScrollReveal<HTMLDivElement>();
 
   const stats: { key: StatKey; value: string; label: string }[] = [
     { key: 'colors', value: '300+', label: t('stats.colors') },
@@ -280,6 +282,121 @@ export default function AboutSection() {
                     {tag}
                   </span>
                 ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Royal Paint (Loggia) brand section */}
+      <section id="royal-paint-about" className="relative scroll-mt-24 py-16 sm:py-24 lg:py-28 bg-[var(--color-bg)] overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.05] pointer-events-none">
+          <div className="absolute top-20 right-8 w-36 h-36 sm:w-52 sm:h-52 rounded-full bg-[#c4a882] organic-blob" />
+          <div className="absolute bottom-16 left-12 w-44 h-44 sm:w-60 sm:h-60 rounded-full bg-[#2a4556] organic-blob" style={{ animationDelay: '-3s' }} />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            <div
+              ref={rpTextRef}
+              className={`lg:col-span-5 order-1 reveal-left ${rpTextRevealed ? 'revealed' : ''}`}
+            >
+              <div className="mb-6 sm:mb-8">
+                <Image
+                  src="/images/royal-paint/royal-paint-logo-navy.png"
+                  alt="Royal Paint"
+                  width={288}
+                  height={78}
+                  className="w-[190px] sm:w-[240px] h-auto dark:invert"
+                />
+                <div className="mt-3 flex items-center gap-2 text-[10px] sm:text-xs uppercase tracking-[0.3em] text-[var(--color-text-muted)]">
+                  <span className="w-6 h-px bg-[#c4a882]" /> by Loggia · Italy
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                <div className="h-1 w-8 sm:w-12 bg-gradient-to-r from-[#c4a882] to-[var(--color-accent-muted)] rounded-full" />
+                <span className="text-base sm:text-lg text-[var(--color-accent-muted)] font-serif italic">
+                  {t('royalPaintSubtitle')}
+                </span>
+              </div>
+
+              <p className="text-base sm:text-lg text-[var(--color-text-secondary)] leading-relaxed mb-8 sm:mb-10">
+                {t('royalPaintDescription')}
+              </p>
+
+              <div className="flex flex-wrap gap-2 sm:gap-3">
+                {[t('royalTags.italian'), t('royalTags.decorative'), t('royalTags.colors')].map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1.5 sm:px-4 sm:py-2 bg-[var(--color-surface)]/80 backdrop-blur-sm text-[var(--color-accent)] text-xs sm:text-sm font-medium rounded-full border border-[var(--color-border)] shadow-sm"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div
+              ref={rpGalleryRef}
+              className={`lg:col-span-7 order-2 reveal-right ${rpGalleryRevealed ? 'revealed' : ''}`}
+            >
+              <div className="relative">
+                <div className="space-y-3 sm:space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                    <div className="image-hover-zoom rounded-xl sm:rounded-2xl overflow-hidden shadow-lg sm:shadow-2xl dark:shadow-black/30 bg-[var(--color-surface)]">
+                      <Image
+                        src="/images/royal-paint/royal-paint-range-board.jpg"
+                        alt="Royal Paint product range"
+                        width={1200}
+                        height={1320}
+                        className="w-full h-72 sm:h-80 lg:h-96 object-contain p-3 sm:p-4"
+                      />
+                    </div>
+                    <div className="image-hover-zoom rounded-xl sm:rounded-2xl overflow-hidden shadow-lg sm:shadow-2xl dark:shadow-black/30 bg-[var(--color-surface)]">
+                      <Image
+                        src="/images/royal-paint/smalto-super-opaco-uniform.jpg"
+                        alt="Royal Paint Smalto Super Opaco"
+                        width={1000}
+                        height={1000}
+                        className="w-full h-72 sm:h-80 lg:h-96 object-cover"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+                    <div className="image-hover-zoom rounded-xl sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg dark:shadow-black/20 bg-[var(--color-surface)]">
+                      <Image
+                        src="/images/royal-paint/lavabile-super-opaca-uniform.jpg"
+                        alt="Royal Paint Lavabile Super Opaca"
+                        width={1000}
+                        height={1000}
+                        className="w-full h-36 sm:h-44 lg:h-52 object-cover"
+                      />
+                    </div>
+                    <div className="image-hover-zoom rounded-xl sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg dark:shadow-black/20 bg-[var(--color-surface)]">
+                      <Image
+                        src="/images/royal-paint/fast-clean-uniform.jpg"
+                        alt="Royal Paint Fast Clean"
+                        width={1000}
+                        height={1000}
+                        className="w-full h-36 sm:h-44 lg:h-52 object-cover"
+                      />
+                    </div>
+                    <div className="image-hover-zoom rounded-xl sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg dark:shadow-black/20 bg-[var(--color-surface)] col-span-2 sm:col-span-1">
+                      <Image
+                        src="/images/royal-paint/egg-shell-uniform.jpg"
+                        alt="Royal Paint Egg Shell"
+                        width={1000}
+                        height={1000}
+                        className="w-full h-36 sm:h-44 lg:h-52 object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="absolute -top-4 -right-4 sm:-top-6 sm:-right-6 w-16 h-16 sm:w-24 sm:h-24 bg-[#c4a882]/25 rounded-xl sm:rounded-2xl -z-10 hidden sm:block" />
+                <div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 w-20 h-20 sm:w-32 sm:h-32 bg-[var(--color-accent)] rounded-xl sm:rounded-2xl -z-10 hidden sm:block" />
               </div>
             </div>
           </div>

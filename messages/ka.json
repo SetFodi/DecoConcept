@@ -45,6 +45,9 @@
     "littleGreeneTitle": "Little Greene",
     "littleGreeneSubtitle": "300 წლიანი ბრიტანული მემკვიდრეობა",
     "littleGreeneDescription": "Little Greene არის ეკო-მეგობრული, საოჯახო ბიზნესი, რომელიც 300 წლიან საღებავებისა და ფონების ისტორიას აერთიანებს. დიდ ბრიტანეთში დაფუძნებული, ისინი ქმნიან პრემიუმ საღებავებს ტრადიციული მეთოდებითა და საუკეთესო ინგრედიენტებით. მათი Intelligent საღებავების სერია გთავაზობთ განსაკუთრებულ გამძლეობას და მშვენიერ დაფარვას, რომელიც დროის გამოცდას უძლებს.",
+    "royalPaintSubtitle": "იტალიური დეკორატიული საღებავი",
+    "royalPaintDescription": "Royal Paint (Loggia) იტალიურ ოსტატობას ამკვიდრებს თქვენს კედლებზე — პრემიუმ კლასის რეცხვადი საფარები, მბზინავი დეკორატიული ეფექტები და 84 დიზაინერული ფერის შერჩეული პალიტრა. ხავერდოვანი სუპერ-მქრქალი ინტერიერიდან მეტალიკ Mantra ტექსტურებამდე — ყველა ზედაპირი აქცენტად იქცევა.",
+    "royalTags": { "italian": "იტალიური ოსტატობა", "decorative": "დეკორატიული ეფექტები", "colors": "84 ფერი" },
     "tags": {
       "heritage": "ისტორიული ფერები",
       "sustainable": "მდგრადი",
@@ -54,17 +57,27 @@
   "products": {
     "label": "ჩვენი ასორტიმენტი",
     "title": "პრემიუმ კოლექცია",
-    "subtitle": "აღმოაჩინეთ პრემიუმ საღებავების ჩვენი რჩეული კოლექცია მსოფლიოში ცნობილი ბრენდებისგან",
+    "subtitle": "აღმოაჩინეთ Little Greene-ისა და Royal Paint-ის პრემიუმ საღებავები",
     "allSizes": "ყველა ზომა",
     "availableSizes": "ხელმისაწვდომია",
     "onlyTheseSizes": "ამ კატეგორიისთვის ხელმისაწვდომია მხოლოდ ეს ზომები",
+    "brands": {
+      "littleGreene": "Little Greene",
+      "royalPaint": "Royal Paint"
+    },
     "categories": {
       "allSizes": "ყველა ზომა",
+      "allProducts": "ყველა პროდუქტი",
       "absoluteMatt": "Absolute Matt",
       "intelligentEggshell": "Intelligent Eggshell",
       "intelligentMatt": "Intelligent Matt",
       "intelligentASP": "Intelligent ASP",
-      "wallPrimerSealer": "Wall Primer Sealer"
+      "wallPrimerSealer": "Wall Primer Sealer",
+      "lavabileSuperOpaca": "Lavabile Super Opaca",
+      "fastClean": "Fast Clean",
+      "smaltoSuperOpaco": "Smalto Super Opaco",
+      "supreme": "Supreme",
+      "eggShell": "Egg Shell"
     },
     "sizes": {
       "60ml": "60მლ ტესტერი",
@@ -73,6 +86,28 @@
       "2_5l": "2.5 ლიტრი",
       "5l": "5 ლიტრი",
       "10l": "10 ლიტრი"
+    },
+    "royalProducts": {
+      "lavabileSuperOpaca": {
+        "title": "Lavabile Super Opaca",
+        "description": "სუპერ მქრქალი რეცხვადი კედლის საღებავი ძლიერი დაფარვით და წყალგაუმტარი დასრულებით."
+      },
+      "fastClean": {
+        "title": "Fast Clean",
+        "description": "მქრქალი კედლის საღებავი, რომელიც ლაქების მარტივ წმენდას ფენის დაზიანების გარეშე უზრუნველყოფს."
+      },
+      "smaltoSuperOpaco": {
+        "title": "Smalto Super Opaco",
+        "description": "წყალზე დაფუძნებული აკრილის ემალი ინტერიერისა და ექსტერიერის ულტრა მქრქალი ზედაპირებისთვის."
+      },
+      "supreme": {
+        "title": "Supreme",
+        "description": "აკრილ-სილოქსანური ექსტერიერის საღებავი სუნთქვადი და წყალგაუმტარი დაცვით."
+      },
+      "eggShell": {
+        "title": "Egg Shell",
+        "description": "სატინის ეფექტის კედლის ემალი ინტერიერისთვის, ელეგანტური ნახევრად პრიალა დასრულებით."
+      }
     }
   },
   "gallery": {
