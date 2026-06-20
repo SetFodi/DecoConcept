@@ -323,19 +323,17 @@ export default function PaintsPage() {
               {/* Left side - Large Color Swatch / room scene */}
               <div className="lg:w-[55%] relative bg-[var(--color-bg-secondary)]">
                 <div className="relative w-full h-full min-h-[320px] sm:min-h-[400px] lg:min-h-[520px]">
-                  {selectedColor.hex ? (
-                    selectedColor.scene ? (
-                      <Image
-                        src={selectedColor.scene}
-                        alt={selectedColor.name}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 1024px) 100vw, 55vw"
-                        quality={85}
-                      />
-                    ) : (
-                      <div className="w-full h-full" style={{ backgroundColor: selectedColor.hex }} />
-                    )
+                  {selectedColor.scene ? (
+                    <Image
+                      src={selectedColor.scene}
+                      alt={selectedColor.name}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 55vw"
+                      quality={85}
+                    />
+                  ) : selectedColor.hex ? (
+                    <div className="w-full h-full" style={{ backgroundColor: selectedColor.hex }} />
                   ) : (
                     <Image
                       src={`/images/swatches/${selectedColor.filename}`}

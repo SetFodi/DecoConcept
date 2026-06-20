@@ -10,7 +10,7 @@ export type Color = {
   filename?: string;
   /** Royal Paint: flat colour value used to render the swatch tile */
   hex?: string;
-  /** Royal Paint: optional room scene shown in the colour detail modal */
+  /** Optional lifestyle image shown in the colour detail modal */
   scene?: string;
 };
 
@@ -247,9 +247,106 @@ function parseColorFromFilename(filename: string): Color | null {
   };
 }
 
+const littleGreeneScenesById: Partial<Record<number, string>> = {
+  6: '/images/little-greene-scenes/ashes-of-roses-6.jpg',
+  7: '/images/little-greene-scenes/adventurer-7.jpg',
+  8: '/images/little-greene-scenes/lg-purple-brown-2.jpg',
+  21: '/images/little-greene-scenes/basalt-221-orange-aurora-21-detail.jpg',
+  33: '/images/little-greene-scenes/linen-wash-33.jpg',
+  46: '/images/little-greene-scenes/remix-yellow-pink-46-jpg-detail.jpg',
+  47: '/images/little-greene-scenes/mister-david-47.jpg',
+  53: '/images/little-greene-scenes/light-gold-53-detail.jpg',
+  56: '/images/little-greene-scenes/invisible-green-56.jpg',
+  64: '/images/little-greene-scenes/remix-bath-stone-64-detail.jpg',
+  71: '/images/little-greene-scenes/citrine-71.jpg',
+  72: '/images/little-greene-scenes/olive-colour-72-basalt-221.jpg',
+  77: '/images/little-greene-scenes/portland-stone-family-stone.jpg',
+  79: '/images/little-greene-scenes/remix-normandy-grey-79.jpg',
+  80: '/images/little-greene-scenes/remix-sage-green-80.jpg',
+  88: '/images/little-greene-scenes/dark-brunswick-green-88.jpg',
+  92: '/images/little-greene-scenes/green-verditer-92-detail.jpg',
+  94: '/images/little-greene-scenes/canton-97.jpg',
+  96: '/images/little-greene-scenes/mid-azure-green-96.jpg',
+  106: '/images/little-greene-scenes/gauze-family-winter.jpg',
+  108: '/images/little-greene-scenes/james-108-rocking-horse.jpg',
+  113: '/images/little-greene-scenes/french-grey-family.jpg',
+  115: '/images/little-greene-scenes/remix-juniper-ash-115.jpg',
+  116: '/images/little-greene-scenes/thai-saphire-116.jpg',
+  117: '/images/little-greene-scenes/lead-colour-117.jpg',
+  119: '/images/little-greene-scenes/jack-black-119.jpg',
+  122: '/images/little-greene-scenes/middle-buff-122-detail.jpg',
+  124: '/images/little-greene-scenes/chocoolate-colour-124.jpg',
+  130: '/images/little-greene-scenes/remix-joanna-130-detail.jpg',
+  135: '/images/little-greene-scenes/remix-sunlight-135.jpg',
+  142: '/images/little-greene-scenes/mushroom-and-pompeian-ash-293-1.jpg',
+  143: '/images/little-greene-scenes/rolling-fog-family.jpg',
+  144: '/images/little-greene-scenes/attic-ii-144.jpg',
+  148: '/images/little-greene-scenes/air-force-blue-260-carys-148-light-gold-53.jpg',
+  155: '/images/little-greene-scenes/portland-stone-family-stone.jpg',
+  157: '/images/little-greene-scenes/portland-stone-family-stone.jpg',
+  158: '/images/little-greene-scenes/rolling-fog-family.jpg',
+  160: '/images/little-greene-scenes/rolling-fog-family.jpg',
+  161: '/images/little-greene-scenes/french-grey-family.jpg',
+  162: '/images/little-greene-scenes/french-grey-family.jpg',
+  163: '/images/little-greene-scenes/french-grey-family.jpg',
+  164: '/images/little-greene-scenes/gauze-family-winter.jpg',
+  165: '/images/little-greene-scenes/gauze-family-winter.jpg',
+  166: '/images/little-greene-scenes/gauze-family-winter.jpg',
+  190: '/images/little-greene-scenes/atomic-red-190.jpg',
+  191: '/images/little-greene-scenes/leather-191-loft-white-222.jpg',
+  196: '/images/little-greene-scenes/trumpet-196.jpg',
+  199: '/images/little-greene-scenes/phthalo-green-199.jpg',
+  213: '/images/little-greene-scenes/dorchester-pink-family.jpg',
+  216: '/images/little-greene-scenes/obsidian-green-216-detail.jpg',
+  221: '/images/little-greene-scenes/olive-colour-72-basalt-221.jpg',
+  222: '/images/little-greene-scenes/remix-loft-white-222-detail.jpg',
+  223: '/images/little-greene-scenes/scree-227-shallows-223.jpg',
+  227: '/images/little-greene-scenes/scree-227-shallows-223.jpg',
+  228: '/images/little-greene-scenes/lamp-black-228-detail.jpg',
+  229: '/images/little-greene-scenes/wood-ash-229.jpg',
+  236: '/images/little-greene-scenes/flint-236.jpg',
+  255: '/images/little-greene-scenes/smalt-255-french-grey-113.jpg',
+  257: '/images/little-greene-scenes/royal-navy-257.jpg',
+  260: '/images/little-greene-scenes/air-force-blue-260-carys-148-light-gold-53.jpg',
+  263: '/images/little-greene-scenes/remix-livid-263.jpg',
+  268: '/images/little-greene-scenes/green-stone-family-detail.jpg',
+  269: '/images/little-greene-scenes/green-stone-family-detail.jpg',
+  270: '/images/little-greene-scenes/green-stone-family-detail.jpg',
+  271: '/images/little-greene-scenes/rolling-fog-family.jpg',
+  280: '/images/little-greene-scenes/pleat-280-exterior.jpg',
+  281: '/images/little-greene-scenes/portland-stone-family-stone.jpg',
+  293: '/images/little-greene-scenes/pompeian-ash-293-detail.jpg',
+  296: '/images/little-greene-scenes/windmill-lane-296.jpg',
+  297: '/images/little-greene-scenes/hopper-297.jpg',
+  298: '/images/little-greene-scenes/puck-298-detail.jpg',
+  303: '/images/little-greene-scenes/jewel-beetle-303-detail.jpg',
+  306: '/images/little-greene-scenes/three-farm-green-306-detail.jpg',
+  307: '/images/little-greene-scenes/hidey-hole-307.jpg',
+  310: '/images/little-greene-scenes/tea-with-florence-310-detail.jpg',
+  311: '/images/little-greene-scenes/goblin-311.jpg',
+  315: '/images/little-greene-scenes/remix-nether-red-315-detail.jpg',
+  321: '/images/little-greene-scenes/baluster-321-detail.jpg',
+  331: '/images/little-greene-scenes/silent-white-deep-331-exterior.jpg',
+  334: '/images/little-greene-scenes/masquerade-334.jpg',
+  336: '/images/little-greene-scenes/06-royal-navy-bassoon-bathroom.jpg',
+  337: '/images/little-greene-scenes/giallo-kitchen-337.jpg',
+  338: '/images/little-greene-scenes/madeleine-338.jpg',
+  339: '/images/little-greene-scenes/bombolone-339.jpg',
+  340: '/images/little-greene-scenes/galette-340.jpg',
+  341: '/images/little-greene-scenes/split-pink-341.jpg',
+  342: '/images/little-greene-scenes/affogato-342-detail.jpg',
+  343: '/images/little-greene-scenes/muscovado-343.jpg',
+  344: '/images/little-greene-scenes/mochi-344-detail.jpg',
+  345: '/images/little-greene-scenes/ganache-345.jpg',
+};
+
 const littleGreeneColors: Color[] = colorFilenames
   .map(parseColorFromFilename)
   .filter((c): c is Color => c !== null)
+  .map((color) => ({
+    ...color,
+    scene: littleGreeneScenesById[color.id],
+  }))
   .sort((a, b) => a.id - b.id);
 
 // Royal Paint exclusive decorative finishes - 84-colour palette (GOCCE COLORATE).
