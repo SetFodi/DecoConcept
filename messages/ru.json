@@ -1,0 +1,205 @@
+{
+  "navigation": {
+    "home": "Главная",
+    "paints": "Краски",
+    "tools": "Инструменты",
+    "contact": "Контакты"
+  },
+  "tools": {
+    "eyebrow": "Профессиональные инструменты",
+    "title": "Инструменты Blue Dolphin",
+    "subtitle": "Профессиональные малярные инструменты, валики, кисти и ленты от Blue Dolphin",
+    "catalog": "Каталог",
+    "categories": "Категории",
+    "allCategories": "Все инструменты",
+    "subcategories": "Подкатегории",
+    "all": "Все",
+    "searchPlaceholder": "Поиск инструментов...",
+    "showing": "Показано <b>{count}</b> товаров",
+    "noResults": "Инструменты по вашему запросу не найдены",
+    "watchVideo": "Смотреть видео",
+    "gallery": "Галерея",
+    "viewDetails": "Подробнее"
+  },
+  "hero": {
+    "tagline": "Премиальные краски и покрытия",
+    "subtitle": "Преобразите пространство с исключительным качеством",
+    "discoverMore": "Узнать больше",
+    "viewColors": "Смотреть цвета",
+    "colorsCount": "300+ эксклюзивных цветов",
+    "scroll": "Прокрутить"
+  },
+  "about": {
+    "label": "О нас",
+    "logoTagline": "Премиальные краски и экспертный сервис",
+    "decoTitle": "О Deco Concept LLC",
+    "decoDescription": "Мультибрендовая компания «Деко Концепт» является эксклюзивным импортером декоративных красок премиум-класса в Грузии из ведущих европейских стран. Компания уделяет особое внимание клиентам и целенаправленно сотрудничает только с избранными брендами, которые лидируют на мировом рынке благодаря высочайшему качеству и инновационным дизайнерским решениям.",
+    "officialPartner": "Официальный представитель",
+    "partnerName": "Little Greene Paints",
+    "stats": {
+      "colors": "Эксклюзивные цвета",
+      "quality": "Качественная продукция",
+      "eco": "Экологичные краски",
+      "expert": "Консультация"
+    },
+    "littleGreeneTitle": "Little Greene",
+    "littleGreeneSubtitle": "300 лет британского наследия",
+    "littleGreeneDescription": "Little Greene - экологичный семейный бизнес, который бережно сохраняет 300-летнюю историю красок и обоев. Основанная в Великобритании компания создает премиальные краски традиционными методами и из лучших ингредиентов. Линейка Intelligent отличается высокой стойкостью и красивым покрытием, которое выдерживает испытание временем.",
+    "royalPaintSubtitle": "Итальянская декоративная краска",
+    "royalPaintDescription": "Royal Paint by Loggia привносит итальянское мастерство на ваши стены - премиальные моющиеся покрытия, сияющие декоративные эффекты и тщательно подобранную палитру из 84 дизайнерских цветов. От бархатистых суперматовых интерьеров до металлических текстур Mantra - каждая поверхность становится акцентом.",
+    "royalTags": {
+      "italian": "Итальянское мастерство",
+      "decorative": "Декоративные эффекты",
+      "colors": "84 цвета"
+    },
+    "tags": {
+      "heritage": "Исторические цвета",
+      "sustainable": "Устойчивое производство",
+      "british": "Сделано в Британии"
+    }
+  },
+  "products": {
+    "label": "Наш ассортимент",
+    "title": "Премиальная коллекция",
+    "subtitle": "Откройте для себя премиальные краски Little Greene и Royal Paint",
+    "allSizes": "Все размеры",
+    "availableSizes": "Доступно в",
+    "onlyTheseSizes": "Для этой категории доступны только эти размеры",
+    "brands": {
+      "littleGreene": "Little Greene",
+      "royalPaint": "Royal Paint"
+    },
+    "categories": {
+      "allSizes": "Все размеры",
+      "allProducts": "Все продукты",
+      "absoluteMatt": "Absolute Matt",
+      "intelligentEggshell": "Intelligent Eggshell",
+      "intelligentMatt": "Intelligent Matt",
+      "intelligentASP": "Intelligent ASP",
+      "wallPrimerSealer": "Wall Primer Sealer",
+      "lavabileSuperOpaca": "Lavabile Super Opaca",
+      "fastClean": "Fast Clean",
+      "smaltoSuperOpaco": "Smalto Super Opaco",
+      "smaltoUltraMatt": "Smalto Ultra Matt",
+      "supreme": "Supreme",
+      "eggShell": "Egg Shell"
+    },
+    "sizes": {
+      "60ml": "Тестер 60 мл",
+      "250ml": "Тестер 250 мл",
+      "1l": "1 литр",
+      "2_5l": "2.5 литра",
+      "5l": "5 литров",
+      "10l": "10 литров"
+    },
+    "royalProducts": {
+      "lavabileSuperOpaca": {
+        "title": "Lavabile Super Opaca",
+        "description": "Суперматовая моющаяся краска для стен с высокой укрывистостью и водоотталкивающим финишем."
+      },
+      "fastClean": {
+        "title": "Fast Clean",
+        "description": "Матовая краска для стен, созданная для легкого удаления пятен без повреждения покрытия."
+      },
+      "smaltoSuperOpaco": {
+        "title": "Smalto Super Opaco",
+        "description": "Водоразбавляемая акриловая эмаль для ультраматовых внутренних и наружных поверхностей."
+      },
+      "smaltoUltraMatt": {
+        "title": "Smalto Ultra Matt",
+        "description": "Ультраматовая водоразбавляемая эмаль с прочным и изысканным финишем для внутренних и наружных поверхностей."
+      },
+      "supreme": {
+        "title": "Supreme",
+        "description": "Акрил-силоксановая фасадная краска с дышащей водоотталкивающей защитой."
+      },
+      "eggShell": {
+        "title": "Egg Shell",
+        "description": "Сатиновая эмаль для внутренних стен с элегантным полуглянцевым финишем."
+      }
+    }
+  },
+  "gallery": {
+    "label": "Галерея",
+    "title": "Найдите вдохновение",
+    "subtitle": "Изучите тщательно подобранные интерьеры, раскрывающие неподвластную времени элегантность красок Little Greene"
+  },
+  "documents": {
+    "label": "Ресурсы",
+    "title": "Техническая информация",
+    "subtitle": "Сертификаты и технические паспорта",
+    "productNames": {
+      "intelligentMatt": "Intelligent Matt Emulsion",
+      "intelligentEggshell": "Intelligent Eggshell",
+      "absoluteMatt": "Absolute Matt Emulsion",
+      "wallPrimer": "Wall Primer Sealer",
+      "intelligentAsp": "Intelligent ASP (All Surface Primer)"
+    },
+    "categories": {
+      "all": "Все продукты",
+      "interior": "Интерьерные краски",
+      "primer": "Грунтовки"
+    },
+    "types": {
+      "interior": "Интерьерная краска",
+      "primer": "Грунтовка"
+    },
+    "viewDetails": "Подробнее",
+    "documentCount": "{count, plural, =1 {1 документ} one {# документ} few {# документа} many {# документов} other {# документа}}",
+    "viewCertificates": "Смотреть сертификаты",
+    "certTitle": "Сертификация Little Greene",
+    "certDocName": "Сертификат качества и безопасности",
+    "certDocDesc": "Официальный сертификационный документ",
+    "pages": "страниц",
+    "page": "Страница",
+    "availableDocs": "Доступные документы",
+    "techSheet": "Технический паспорт",
+    "prodSpecs": "Характеристики продукта",
+    "formats": {
+      "pdfEn": "PDF • английский",
+      "docxKa": "PDF • грузинский"
+    },
+    "download": "Скачать"
+  },
+  "paints": {
+    "title": "Коллекция красок",
+    "premiumCollection": "Премиальная коллекция",
+    "subtitle": "Изучите нашу тщательно подобранную коллекцию премиальных красок от всемирно известных брендов",
+    "showing": "Показано <b>{count}</b> цветов",
+    "noColors": "Цвета по вашему запросу не найдены",
+    "catalog": "Каталог",
+    "brands": "Бренды",
+    "availability": "Коллекция Royal Paint",
+    "allRoyalPaint": "Все Royal Paint",
+    "exclusive": "Эксклюзивные",
+    "module": "Модуль {module}",
+    "allColors": "Все цвета",
+    "searchPlaceholder": "Поиск цветов...",
+    "sampleTitle": "Проверьте этот цвет",
+    "sampleDescription": "Мы рекомендуем протестировать цвет перед покупкой, чтобы убедиться, что итоговый результат вам подходит: оттенки на экране могут отличаться. Deco Concept не несет ответственности за расхождения между представленными цветами и фактическим продуктом, а также за ошибки, связанные с нанесением продукта.",
+    "samplePot": "Тестер 60 мл",
+    "decorativeFinish": "Декоративное покрытие",
+    "interiorExterior": "Интерьер и экстерьер",
+    "ecoFriendly": "Экологично"
+  },
+  "contact": {
+    "label": "Связаться",
+    "title": "Свяжитесь с нами",
+    "subtitle": "Будем рады вам помочь",
+    "detailsTitle": "Контактные данные",
+    "followUs": "Следите за нами",
+    "whatsappTitle": "Быстрый ответ в WhatsApp",
+    "whatsappDesc": "Свяжитесь с нами в WhatsApp для персональной консультации по цветам и вопросам о продукции",
+    "whatsappButton": "Написать в WhatsApp",
+    "fastResponse": "Быстрый ответ",
+    "expertAdvice": "Совет эксперта",
+    "openMaps": "Открыть в Google Maps",
+    "address": "Адрес",
+    "email": "Эл. почта",
+    "phone": "Телефон"
+  },
+  "footer": {
+    "rights": "Все права защищены",
+    "tagline": "Премиальные краски и покрытия"
+  }
+}

@@ -12,19 +12,29 @@ import { ThemeProvider } from "@/contexts/ThemeContext";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
-  subsets: ["latin"],
+  subsets: ["latin", "cyrillic"],
   weight: ["400", "500", "600", "700"],
 });
 
 const sourceSans = Source_Sans_3({
   variable: "--font-source-sans",
-  subsets: ["latin"],
+  subsets: ["latin", "cyrillic"],
   weight: ["400", "500", "600", "700"],
 });
 
-export const metadata: Metadata = {
-  title: "Deco Concept LLC | Premium Paints & Finishes",
-  description: "Georgia's premier destination for luxury paints and wall finishes. Featuring Little Greene and other premium brands.",
+const metadataByLocale: Record<string, Metadata> = {
+  en: {
+    title: "Deco Concept LLC | Premium Paints & Finishes",
+    description: "Georgia's premier destination for luxury paints and wall finishes. Featuring Little Greene, Royal Paint and other premium brands.",
+  },
+  ka: {
+    title: "Deco Concept LLC | პრემიუმ საღებავები და დაფარვები",
+    description: "პრემიუმ საღებავებისა და კედლის დეკორატიული დაფარვების სივრცე საქართველოში. Little Greene, Royal Paint და სხვა პრემიუმ ბრენდები.",
+  },
+  ru: {
+    title: "Deco Concept LLC | Премиальные краски и покрытия",
+    description: "Премиальные краски и декоративные покрытия в Грузии. Little Greene, Royal Paint и другие премиальные бренды.",
+  },
 };
 
 type Props = {
@@ -32,10 +42,16 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
+export async function generateMetadata({ params }: Pick<Props, 'params'>): Promise<Metadata> {
+  const { locale } = await params;
+
+  return metadataByLocale[locale] || metadataByLocale.ka;
+}
+
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
 
-  if (!routing.locales.includes(locale as 'en' | 'ka')) {
+  if (!(routing.locales as readonly string[]).includes(locale)) {
     notFound();
   }
 

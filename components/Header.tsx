@@ -2,9 +2,18 @@
 
 import { useTranslations, useLocale } from 'next-intl';
 import { Link, usePathname, useRouter } from '@/i18n/navigation';
+import { routing } from '@/i18n/routing';
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { useTheme } from '@/contexts/ThemeContext';
+
+type AppLocale = (typeof routing.locales)[number];
+
+const languageOptions: Array<{ locale: AppLocale; label: string }> = [
+  { locale: 'en', label: 'EN' },
+  { locale: 'ka', label: 'GE' },
+  { locale: 'ru', label: 'RU' },
+];
 
 export default function Header() {
   const t = useTranslations('navigation');
@@ -26,7 +35,11 @@ export default function Header() {
 
   // Close menu on route change
   useEffect(() => {
-    setMobileMenuOpen(false);
+    const frame = requestAnimationFrame(() => {
+      setMobileMenuOpen(false);
+    });
+
+    return () => cancelAnimationFrame(frame);
   }, [pathname]);
 
   // Prevent body scroll when menu is open
@@ -53,7 +66,7 @@ export default function Header() {
     setMobileMenuOpen(false);
   }, [mobileMenuOpen]);
 
-  const handleLocaleChange = (newLocale: string) => {
+  const handleLocaleChange = (newLocale: AppLocale) => {
     router.replace(pathname, { locale: newLocale });
   };
 
@@ -128,26 +141,19 @@ export default function Header() {
 
               {/* Language Switcher */}
               <div className="flex items-center gap-0.5 sm:gap-1 bg-[var(--color-bg-secondary)] rounded-full p-0.5 sm:p-1">
-              <button
-                onClick={() => handleLocaleChange('en')}
-                  className={`px-2.5 py-1.5 sm:px-4 sm:py-2 text-xs font-medium rounded-full transition-all duration-300 ${
-                  locale === 'en'
-                      ? 'bg-[var(--color-accent)] text-[var(--color-bg)] shadow-sm'
-                      : 'text-[var(--color-text-secondary)] hover:text-[var(--color-accent)]'
-                }`}
-              >
-                EN
-              </button>
-              <button
-                onClick={() => handleLocaleChange('ka')}
-                  className={`px-2.5 py-1.5 sm:px-4 sm:py-2 text-xs font-medium rounded-full transition-all duration-300 ${
-                  locale === 'ka'
-                      ? 'bg-[var(--color-accent)] text-[var(--color-bg)] shadow-sm'
-                      : 'text-[var(--color-text-secondary)] hover:text-[var(--color-accent)]'
-                }`}
-              >
-                GE
-              </button>
+                {languageOptions.map((option) => (
+                  <button
+                    key={option.locale}
+                    onClick={() => handleLocaleChange(option.locale)}
+                    className={`px-2.5 py-1.5 sm:px-3.5 sm:py-2 text-xs font-medium rounded-full transition-all duration-300 ${
+                      locale === option.locale
+                        ? 'bg-[var(--color-accent)] text-[var(--color-bg)] shadow-sm'
+                        : 'text-[var(--color-text-secondary)] hover:text-[var(--color-accent)]'
+                    }`}
+                  >
+                    {option.label}
+                  </button>
+                ))}
             </div>
 
               {/* Mobile Menu Button */}
