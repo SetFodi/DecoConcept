@@ -3,8 +3,12 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import { colors, brands, searchColors, type Color } from '@/lib/colors';
+import { colors, brands, searchColors, type Color, type ColorAvailability } from '@/lib/colors';
 import ColorCard from '@/components/ColorCard';
+
+type AvailabilityFilter = ColorAvailability | 'all';
+
+const availabilityFilters: AvailabilityFilter[] = ['all', 'exclusive', 'nonExclusive'];
 
 // Sample pot filename mapping - handles the naming convention
 function getSamplePotFilename(color: Color): string {
@@ -17,6 +21,7 @@ export default function PaintsPage() {
   const t = useTranslations('paints');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBrand, setSelectedBrand] = useState<string>('Little Greene');
+  const [selectedAvailability, setSelectedAvailability] = useState<AvailabilityFilter>('all');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState<Color | null>(null);
 
@@ -45,27 +50,34 @@ export default function PaintsPage() {
   }, [sidebarOpen, selectedColor]);
 
   const filteredColors = useMemo(() => {
-    let result = colors;
+    let result = searchQuery.trim() ? searchColors(searchQuery) : colors;
     
     if (selectedBrand) {
       result = result.filter(c => c.brand === selectedBrand);
     }
     
-    if (searchQuery.trim()) {
-      result = searchColors(searchQuery).filter(c => 
-        !selectedBrand || c.brand === selectedBrand
-      );
+    if (selectedBrand === 'Royal Paint' && selectedAvailability !== 'all') {
+      result = result.filter(c => c.availability === selectedAvailability);
     }
     
     return result;
-  }, [searchQuery, selectedBrand]);
+  }, [searchQuery, selectedBrand, selectedAvailability]);
 
   const handleBrandSelect = (brand: string) => {
     setSelectedBrand(brand);
-    if (window.innerWidth < 1024) {
+    if (brand !== 'Royal Paint') {
+      setSelectedAvailability('all');
+    }
+    if (window.innerWidth < 1024 && brand !== 'Royal Paint') {
       setSidebarOpen(false);
     }
   };
+
+  const getAvailabilityLabel = (availability: AvailabilityFilter) => ({
+    all: t('allRoyalPaint'),
+    exclusive: t('exclusive'),
+    nonExclusive: t('nonExclusive'),
+  }[availability]);
 
   return (
     <div className="min-h-screen bg-[var(--color-bg-secondary)]">
@@ -123,7 +135,14 @@ export default function PaintsPage() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
           </svg>
           {t('catalog')}
-          {selectedBrand && <span className="px-2 py-0.5 bg-[var(--color-accent)] text-[var(--color-bg)] text-xs rounded-full">{selectedBrand}</span>}
+          {selectedBrand && (
+            <span className="px-2 py-0.5 bg-[var(--color-accent)] text-[var(--color-bg)] text-xs rounded-full">
+              {selectedBrand}
+              {selectedBrand === 'Royal Paint' && selectedAvailability !== 'all'
+                ? ` · ${getAvailabilityLabel(selectedAvailability)}`
+                : ''}
+            </span>
+          )}
         </button>
       </div>
 
@@ -182,10 +201,34 @@ export default function PaintsPage() {
               </div>
             </div>
 
+            {selectedBrand === 'Royal Paint' && (
+              <div className="mb-6">
+                <label className="block text-sm text-[var(--color-text-secondary)] mb-2">
+                  {t('availability')}
+                </label>
+                <div className="space-y-1 sm:space-y-2">
+                  {availabilityFilters.map((availability) => (
+                    <button
+                      key={availability}
+                      onClick={() => setSelectedAvailability(availability)}
+                      className={`w-full text-left px-4 py-3 rounded-lg transition-all active:scale-[0.98] ${
+                        selectedAvailability === availability
+                          ? 'bg-[var(--color-accent)] text-[var(--color-bg)]'
+                          : 'text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)] hover:text-[var(--color-accent)]'
+                      }`}
+                    >
+                      {getAvailabilityLabel(availability)}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div className="pt-4 border-t border-[var(--color-border)]">
               <button
                 onClick={() => {
-                  setSelectedBrand('Little Greene');
+                  setSelectedBrand('');
+                  setSelectedAvailability('all');
                   setSearchQuery('');
                   if (window.innerWidth < 1024) setSidebarOpen(false);
                 }}
@@ -312,7 +355,7 @@ export default function PaintsPage() {
                 {/* Sample Pot Section - Redesigned */}
                 <div className="flex-1 flex flex-col items-center justify-center text-center">
                   {selectedColor.hex ? (
-                    /* LOGGIA: solid colour disc + name */
+                    /* Royal Paint: solid colour disc + name */
                     <>
                       <div
                         className="w-28 h-28 sm:w-36 sm:h-36 lg:w-40 lg:h-40 rounded-full mb-4 sm:mb-5 shadow-lg ring-1 ring-black/5"
@@ -323,6 +366,7 @@ export default function PaintsPage() {
                       </h3>
                       <span className="text-xs sm:text-sm text-[var(--color-text-secondary)] tracking-wider uppercase mb-3 sm:mb-4">
                         {selectedColor.hex.toUpperCase()} · {selectedColor.brand}
+                        {selectedColor.module ? ` · ${t('module', { module: selectedColor.module })}` : ''}
                       </span>
                     </>
                   ) : (
@@ -357,6 +401,16 @@ export default function PaintsPage() {
                     <span className="px-3 py-1.5 bg-[var(--color-accent)] text-[var(--color-bg)] text-xs font-medium rounded-full">
                       {selectedColor.hex ? t('decorativeFinish') : t('samplePot')}
                     </span>
+                    {selectedColor.availability && (
+                      <span className="px-3 py-1.5 bg-[var(--color-accent-muted)]/10 text-[var(--color-accent)] text-xs font-medium rounded-full border border-[var(--color-accent-muted)]/20">
+                        {getAvailabilityLabel(selectedColor.availability)}
+                      </span>
+                    )}
+                    {selectedColor.module && (
+                      <span className="px-3 py-1.5 bg-[var(--color-accent-muted)]/10 text-[var(--color-accent)] text-xs font-medium rounded-full border border-[var(--color-accent-muted)]/20">
+                        {t('module', { module: selectedColor.module })}
+                      </span>
+                    )}
                     <span className="px-3 py-1.5 bg-[var(--color-accent-muted)]/10 text-[var(--color-accent)] text-xs font-medium rounded-full border border-[var(--color-accent-muted)]/20">
                       {t('interiorExterior')}
                     </span>
