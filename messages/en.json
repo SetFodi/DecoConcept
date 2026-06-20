@@ -76,6 +76,7 @@
       "lavabileSuperOpaca": "Lavabile Super Opaca",
       "fastClean": "Fast Clean",
       "smaltoSuperOpaco": "Smalto Super Opaco",
+      "smaltoUltraMatt": "Smalto Ultra Matt",
       "supreme": "Supreme",
       "eggShell": "Egg Shell"
     },
@@ -99,6 +100,10 @@
       "smaltoSuperOpaco": {
         "title": "Smalto Super Opaco",
         "description": "Water-based acrylic enamel for interior and exterior ultra-matt surfaces."
+      },
+      "smaltoUltraMatt": {
+        "title": "Smalto Ultra Matt",
+        "description": "Ultra-matt water-based enamel with a refined, durable finish for interior and exterior surfaces."
       },
       "supreme": {
         "title": "Supreme",

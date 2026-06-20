@@ -76,6 +76,7 @@
       "lavabileSuperOpaca": "Lavabile Super Opaca",
       "fastClean": "Fast Clean",
       "smaltoSuperOpaco": "Smalto Super Opaco",
+      "smaltoUltraMatt": "Smalto Ultra Matt",
       "supreme": "Supreme",
       "eggShell": "Egg Shell"
     },
@@ -99,6 +100,10 @@
       "smaltoSuperOpaco": {
         "title": "Smalto Super Opaco",
         "description": "წყალზე დაფუძნებული აკრილის ემალი ინტერიერისა და ექსტერიერის ულტრა მქრქალი ზედაპირებისთვის."
+      },
+      "smaltoUltraMatt": {
+        "title": "Smalto Ultra Matt",
+        "description": "ულტრა მქრქალი წყალზე დაფუძნებული ემალი გამძლე და დახვეწილი დასრულებით ინტერიერისა და ექსტერიერის ზედაპირებისთვის."
       },
       "supreme": {
         "title": "Supreme",

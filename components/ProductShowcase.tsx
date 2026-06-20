@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, type CSSProperties } from 'react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
@@ -27,6 +27,8 @@ type BrandCollection = {
   id: BrandId;
   labelKey: string;
   logo: string;
+  darkLogo?: string;
+  logoClassName?: string;
   logoAlt: string;
   categories: ProductCategory[];
 };
@@ -115,6 +117,11 @@ const royalPaintProducts: ProductItem[] = [
     imageFit: 'cover',
   },
   {
+    translationKey: 'smaltoUltraMatt',
+    image: '/images/royal-paint/smalto-ultra-matt-uniform.jpg',
+    imageFit: 'cover',
+  },
+  {
     translationKey: 'supreme',
     image: '/images/royal-paint/supreme-uniform.jpg',
     imageFit: 'cover',
@@ -152,16 +159,22 @@ const royalPaintCategories: ProductCategory[] = [
     products: [royalPaintProducts[2]],
   },
   {
+    id: 'smalto-ultra-matt',
+    nameKey: 'smaltoUltraMatt',
+    accent: '#59616b',
+    products: [royalPaintProducts[3]],
+  },
+  {
     id: 'supreme',
     nameKey: 'supreme',
     accent: '#8199a9',
-    products: [royalPaintProducts[3]],
+    products: [royalPaintProducts[4]],
   },
   {
     id: 'egg-shell',
     nameKey: 'eggShell',
     accent: '#aa8c9a',
-    products: [royalPaintProducts[4]],
+    products: [royalPaintProducts[5]],
   },
 ];
 
@@ -170,6 +183,7 @@ const brandCollections: BrandCollection[] = [
     id: 'little-greene',
     labelKey: 'littleGreene',
     logo: '/images/LG Logo_Black.png',
+    logoClassName: 'dark:brightness-0 dark:invert',
     logoAlt: 'Little Greene',
     categories: littleGreeneCategories,
   },
@@ -177,6 +191,7 @@ const brandCollections: BrandCollection[] = [
     id: 'royal-paint',
     labelKey: 'royalPaint',
     logo: '/images/royal-paint/royal-paint-logo-navy.png',
+    darkLogo: '/images/royal-paint/royal-paint-logo-white.png',
     logoAlt: 'Royal Paint',
     categories: royalPaintCategories,
   },
@@ -277,8 +292,20 @@ export default function ProductShowcase() {
                       src={brand.logo}
                       alt={brand.logoAlt}
                       fill
-                      className="object-contain p-3 transition-transform duration-300 group-hover:scale-105"
+                      sizes="(max-width: 640px) 45vw, 220px"
+                      className={`object-contain p-3 transition-transform duration-300 group-hover:scale-105 ${
+                        brand.darkLogo ? 'dark:hidden' : brand.logoClassName || ''
+                      }`}
                     />
+                    {brand.darkLogo && (
+                      <Image
+                        src={brand.darkLogo}
+                        alt={brand.logoAlt}
+                        fill
+                        sizes="(max-width: 640px) 45vw, 220px"
+                        className="hidden object-contain p-3 transition-transform duration-300 group-hover:scale-105 dark:block"
+                      />
+                    )}
                   </span>
                 </button>
               );
@@ -296,7 +323,7 @@ export default function ProductShowcase() {
                 onClick={() => setSelectedCategoryId(category.id)}
                 className={`px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-medium transition-all duration-300 ${
                   selectedCategory.id === category.id
-                    ? 'text-[var(--color-bg)] shadow-md'
+                    ? 'text-white shadow-md'
                     : 'text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] hover:bg-[var(--color-bg-secondary)]'
                 }`}
                 style={{
@@ -319,6 +346,9 @@ export default function ProductShowcase() {
             const productTitle = getProductTitle(product);
             const productDescription = getProductDescription(product);
             const isRoyalPaintProduct = Boolean(product.translationKey);
+            const productAccentStyle = {
+              '--product-accent': selectedCategory.accent,
+            } as CSSProperties;
 
             return (
             <div
@@ -356,6 +386,7 @@ export default function ProductShowcase() {
                     src={product.image}
                     alt={isRoyalPaintProduct ? productTitle : `${t(`categories.${selectedCategory.nameKey}`)} ${product.label}`}
                     fill
+                    sizes="(max-width: 640px) 45vw, (max-width: 1024px) 200px, 240px"
                     className={`transition-all duration-700 sm:group-hover:scale-110 ${
                       product.imageFit === 'cover'
                         ? 'object-cover'
@@ -366,12 +397,12 @@ export default function ProductShowcase() {
 
                 <div className="text-center">
                   <span
-                    className={`block font-serif mb-1 transition-all duration-300 ${
+                    className={`block font-serif mb-1 text-[var(--product-accent)] transition-all duration-300 dark:text-[var(--color-accent-hover)] ${
                       isRoyalPaintProduct
                         ? 'text-lg sm:text-xl lg:text-2xl leading-tight min-h-[3.25rem]'
                         : 'text-xl sm:text-2xl lg:text-3xl'
                     }`}
-                    style={{ color: selectedCategory.accent }}
+                    style={productAccentStyle}
                   >
                     {productTitle}
                   </span>
