@@ -3,12 +3,12 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import { colors, brands, searchColors, type Color, type ColorAvailability } from '@/lib/colors';
+import { colors, brands, searchColors, type Color } from '@/lib/colors';
 import ColorCard from '@/components/ColorCard';
 
-type AvailabilityFilter = ColorAvailability | 'all';
+type AvailabilityFilter = 'all' | 'exclusive';
 
-const availabilityFilters: AvailabilityFilter[] = ['all', 'exclusive', 'nonExclusive'];
+const availabilityFilters: AvailabilityFilter[] = ['all', 'exclusive'];
 
 // Sample pot filename mapping - handles the naming convention
 function getSamplePotFilename(color: Color): string {
@@ -76,7 +76,6 @@ export default function PaintsPage() {
   const getAvailabilityLabel = (availability: AvailabilityFilter) => ({
     all: t('allRoyalPaint'),
     exclusive: t('exclusive'),
-    nonExclusive: t('nonExclusive'),
   }[availability]);
 
   return (
@@ -401,9 +400,9 @@ export default function PaintsPage() {
                     <span className="px-3 py-1.5 bg-[var(--color-accent)] text-[var(--color-bg)] text-xs font-medium rounded-full">
                       {selectedColor.hex ? t('decorativeFinish') : t('samplePot')}
                     </span>
-                    {selectedColor.availability && (
+                    {selectedColor.availability === 'exclusive' && (
                       <span className="px-3 py-1.5 bg-[var(--color-accent-muted)]/10 text-[var(--color-accent)] text-xs font-medium rounded-full border border-[var(--color-accent-muted)]/20">
-                        {getAvailabilityLabel(selectedColor.availability)}
+                        {t('exclusive')}
                       </span>
                     )}
                     {selectedColor.module && (
