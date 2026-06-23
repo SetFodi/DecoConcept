@@ -44,7 +44,7 @@ export default function Footer() {
           <div className="flex flex-col gap-3 sm:gap-4">
             <div className="flex items-center gap-4 sm:gap-6">
               <span className="text-lg sm:text-xl font-serif tracking-wide text-white" style={{ color: 'white' }}>
-                Deco Concept LLC
+                Deconcept LLC
               </span>
             <div className="hidden sm:flex gap-2">
               {['#8b7355', '#4a7a96', '#c4a882'].map((color) => (
@@ -110,7 +110,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-[10px] sm:text-xs text-white/40 text-center sm:text-left" style={{ color: 'rgba(255,255,255,0.4)' }}>
-          <p style={{ color: 'rgba(255,255,255,0.4)' }}>© {new Date().getFullYear()} Deco Concept LLC. {t('rights')}.</p>
+          <p style={{ color: 'rgba(255,255,255,0.4)' }}>© {new Date().getFullYear()} Deconcept LLC. {t('rights')}.</p>
           <p style={{ color: 'rgba(255,255,255,0.4)' }}>{t('tagline')}</p>
         </div>
       </div>

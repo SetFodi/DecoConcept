@@ -24,15 +24,15 @@ const sourceSans = Source_Sans_3({
 
 const metadataByLocale: Record<string, Metadata> = {
   en: {
-    title: "Deco Concept LLC | Premium Paints & Finishes",
+    title: "Deconcept LLC | Premium Paints & Finishes",
     description: "Georgia's premier destination for luxury paints and wall finishes. Featuring Little Greene, Royal Paint and other premium brands.",
   },
   ka: {
-    title: "Deco Concept LLC | პრემიუმ საღებავები და დაფარვები",
+    title: "Deconcept LLC | პრემიუმ საღებავები და დაფარვები",
     description: "პრემიუმ საღებავებისა და კედლის დეკორატიული დაფარვების სივრცე საქართველოში. Little Greene, Royal Paint და სხვა პრემიუმ ბრენდები.",
   },
   ru: {
-    title: "Deco Concept LLC | Премиальные краски и покрытия",
+    title: "Deconcept LLC | Премиальные краски и покрытия",
     description: "Премиальные краски и декоративные покрытия в Грузии. Little Greene, Royal Paint и другие премиальные бренды.",
   },
 };

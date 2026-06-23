@@ -124,57 +124,45 @@ export default function PaintsPage() {
         <div className="absolute bottom-0 left-0 right-0 h-16 sm:h-24 bg-gradient-to-t from-[var(--color-bg-secondary)] to-transparent" />
       </section>
 
-      {/* Mobile Filter Button */}
-      <div className="lg:hidden sticky top-16 z-30 bg-[var(--color-bg-secondary)] border-b border-[var(--color-border)] px-4 py-3">
-        <button
-          onClick={() => setSidebarOpen(true)}
-          className="flex items-center gap-2 px-4 py-2.5 bg-[var(--color-surface)] rounded-xl border border-[var(--color-border)] text-[var(--color-accent)] font-medium text-sm shadow-sm active:scale-[0.98] transition-all"
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
-          </svg>
-          {t('catalog')}
-          {selectedBrand && (
-            <span className="px-2 py-0.5 bg-[var(--color-accent)] text-[var(--color-bg)] text-xs rounded-full">
-              {selectedBrand}
-              {selectedBrand === 'Royal Paint' && selectedAvailability !== 'all'
-                ? ` · ${getAvailabilityLabel(selectedAvailability)}`
-                : ''}
-            </span>
-          )}
-        </button>
+      {/* Mobile filter chips */}
+      <div className="lg:hidden sticky top-16 z-30 bg-[var(--color-bg-secondary)]/95 backdrop-blur border-b border-[var(--color-border)]">
+        <div className="flex gap-2 overflow-x-auto px-4 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {brands.map((brand) => (
+            <button
+              key={brand}
+              onClick={() => handleBrandSelect(brand)}
+              className={`whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium transition-all active:scale-95 ${
+                selectedBrand === brand
+                  ? 'bg-[var(--color-accent)] text-[var(--color-bg)]'
+                  : 'bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)]'
+              }`}
+            >
+              {brand}
+            </button>
+          ))}
+        </div>
+        {selectedBrand === 'Royal Paint' && (
+          <div className="flex gap-2 overflow-x-auto px-4 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {availabilityFilters.map((availability) => (
+              <button
+                key={availability}
+                onClick={() => setSelectedAvailability(availability)}
+                className={`whitespace-nowrap px-3 py-1.5 rounded-full text-xs transition-all ${
+                  selectedAvailability === availability
+                    ? 'bg-[var(--color-accent)]/15 text-[var(--color-accent)] font-medium'
+                    : 'text-[var(--color-text-secondary)] bg-[var(--color-surface)] border border-[var(--color-border)]/60'
+                }`}
+              >
+                {getAvailabilityLabel(availability)}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="flex">
-        {/* Mobile Sidebar Overlay */}
-        {sidebarOpen && (
-          <div 
-            className="fixed inset-0 bg-black/50 z-40 lg:hidden"
-            onClick={() => setSidebarOpen(false)}
-          />
-        )}
-
-        <aside 
-          className={`fixed lg:sticky top-0 lg:top-16 left-0 h-full lg:h-[calc(100vh-4rem)] bg-[var(--color-surface)] border-r border-[var(--color-border)] transition-transform duration-300 ease-out z-50 lg:z-30 w-72 sm:w-80 lg:w-64 ${
-            sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
-          }`}
-        >
-          {/* Mobile Header */}
-          <div className="flex items-center justify-between p-4 border-b border-[var(--color-border)] lg:hidden">
-            <h2 className="text-lg font-serif text-[var(--color-accent)]">
-              {t('catalog')}
-            </h2>
-            <button
-              onClick={() => setSidebarOpen(false)}
-              className="p-2 text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] active:scale-95 transition-all"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-
-          <div className="p-4 sm:p-6 overflow-y-auto h-[calc(100%-4rem)] lg:h-full">
+        <aside className="hidden lg:block sticky top-16 h-[calc(100vh-4rem)] shrink-0 bg-[var(--color-surface)] border-r border-[var(--color-border)] z-30 w-64">
+          <div className="p-4 sm:p-6 overflow-y-auto h-full">
             <h2 className="text-xl font-serif text-[var(--color-accent)] mb-6 hidden lg:block">
               {t('catalog')}
             </h2>

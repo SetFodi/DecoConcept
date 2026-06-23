@@ -54,7 +54,7 @@ export default function AboutSection() {
 
   return (
     <>
-      {/* Deco Concept Logo Showcase Section */}
+      {/* Deconcept Logo Showcase Section */}
       <section id="about" className="relative py-10 sm:py-12 lg:py-14 bg-gradient-to-b from-[var(--color-bg-secondary)] to-[var(--color-bg)] overflow-hidden">
         <div 
           ref={logoRef}
@@ -80,7 +80,7 @@ export default function AboutSection() {
               <div className="absolute inset-0 bg-[#2a4556]/3 blur-xl rounded-full scale-150" />
               <Image
                 src="/images/deco-concept-logo.png"
-                alt="Deco Concept LLC"
+                alt="Deconcept LLC"
                 width={200}
                 height={90}
                 className="relative w-[140px] sm:w-[180px] lg:w-[200px] h-auto dark:brightness-0 dark:invert"
@@ -99,7 +99,7 @@ export default function AboutSection() {
         </div>
       </section>
 
-      {/* About Deco Concept Section */}
+      {/* About Deconcept Section */}
       <section className="relative py-16 sm:py-24 lg:py-32 bg-[var(--color-bg)] overflow-hidden">
         <div className="absolute top-0 right-0 w-48 sm:w-96 h-48 sm:h-96 bg-gradient-to-bl from-[var(--color-bg-secondary)] to-transparent rounded-full opacity-60 -translate-y-1/2 translate-x-1/3" />
         <div className="absolute bottom-0 left-0 w-32 sm:w-64 h-32 sm:h-64 bg-gradient-to-tr from-[var(--color-bg-tertiary)]/30 to-transparent rounded-full translate-y-1/3 -translate-x-1/4" />
@@ -126,7 +126,7 @@ export default function AboutSection() {
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
                 <Image
                   src="/images/deco-concept-logo.png"
-                  alt="Deco Concept LLC"
+                  alt="Deconcept LLC"
                   width={120}
                   height={68}
                   className="object-contain sm:w-[140px] sm:h-[80px] dark:brightness-0 dark:invert"
@@ -364,7 +364,7 @@ export default function AboutSection() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
                     <div className="image-hover-zoom rounded-xl sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg dark:shadow-black/20 bg-[var(--color-surface)]">
                       <Image
                         src="/images/royal-paint/lavabile-super-opaca-uniform.jpg"
@@ -383,7 +383,16 @@ export default function AboutSection() {
                         className="w-full h-36 sm:h-44 lg:h-52 object-cover"
                       />
                     </div>
-                    <div className="image-hover-zoom rounded-xl sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg dark:shadow-black/20 bg-[var(--color-surface)] col-span-2 sm:col-span-1">
+                    <div className="image-hover-zoom rounded-xl sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg dark:shadow-black/20 bg-[var(--color-surface)]">
+                      <Image
+                        src="/images/royal-paint/supreme-uniform.jpg"
+                        alt="Royal Paint Supreme"
+                        width={1000}
+                        height={1000}
+                        className="w-full h-36 sm:h-44 lg:h-52 object-cover"
+                      />
+                    </div>
+                    <div className="image-hover-zoom rounded-xl sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg dark:shadow-black/20 bg-[var(--color-surface)]">
                       <Image
                         src="/images/royal-paint/egg-shell-uniform.jpg"
                         alt="Royal Paint Egg Shell"

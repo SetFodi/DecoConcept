@@ -91,7 +91,7 @@ export default function Header() {
             <Link href="/" className="flex items-center" onClick={closeMenu}>
             <Image
               src="/images/deco-concept-logo.png"
-              alt="Deco Concept LLC"
+              alt="Deconcept LLC"
               width={100}
               height={45}
                 className="object-contain w-[90px] sm:w-[120px] h-auto dark:brightness-0 dark:invert"

@@ -29,7 +29,7 @@ export default function PaintLoader() {
       <div className="relative mb-8">
         <Image
           src="/images/deco-concept-logo.png"
-          alt="Deco Concept LLC"
+          alt="Deconcept LLC"
           width={180}
           height={100}
           className="object-contain"

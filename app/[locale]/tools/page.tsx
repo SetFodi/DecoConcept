@@ -118,41 +118,65 @@ export default function ToolsPage() {
         </div>
       </section>
 
-      {/* Mobile filter button */}
-      <div className="lg:hidden sticky top-16 z-30 bg-[var(--color-bg-secondary)] border-b border-[var(--color-border)] px-4 py-3">
-        <button
-          onClick={() => setSidebarOpen(true)}
-          className="flex items-center gap-2 px-4 py-2.5 bg-[var(--color-surface)] rounded-xl border border-[var(--color-border)] text-[var(--color-accent)] font-medium text-sm shadow-sm active:scale-[0.98] transition-all"
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
-          </svg>
-          {t('catalog')}
-          <span className="px-2 py-0.5 bg-[var(--color-accent)] text-[var(--color-bg)] text-xs rounded-full">{selectedCategory}</span>
-        </button>
+      {/* Mobile category chips */}
+      <div className="lg:hidden sticky top-16 z-30 bg-[var(--color-bg-secondary)]/95 backdrop-blur border-b border-[var(--color-border)]">
+        <div className="flex gap-2 overflow-x-auto px-4 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <button
+            onClick={() => selectCategory('all')}
+            className={`whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium transition-all active:scale-95 ${
+              selectedCategory === 'all'
+                ? 'bg-[var(--color-accent)] text-[var(--color-bg)]'
+                : 'bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)]'
+            }`}
+          >
+            {t('allCategories')}
+          </button>
+          {toolCategories.map((cat) => (
+            <button
+              key={cat.name}
+              onClick={() => selectCategory(cat.name)}
+              className={`whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium transition-all active:scale-95 ${
+                selectedCategory === cat.name
+                  ? 'bg-[var(--color-accent)] text-[var(--color-bg)]'
+                  : 'bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)]'
+              }`}
+            >
+              {cat.name}
+            </button>
+          ))}
+        </div>
+        {(() => {
+          const cat = toolCategories.find((c) => c.name === selectedCategory);
+          if (!cat || cat.subcategories.length === 0) return null;
+          return (
+            <div className="flex gap-2 overflow-x-auto px-4 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              <button
+                onClick={() => setSelectedSub('all')}
+                className={`whitespace-nowrap px-3 py-1.5 rounded-full text-xs transition-all ${
+                  selectedSub === 'all' ? 'bg-[var(--color-accent)]/15 text-[var(--color-accent)] font-medium' : 'text-[var(--color-text-secondary)] bg-[var(--color-surface)] border border-[var(--color-border)]/60'
+                }`}
+              >
+                {t('all')}
+              </button>
+              {cat.subcategories.map((sub) => (
+                <button
+                  key={sub}
+                  onClick={() => setSelectedSub(sub)}
+                  className={`whitespace-nowrap px-3 py-1.5 rounded-full text-xs transition-all ${
+                    selectedSub === sub ? 'bg-[var(--color-accent)]/15 text-[var(--color-accent)] font-medium' : 'text-[var(--color-text-secondary)] bg-[var(--color-surface)] border border-[var(--color-border)]/60'
+                  }`}
+                >
+                  {sub}
+                </button>
+              ))}
+            </div>
+          );
+        })()}
       </div>
 
       <div className="flex">
-        {/* Sidebar overlay (mobile) */}
-        {sidebarOpen && (
-          <div className="fixed inset-0 bg-black/50 z-40 lg:hidden" onClick={() => setSidebarOpen(false)} />
-        )}
-
-        <aside
-          className={`fixed lg:sticky top-0 lg:top-16 left-0 h-full lg:h-[calc(100vh-4rem)] bg-[var(--color-surface)] border-r border-[var(--color-border)] transition-transform duration-300 ease-out z-50 lg:z-30 w-72 sm:w-80 lg:w-64 ${
-            sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
-          }`}
-        >
-          <div className="flex items-center justify-between p-4 border-b border-[var(--color-border)] lg:hidden">
-            <h2 className="text-lg font-serif text-[var(--color-accent)]">{t('catalog')}</h2>
-            <button onClick={() => setSidebarOpen(false)} className="p-2 text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] active:scale-95 transition-all">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-
-          <div className="p-4 sm:p-6 overflow-y-auto h-[calc(100%-4rem)] lg:h-full">
+        <aside className="hidden lg:block sticky top-16 h-[calc(100vh-4rem)] shrink-0 bg-[var(--color-surface)] border-r border-[var(--color-border)] z-30 w-64">
+          <div className="p-4 sm:p-6 overflow-y-auto h-full">
             <label className="block text-xs uppercase tracking-wider text-[var(--color-text-muted)] mb-2">{t('categories')}</label>
             <div className="space-y-1">
               <button
@@ -316,6 +340,15 @@ export default function ToolsPage() {
                   <h2 className="text-2xl sm:text-3xl lg:text-[2rem] leading-tight font-serif text-[var(--color-accent)]">{selected.name}</h2>
                   <div className="h-px w-14 bg-gradient-to-r from-[var(--color-accent)] to-transparent mt-4 mb-5" />
 
+                  {selected.sizes && (
+                    <div className="flex items-center gap-2 mb-5 text-sm text-[var(--color-text-secondary)]">
+                      <svg className="w-4 h-4 text-[var(--color-accent-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 7.5h18M3 7.5v9h18v-9M7 7.5v3M11 7.5v4.5M15 7.5v3M19 7.5v4.5" />
+                      </svg>
+                      <span>{t('availableSizes')}: <span className="font-medium text-[var(--color-accent)]">{selected.sizes}</span></span>
+                    </div>
+                  )}
+
                   <div className="flex flex-wrap gap-2 mb-7">
                     <span className="px-3 py-1.5 text-xs font-medium rounded-full bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]">{selected.category}</span>
                     {selected.subcategory && (
@@ -342,7 +375,7 @@ export default function ToolsPage() {
                       height={50}
                       className="w-[120px] h-auto"
                     />
-                    <span className="text-[10px] uppercase tracking-widest text-[var(--color-text-muted)]">Deco Concept</span>
+                    <span className="text-[10px] uppercase tracking-widest text-[var(--color-text-muted)]">Deconcept</span>
                   </div>
                 </div>
               </div>

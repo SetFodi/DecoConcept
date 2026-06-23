@@ -19,7 +19,8 @@
     "noResults": "No tools found matching your search",
     "watchVideo": "Watch video",
     "gallery": "Gallery",
-    "viewDetails": "View details"
+    "viewDetails": "View details",
+    "availableSizes": "Available sizes"
   },
   "hero": {
     "tagline": "Premium Paints & Finishes",
@@ -32,8 +33,8 @@
   "about": {
     "label": "About Us",
     "logoTagline": "Premium Paints & Expert Service",
-    "decoTitle": "About Deco Concept LLC",
-    "decoDescription": "The multi-brand company “Deco Concept” is the exclusive importer of premium class decorative paints in Georgia from leading European countries. The company pays special attention to its customers and purposefully cooperates only with selected brands that lead the world market with the highest quality and innovative design solutions.",
+    "decoTitle": "About Deconcept LLC",
+    "decoDescription": "The multi-brand company “Deconcept” is the exclusive importer of premium class decorative paints in Georgia from leading European countries. The company pays special attention to its customers and purposefully cooperates only with selected brands that lead the world market with the highest quality and innovative design solutions.",
     "officialPartner": "Official Representative",
     "partnerName": "Little Greene Paints",
     "stats": {
@@ -172,7 +173,7 @@
     "allColors": "All Colors",
     "searchPlaceholder": "Search colors...",
     "sampleTitle": "Sample this Colour",
-    "sampleDescription": "We recommend testing a colour before purchase to ensure you are happy with the final result as colours may vary on screen. Deco Concept is not responsible for discrepancies between the colors shown and the actual product, nor for any errors arising from product application.",
+    "sampleDescription": "We recommend testing a colour before purchase to ensure you are happy with the final result as colours may vary on screen. Deconcept is not responsible for discrepancies between the colors shown and the actual product, nor for any errors arising from product application.",
     "samplePot": "60ml Sample Pot",
     "decorativeFinish": "Decorative Finish",
     "interiorExterior": "Interior & Exterior",

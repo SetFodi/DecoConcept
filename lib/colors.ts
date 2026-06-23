@@ -298,7 +298,6 @@ const littleGreeneScenesById: Partial<Record<number, string>> = {
   199: '/images/little-greene-scenes/phthalo-green-199.jpg',
   213: '/images/little-greene-scenes/dorchester-pink-family.jpg',
   216: '/images/little-greene-scenes/obsidian-green-216-detail.jpg',
-  221: '/images/little-greene-scenes/olive-colour-72-basalt-221.jpg',
   222: '/images/little-greene-scenes/remix-loft-white-222-detail.jpg',
   223: '/images/little-greene-scenes/scree-227-shallows-223.jpg',
   227: '/images/little-greene-scenes/scree-227-shallows-223.jpg',
