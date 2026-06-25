@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
@@ -7,16 +8,30 @@ import { useRouter } from '@/i18n/navigation';
 
 type StatKey = 'colors' | 'quality' | 'eco' | 'expert';
 
+type BrandImage = { src: string; alt: string; fit: 'cover' | 'contain' };
+
+type Brand = {
+  id: string;
+  anchor?: string;
+  logo: string;
+  logoClass?: string;
+  logoWidth: string;
+  origin: string;
+  subtitle: string;
+  description: string;
+  accent: string;
+  swatches: string[];
+  tags: string[];
+  images: BrandImage[];
+};
+
 export default function AboutSection() {
   const t = useTranslations('about');
   const router = useRouter();
   const [logoRef, logoRevealed] = useScrollReveal<HTMLDivElement>();
   const [decoRef, decoRevealed] = useScrollReveal<HTMLDivElement>();
   const [statsRef, statsRevealed] = useScrollReveal<HTMLDivElement>();
-  const [lgRef, lgRevealed] = useScrollReveal<HTMLDivElement>();
-  const [galleryRef, galleryRevealed] = useScrollReveal<HTMLDivElement>();
-  const [rpTextRef, rpTextRevealed] = useScrollReveal<HTMLDivElement>();
-  const [rpGalleryRef, rpGalleryRevealed] = useScrollReveal<HTMLDivElement>();
+  const [brandsRef, brandsRevealed] = useScrollReveal<HTMLDivElement>();
 
   const stats: { key: StatKey; value: string; label: string }[] = [
     { key: 'colors', value: '300+', label: t('stats.colors') },
@@ -24,6 +39,53 @@ export default function AboutSection() {
     { key: 'eco', value: 'Eco', label: t('stats.eco') },
     { key: 'expert', value: 'Expert', label: t('stats.expert') },
   ];
+
+  // Brand catalogue — add a new object here and it gets its own accordion panel.
+  const brands: Brand[] = [
+    {
+      id: 'little-greene',
+      logo: '/images/LG Logo_Black.png',
+      logoClass: 'dark:invert',
+      logoWidth: 'w-[120px] sm:w-[150px]',
+      origin: 'England · UK',
+      subtitle: t('littleGreeneSubtitle'),
+      description: t('littleGreeneDescription'),
+      accent: '#2e4a3f',
+      swatches: ['#2e4a3f', '#7a8b6f', '#c4a882', '#34506b'],
+      tags: [t('tags.heritage'), t('tags.sustainable'), t('tags.british')],
+      images: [
+        { src: '/images/colour-tools/Fan Deck - Colours of England.jpg', alt: 'Fan Deck Colours of England', fit: 'contain' },
+        { src: '/images/colour-tools/Colours of England Colour Card.jpg', alt: 'Colours of England Colour Card', fit: 'contain' },
+        { src: '/images/colour-tools/Brush Out Boards.jpg', alt: 'Brush Out Boards', fit: 'contain' },
+        { src: '/images/colour-tools/Fan Deck - 01.jpg', alt: 'Fan Deck', fit: 'contain' },
+        { src: '/images/good-image.jpeg', alt: 'Little Greene Products', fit: 'contain' },
+      ],
+    },
+    {
+      id: 'royal-paint',
+      anchor: 'royal-paint-about',
+      logo: '/images/royal-paint/royal-paint-logo-navy.png',
+      logoClass: 'dark:invert',
+      logoWidth: 'w-[150px] sm:w-[190px]',
+      origin: 'by Loggia · Italy',
+      subtitle: t('royalPaintSubtitle'),
+      description: t('royalPaintDescription'),
+      accent: '#c4a882',
+      swatches: ['#c4a882', '#8d6a4f', '#2a4556', '#b9b2a3'],
+      tags: [t('royalTags.italian'), t('royalTags.decorative'), t('royalTags.colors')],
+      images: [
+        { src: '/images/royal-paint/royal-paint-range-board.jpg', alt: 'Royal Paint product range', fit: 'contain' },
+        { src: '/images/royal-paint/smalto-super-opaco-uniform.jpg', alt: 'Royal Paint Smalto Super Opaco', fit: 'cover' },
+        { src: '/images/royal-paint/lavabile-super-opaca-uniform.jpg', alt: 'Royal Paint Lavabile Super Opaca', fit: 'cover' },
+        { src: '/images/royal-paint/fast-clean-uniform.jpg', alt: 'Royal Paint Fast Clean', fit: 'cover' },
+        { src: '/images/royal-paint/supreme-uniform.jpg', alt: 'Royal Paint Supreme', fit: 'cover' },
+        { src: '/images/royal-paint/egg-shell-uniform.jpg', alt: 'Royal Paint Egg Shell', fit: 'cover' },
+      ],
+    },
+  ];
+
+  // All brands collapsed by default; single-open accordion.
+  const [openId, setOpenId] = useState<string>('');
 
   const handleStatClick = (key: StatKey) => {
     switch (key) {
@@ -56,7 +118,7 @@ export default function AboutSection() {
     <>
       {/* Deconcept Logo Showcase Section */}
       <section id="about" className="relative py-10 sm:py-12 lg:py-14 bg-gradient-to-b from-[var(--color-bg-secondary)] to-[var(--color-bg)] overflow-hidden">
-        <div 
+        <div
           ref={logoRef}
           className={`max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative reveal ${logoRevealed ? 'revealed' : ''}`}
         >
@@ -79,7 +141,7 @@ export default function AboutSection() {
             <div className="relative mb-4 sm:mb-5">
               <div className="absolute inset-0 bg-[#2a4556]/3 blur-xl rounded-full scale-150" />
               <Image
-                src="/images/deco-concept-logo.png"
+                src="/images/deconcept-logo.png"
                 alt="Deconcept LLC"
                 width={200}
                 height={90}
@@ -103,7 +165,7 @@ export default function AboutSection() {
       <section className="relative py-16 sm:py-24 lg:py-32 bg-[var(--color-bg)] overflow-hidden">
         <div className="absolute top-0 right-0 w-48 sm:w-96 h-48 sm:h-96 bg-gradient-to-bl from-[var(--color-bg-secondary)] to-transparent rounded-full opacity-60 -translate-y-1/2 translate-x-1/3" />
         <div className="absolute bottom-0 left-0 w-32 sm:w-64 h-32 sm:h-64 bg-gradient-to-tr from-[var(--color-bg-tertiary)]/30 to-transparent rounded-full translate-y-1/3 -translate-x-1/4" />
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
             <div
@@ -114,18 +176,18 @@ export default function AboutSection() {
                 <span className="w-6 sm:w-8 h-px bg-[var(--color-accent-muted)]" />
                 {t('label')}
               </div>
-              
+
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-[var(--color-accent)] mb-6 sm:mb-8 leading-tight">
                 <span className="brush-underline">{t('decoTitle')}</span>
               </h2>
-              
+
               <p className="text-base sm:text-lg lg:text-xl text-[var(--color-text-secondary)] leading-relaxed mb-8 sm:mb-10">
                 {t('decoDescription')}
               </p>
 
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
                 <Image
-                  src="/images/deco-concept-logo.png"
+                  src="/images/deconcept-logo.png"
                   alt="Deconcept LLC"
                   width={120}
                   height={68}
@@ -138,7 +200,7 @@ export default function AboutSection() {
                 </div>
               </div>
             </div>
-            
+
             <div
               ref={statsRef}
               className={`reveal-right ${statsRevealed ? 'revealed' : ''}`}
@@ -173,241 +235,201 @@ export default function AboutSection() {
         </div>
       </section>
 
-      <section className="relative py-16 sm:py-24 lg:py-32 bg-[var(--color-bg-secondary)] overflow-hidden noise-texture">
-        <div className="absolute inset-0 opacity-5">
+      {/* Brands — expandable accordion (scales to any number of brands) */}
+      <section id="brands" className="relative py-16 sm:py-24 lg:py-28 bg-[var(--color-bg-secondary)] overflow-hidden noise-texture">
+        <div className="absolute inset-0 opacity-5 pointer-events-none">
           <div className="absolute top-20 left-10 w-40 h-40 rounded-full bg-[#4a7a96] organic-blob" />
-          <div className="absolute bottom-20 right-20 w-56 h-56 rounded-full bg-[#2a4556] organic-blob" style={{ animationDelay: '-4s' }} />
+          <div className="absolute bottom-20 right-20 w-56 h-56 rounded-full bg-[#c4a882] organic-blob" style={{ animationDelay: '-4s' }} />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            <div
-              ref={galleryRef}
-              className={`lg:col-span-7 order-2 lg:order-1 reveal-left ${galleryRevealed ? 'revealed' : ''}`}
-            >
-              <div className="relative">
-                <div className="space-y-3 sm:space-y-4">
-                  {/* Top row - 2 images */}
-                  <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                    <div className="image-hover-zoom rounded-xl sm:rounded-2xl overflow-hidden shadow-lg sm:shadow-2xl dark:shadow-black/30 bg-[var(--color-surface)]">
-                      <Image
-                        src="/images/colour-tools/Fan Deck - Colours of England.jpg"
-                        alt="Fan Deck Colours of England"
-                        width={500}
-                        height={400}
-                        className="w-full h-32 sm:h-44 lg:h-56 object-contain p-2 sm:p-3"
-                      />
-                    </div>
-                    <div className="image-hover-zoom rounded-xl sm:rounded-2xl overflow-hidden shadow-lg sm:shadow-2xl dark:shadow-black/30 bg-[var(--color-surface)]">
-                      <Image
-                        src="/images/colour-tools/Colours of England Colour Card.jpg"
-                        alt="Colours of England Colour Card"
-                        width={500}
-                        height={400}
-                        className="w-full h-32 sm:h-44 lg:h-56 object-contain p-2 sm:p-3"
-                      />
-                    </div>
-                  </div>
-                  
-                  {/* Bottom row - 3 images on desktop, 2+1 on mobile */}
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-                    <div className="image-hover-zoom rounded-xl sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg dark:shadow-black/20 bg-[var(--color-surface)]">
-                      <Image
-                        src="/images/colour-tools/Brush Out Boards.jpg"
-                        alt="Brush Out Boards"
-                        width={400}
-                        height={300}
-                        className="w-full h-28 sm:h-36 lg:h-44 object-contain p-2 sm:p-3"
-                      />
-                    </div>
-                    <div className="image-hover-zoom rounded-xl sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg dark:shadow-black/20 bg-[var(--color-surface)]">
-                      <Image
-                        src="/images/colour-tools/Fan Deck - 01.jpg"
-                        alt="Fan Deck"
-                        width={400}
-                        height={300}
-                        className="w-full h-28 sm:h-36 lg:h-44 object-contain p-2 sm:p-3"
-                      />
-                    </div>
-                    <div className="image-hover-zoom rounded-xl sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg dark:shadow-black/20 bg-[var(--color-surface)] col-span-2 sm:col-span-1">
-                      <Image
-                        src="/images/good-image.jpeg"
-                        alt="Little Greene Products"
-                        width={400}
-                        height={300}
-                        className="w-full h-28 sm:h-36 lg:h-44 object-contain p-2 sm:p-3"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 w-20 h-20 sm:w-32 sm:h-32 bg-[var(--color-accent)] rounded-xl sm:rounded-2xl -z-10 hidden sm:block" />
-                <div className="absolute -top-4 -right-4 sm:-top-6 sm:-right-6 w-16 h-16 sm:w-24 sm:h-24 bg-[var(--color-accent-muted)]/20 rounded-xl sm:rounded-2xl -z-10 hidden sm:block" />
-              </div>
+          <div
+            ref={brandsRef}
+            className={`text-center mb-10 sm:mb-14 reveal ${brandsRevealed ? 'revealed' : ''}`}
+          >
+            <div className="inline-flex items-center gap-2 mb-3 text-xs sm:text-sm font-medium text-[var(--color-accent-muted)] uppercase tracking-widest">
+              <span className="w-6 sm:w-8 h-px bg-[var(--color-accent-muted)]" />
+              {t('brandsLabel')}
+              <span className="w-6 sm:w-8 h-px bg-[var(--color-accent-muted)]" />
             </div>
-            
-            <div
-              ref={lgRef}
-              className={`lg:col-span-5 order-1 lg:order-2 reveal-right ${lgRevealed ? 'revealed' : ''}`}
-            >
-              <Image
-                src="/images/LG Logo_Black.png"
-                alt="Little Greene Logo"
-                width={160}
-                height={64}
-                className="mb-6 sm:mb-8 w-[140px] sm:w-[200px] dark:invert"
-              />
-              
-              <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-                <div className="h-1 w-8 sm:w-12 bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-muted)] rounded-full" />
-                <span className="text-base sm:text-lg text-[var(--color-accent-muted)] font-serif italic">
-                  {t('littleGreeneSubtitle')}
-                </span>
-              </div>
-              
-              <p className="text-base sm:text-lg text-[var(--color-text-secondary)] leading-relaxed mb-8 sm:mb-10">
-                {t('littleGreeneDescription')}
-              </p>
-
-              <div className="flex flex-wrap gap-2 sm:gap-3">
-                {[
-                  t('tags.heritage'),
-                  t('tags.sustainable'),
-                  t('tags.british')
-                ].map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-3 py-1.5 sm:px-4 sm:py-2 bg-[var(--color-surface)]/80 backdrop-blur-sm text-[var(--color-accent)] text-xs sm:text-sm font-medium rounded-full border border-[var(--color-border)] shadow-sm"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-[var(--color-accent)]">
+              {t('brandsTitle')}
+            </h2>
           </div>
-        </div>
-      </section>
 
-      {/* Royal Paint (Loggia) brand section */}
-      <section id="royal-paint-about" className="relative scroll-mt-24 py-16 sm:py-24 lg:py-28 bg-[var(--color-bg)] overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.05] pointer-events-none">
-          <div className="absolute top-20 right-8 w-36 h-36 sm:w-52 sm:h-52 rounded-full bg-[#c4a882] organic-blob" />
-          <div className="absolute bottom-16 left-12 w-44 h-44 sm:w-60 sm:h-60 rounded-full bg-[#2a4556] organic-blob" style={{ animationDelay: '-3s' }} />
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            <div
-              ref={rpTextRef}
-              className={`lg:col-span-5 order-1 reveal-left ${rpTextRevealed ? 'revealed' : ''}`}
-            >
-              <div className="mb-6 sm:mb-8">
-                <Image
-                  src="/images/royal-paint/royal-paint-logo-navy.png"
-                  alt="Royal Paint"
-                  width={288}
-                  height={78}
-                  className="w-[190px] sm:w-[240px] h-auto dark:invert"
-                />
-                <div className="mt-3 flex items-center gap-2 text-[10px] sm:text-xs uppercase tracking-[0.3em] text-[var(--color-text-muted)]">
-                  <span className="w-6 h-px bg-[#c4a882]" /> by Loggia · Italy
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-                <div className="h-1 w-8 sm:w-12 bg-gradient-to-r from-[#c4a882] to-[var(--color-accent-muted)] rounded-full" />
-                <span className="text-base sm:text-lg text-[var(--color-accent-muted)] font-serif italic">
-                  {t('royalPaintSubtitle')}
-                </span>
-              </div>
-
-              <p className="text-base sm:text-lg text-[var(--color-text-secondary)] leading-relaxed mb-8 sm:mb-10">
-                {t('royalPaintDescription')}
-              </p>
-
-              <div className="flex flex-wrap gap-2 sm:gap-3">
-                {[t('royalTags.italian'), t('royalTags.decorative'), t('royalTags.colors')].map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-3 py-1.5 sm:px-4 sm:py-2 bg-[var(--color-surface)]/80 backdrop-blur-sm text-[var(--color-accent)] text-xs sm:text-sm font-medium rounded-full border border-[var(--color-border)] shadow-sm"
+          <div className="space-y-3 sm:space-y-4">
+            {brands.map((brand) => {
+              const open = openId === brand.id;
+              return (
+                <div
+                  key={brand.id}
+                  id={brand.anchor}
+                  className={`scroll-mt-24 rounded-2xl border overflow-hidden transition-all duration-300 ${
+                    open
+                      ? 'border-[var(--color-accent)]/40 bg-[var(--color-surface)] shadow-lg dark:shadow-black/30'
+                      : 'border-[var(--color-border)] bg-[var(--color-surface)]/40 hover:border-[var(--color-accent)]/30 hover:bg-[var(--color-surface)]/70'
+                  }`}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setOpenId(open ? '' : brand.id)}
+                    aria-expanded={open}
+                    className="w-full flex items-center gap-3 sm:gap-6 p-4 sm:p-6 text-left cursor-pointer"
                   >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
+                    <span
+                      className="hidden sm:block w-1 h-12 rounded-full shrink-0 transition-colors duration-300"
+                      style={{ backgroundColor: open ? brand.accent : 'transparent' }}
+                    />
+                    <Image
+                      src={brand.logo}
+                      alt={brand.subtitle}
+                      width={220}
+                      height={88}
+                      className={`${brand.logoWidth} h-auto object-contain shrink-0 ${brand.logoClass ?? ''}`}
+                    />
+                    <div className="min-w-0 flex-1">
+                      <div className="font-serif italic text-sm sm:text-lg text-[var(--color-accent-muted)] truncate">
+                        {brand.subtitle}
+                      </div>
+                      <div className="mt-1 flex items-center gap-2 text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[var(--color-text-muted)]">
+                        <span className="w-4 h-px" style={{ backgroundColor: brand.accent }} />
+                        {brand.origin}
+                      </div>
+                    </div>
+                    <div className="hidden md:flex items-center gap-1.5 shrink-0">
+                      {brand.swatches.map((c) => (
+                        <span key={c} className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: c }} />
+                      ))}
+                    </div>
+                    <span
+                      className={`shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border transition-all duration-300 ${
+                        open ? 'border-transparent text-white' : 'border-[var(--color-border)] text-[var(--color-accent)]'
+                      }`}
+                      style={open ? { backgroundColor: brand.accent } : undefined}
+                    >
+                      <svg
+                        className={`w-4 h-4 transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </span>
+                  </button>
 
-            <div
-              ref={rpGalleryRef}
-              className={`lg:col-span-7 order-2 reveal-right ${rpGalleryRevealed ? 'revealed' : ''}`}
-            >
-              <div className="relative">
-                <div className="space-y-3 sm:space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                    <div className="image-hover-zoom rounded-xl sm:rounded-2xl overflow-hidden shadow-lg sm:shadow-2xl dark:shadow-black/30 bg-[var(--color-surface)]">
-                      <Image
-                        src="/images/royal-paint/royal-paint-range-board.jpg"
-                        alt="Royal Paint product range"
-                        width={1200}
-                        height={1320}
-                        className="w-full h-72 sm:h-80 lg:h-96 object-contain p-3 sm:p-4"
-                      />
-                    </div>
-                    <div className="image-hover-zoom rounded-xl sm:rounded-2xl overflow-hidden shadow-lg sm:shadow-2xl dark:shadow-black/30 bg-[var(--color-surface)]">
-                      <Image
-                        src="/images/royal-paint/smalto-super-opaco-uniform.jpg"
-                        alt="Royal Paint Smalto Super Opaco"
-                        width={1000}
-                        height={1000}
-                        className="w-full h-72 sm:h-80 lg:h-96 object-cover"
-                      />
-                    </div>
-                  </div>
+                  {/* Smooth height animation via grid-template-rows 0fr → 1fr */}
+                  <div
+                    className={`grid transition-[grid-template-rows] duration-500 ease-out ${
+                      open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+                    }`}
+                  >
+                    <div className="overflow-hidden min-h-0">
+                      <div className="px-5 sm:px-8 lg:px-10 pb-10 sm:pb-14">
+                        <div className="h-px w-full bg-gradient-to-r from-transparent via-[var(--color-border)] to-transparent mb-8 sm:mb-12" />
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+                          <div className="lg:col-span-5 order-2 lg:order-1">
+                            <div
+                              className="h-1 w-12 sm:w-16 rounded-full mb-6 sm:mb-8"
+                              style={{ background: `linear-gradient(to right, ${brand.accent}, var(--color-accent-muted))` }}
+                            />
 
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-                    <div className="image-hover-zoom rounded-xl sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg dark:shadow-black/20 bg-[var(--color-surface)]">
-                      <Image
-                        src="/images/royal-paint/lavabile-super-opaca-uniform.jpg"
-                        alt="Royal Paint Lavabile Super Opaca"
-                        width={1000}
-                        height={1000}
-                        className="w-full h-36 sm:h-44 lg:h-52 object-cover"
-                      />
-                    </div>
-                    <div className="image-hover-zoom rounded-xl sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg dark:shadow-black/20 bg-[var(--color-surface)]">
-                      <Image
-                        src="/images/royal-paint/fast-clean-uniform.jpg"
-                        alt="Royal Paint Fast Clean"
-                        width={1000}
-                        height={1000}
-                        className="w-full h-36 sm:h-44 lg:h-52 object-cover"
-                      />
-                    </div>
-                    <div className="image-hover-zoom rounded-xl sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg dark:shadow-black/20 bg-[var(--color-surface)]">
-                      <Image
-                        src="/images/royal-paint/supreme-uniform.jpg"
-                        alt="Royal Paint Supreme"
-                        width={1000}
-                        height={1000}
-                        className="w-full h-36 sm:h-44 lg:h-52 object-cover"
-                      />
-                    </div>
-                    <div className="image-hover-zoom rounded-xl sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg dark:shadow-black/20 bg-[var(--color-surface)]">
-                      <Image
-                        src="/images/royal-paint/egg-shell-uniform.jpg"
-                        alt="Royal Paint Egg Shell"
-                        width={1000}
-                        height={1000}
-                        className="w-full h-36 sm:h-44 lg:h-52 object-cover"
-                      />
+                            <p className="text-base sm:text-lg text-[var(--color-text-secondary)] leading-relaxed mb-8 sm:mb-10">
+                              {brand.description}
+                            </p>
+
+                            <div className="flex flex-wrap gap-2 sm:gap-3 mb-8 sm:mb-10">
+                              {brand.tags.map((tag) => (
+                                <span
+                                  key={tag}
+                                  className="px-3 py-1.5 sm:px-4 sm:py-2 bg-[var(--color-bg-secondary)]/80 backdrop-blur-sm text-[var(--color-accent)] text-xs sm:text-sm font-medium rounded-full border border-[var(--color-border)] shadow-sm"
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+
+                            <button
+                              type="button"
+                              onClick={() => router.push('/paints')}
+                              className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[var(--color-accent)] text-[var(--color-bg)] text-sm font-medium shadow-lg hover:shadow-xl hover:gap-3 active:scale-[0.98] transition-all duration-300"
+                            >
+                              {t('brandExplore')}
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                              </svg>
+                            </button>
+                          </div>
+
+                          <div className="lg:col-span-7 order-1 lg:order-2">
+                            <div className="relative">
+                              <div className="space-y-3 sm:space-y-4">
+                                {/* Featured row — first two images, large */}
+                                <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                                  {brand.images.slice(0, 2).map((img) => (
+                                    <div
+                                      key={img.src}
+                                      className="image-hover-zoom rounded-xl sm:rounded-2xl overflow-hidden shadow-lg sm:shadow-2xl dark:shadow-black/30 bg-[var(--color-surface)]"
+                                    >
+                                      <Image
+                                        src={img.src}
+                                        alt={img.alt}
+                                        width={800}
+                                        height={800}
+                                        className={`w-full h-44 sm:h-64 lg:h-80 ${
+                                          img.fit === 'cover' ? 'object-cover' : 'object-contain p-2 sm:p-3'
+                                        }`}
+                                      />
+                                    </div>
+                                  ))}
+                                </div>
+
+                                {/* Secondary row — remaining images */}
+                                {brand.images.length > 2 && (
+                                  <div
+                                    className="grid grid-cols-3 gap-3 sm:gap-4"
+                                    style={{
+                                      gridTemplateColumns: `repeat(${brand.images.length - 2}, minmax(0, 1fr))`,
+                                    }}
+                                  >
+                                    {brand.images.slice(2).map((img) => (
+                                      <div
+                                        key={img.src}
+                                        className="image-hover-zoom rounded-xl sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg dark:shadow-black/20 bg-[var(--color-surface)]"
+                                      >
+                                        <Image
+                                          src={img.src}
+                                          alt={img.alt}
+                                          width={500}
+                                          height={500}
+                                          className={`w-full h-28 sm:h-36 lg:h-44 ${
+                                            img.fit === 'cover' ? 'object-cover' : 'object-contain p-1.5 sm:p-2'
+                                          }`}
+                                        />
+                                      </div>
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
+
+                              {/* Floating accent squares for depth */}
+                              <div
+                                className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 w-20 h-20 sm:w-32 sm:h-32 rounded-xl sm:rounded-2xl -z-10 hidden sm:block"
+                                style={{ backgroundColor: brand.accent }}
+                              />
+                              <div
+                                className="absolute -top-4 -right-4 sm:-top-6 sm:-right-6 w-16 h-16 sm:w-24 sm:h-24 rounded-xl sm:rounded-2xl -z-10 hidden sm:block"
+                                style={{ backgroundColor: brand.accent, opacity: 0.2 }}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-
-                <div className="absolute -top-4 -right-4 sm:-top-6 sm:-right-6 w-16 h-16 sm:w-24 sm:h-24 bg-[#c4a882]/25 rounded-xl sm:rounded-2xl -z-10 hidden sm:block" />
-                <div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 w-20 h-20 sm:w-32 sm:h-32 bg-[var(--color-accent)] rounded-xl sm:rounded-2xl -z-10 hidden sm:block" />
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
       </section>

@@ -90,7 +90,7 @@ export default function Header() {
           <div className="flex items-center justify-between h-16 sm:h-20">
             <Link href="/" className="flex items-center" onClick={closeMenu}>
             <Image
-              src="/images/deco-concept-logo.png"
+              src="/images/deconcept-logo.png"
               alt="Deconcept LLC"
               width={100}
               height={45}

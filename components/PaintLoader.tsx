@@ -28,7 +28,7 @@ export default function PaintLoader() {
     <div className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#f8f6f3] transition-opacity duration-500 ${paintProgress >= 100 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
       <div className="relative mb-8">
         <Image
-          src="/images/deco-concept-logo.png"
+          src="/images/deconcept-logo.png"
           alt="Deconcept LLC"
           width={180}
           height={100}
