@@ -54,11 +54,12 @@ export default function AboutSection() {
       swatches: ['#2e4a3f', '#7a8b6f', '#c4a882', '#34506b'],
       tags: [t('tags.heritage'), t('tags.sustainable'), t('tags.british')],
       images: [
-        { src: '/images/colour-tools/Fan Deck - Colours of England.jpg', alt: 'Fan Deck Colours of England', fit: 'contain' },
-        { src: '/images/colour-tools/Colours of England Colour Card.jpg', alt: 'Colours of England Colour Card', fit: 'contain' },
-        { src: '/images/colour-tools/Brush Out Boards.jpg', alt: 'Brush Out Boards', fit: 'contain' },
-        { src: '/images/colour-tools/Fan Deck - 01.jpg', alt: 'Fan Deck', fit: 'contain' },
-        { src: '/images/good-image.jpeg', alt: 'Little Greene Products', fit: 'contain' },
+        { src: '/images/tins/tin-family.jpg', alt: 'Little Greene paint tin family', fit: 'contain' },
+        { src: '/images/colour-tools/Fan Deck - Colours of England.jpg', alt: 'Little Greene Colours of England fan deck', fit: 'contain' },
+        { src: '/images/tins/tin-1l-matt.jpg', alt: 'Little Greene Intelligent Matt Emulsion tin', fit: 'contain' },
+        { src: '/images/tins/tin-1l-eggshell.jpg', alt: 'Little Greene Intelligent Eggshell tin', fit: 'contain' },
+        { src: '/images/tins/tin-1l-absolute-matt.jpg', alt: 'Little Greene Absolute Matt Emulsion tin', fit: 'contain' },
+        { src: '/images/tins/tin-5l-primer.jpg', alt: 'Little Greene Wall Primer Sealer tin', fit: 'contain' },
       ],
     },
     {
