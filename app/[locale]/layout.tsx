@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import PaintLoader from "@/components/PaintLoader";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { siteUrl, siteName, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
+import { Analytics } from "@vercel/analytics/next";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -147,6 +148,7 @@ export default async function LocaleLayout({ children, params }: Props) {
             <Footer />
           </NextIntlClientProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
