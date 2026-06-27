@@ -24,6 +24,15 @@ export default function PaintsPage() {
   const [selectedAvailability, setSelectedAvailability] = useState<AvailabilityFilter>('all');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState<Color | null>(null);
+  // Client-managed scene photo overrides (Little Greene), loaded from the admin/Blob store.
+  const [sceneOverrides, setSceneOverrides] = useState<Record<number, string>>({});
+
+  useEffect(() => {
+    fetch('/api/scenes')
+      .then((r) => r.json())
+      .then((d) => setSceneOverrides(d.overrides || {}))
+      .catch(() => {});
+  }, []);
 
   // Close sidebar on larger screens by default, open by default on desktop
   useEffect(() => {
@@ -77,6 +86,13 @@ export default function PaintsPage() {
     all: t('allRoyalPaint'),
     exclusive: t('exclusive'),
   }[availability]);
+
+  // Uploaded override (Little Greene only) wins over the built-in scene.
+  const activeScene = selectedColor
+    ? selectedColor.brand === 'Little Greene'
+      ? sceneOverrides[selectedColor.id] ?? selectedColor.scene
+      : selectedColor.scene
+    : null;
 
   return (
     <div className="min-h-screen bg-[var(--color-bg-secondary)]">
@@ -311,9 +327,9 @@ export default function PaintsPage() {
               {/* Left side - Large Color Swatch / room scene */}
               <div className="lg:w-[55%] relative bg-[var(--color-bg-secondary)]">
                 <div className="relative w-full h-full min-h-[320px] sm:min-h-[400px] lg:min-h-[520px]">
-                  {selectedColor.scene ? (
+                  {activeScene ? (
                     <Image
-                      src={selectedColor.scene}
+                      src={activeScene}
                       alt={selectedColor.name}
                       fill
                       className="object-cover"
