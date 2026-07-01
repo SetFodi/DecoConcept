@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { toolProducts, toolCategories, type ToolProduct } from '@/lib/tools';
+import { applyToolsConfig, type ToolsConfig } from '@/lib/toolsConfig';
 
 function VideoPlayer({ src }: { src: string }) {
   const ref = useRef<HTMLVideoElement>(null);
@@ -44,6 +45,17 @@ export default function ToolsPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selected, setSelected] = useState<ToolProduct | null>(null);
   const [activeImage, setActiveImage] = useState(0);
+  // Admin-managed catalog overrides (edits / hidden / added tools), stored in Blob.
+  const [toolsConfig, setToolsConfig] = useState<ToolsConfig | null>(null);
+
+  useEffect(() => {
+    fetch('/api/tools-config')
+      .then((r) => r.json())
+      .then((d) => setToolsConfig(d.config || null))
+      .catch(() => {});
+  }, []);
+
+  const allTools = useMemo(() => applyToolsConfig(toolProducts, toolsConfig), [toolsConfig]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -69,7 +81,7 @@ export default function ToolsPage() {
   useEffect(() => setSelectedSub('all'), [selectedCategory]);
 
   const filtered = useMemo(() => {
-    let result = toolProducts;
+    let result = allTools;
     if (selectedCategory !== 'all') result = result.filter((p) => p.category === selectedCategory);
     if (selectedSub !== 'all') result = result.filter((p) => p.subcategory === selectedSub);
     if (searchQuery.trim()) {
@@ -79,7 +91,7 @@ export default function ToolsPage() {
       );
     }
     return result;
-  }, [selectedCategory, selectedSub, searchQuery]);
+  }, [allTools, selectedCategory, selectedSub, searchQuery]);
 
   const openProduct = (p: ToolProduct) => {
     setSelected(p);
