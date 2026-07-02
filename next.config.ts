@@ -5,6 +5,10 @@ const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
 const nextConfig: NextConfig = {
   images: {
+    // Serve images as-is from the CDN. All files in /public are pre-compressed
+    // (JPEG ≤1920px q80, PNG ≤1400px) and admin uploads are downscaled client-side,
+    // so Vercel's per-transformation Image Optimization (5K/mo free cap) isn't needed.
+    unoptimized: true,
     remotePatterns: [
       // Client-uploaded colour scene photos live in Vercel Blob (public store).
       { protocol: 'https', hostname: '*.public.blob.vercel-storage.com' },
