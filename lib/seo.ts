@@ -8,12 +8,12 @@ export const siteName = "Deconcept LLC";
 /** Real business contact data — kept in sync with the contact page. */
 export const business = {
   name: siteName,
-  email: "decoconceptbatumi@gmail.com",
-  phone: "+995598152727",
-  phoneDisplay: "+995 598 15 27 27",
+  email: "info@deconcept.ge",
+  phone: "+995577477288",
+  phoneDisplay: "+995 577 47 72 88",
   whatsapp: "https://wa.me/995598152727",
-  street: "18 Nikoloz Baratashvili Street",
-  city: "Batumi",
+  street: "Vazha Pshavela Avenue 37",
+  city: "Tbilisi",
   country: "GE",
   facebook: "https://facebook.com/DecoConceptBatumi/",
   instagram: "https://www.instagram.com/deco_concept_batumi/",

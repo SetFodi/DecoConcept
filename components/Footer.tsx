@@ -57,11 +57,11 @@ export default function Footer() {
             </div>
             </div>
             <a 
-              href="mailto:decoconceptbatumi@gmail.com" 
+              href="mailto:info@deconcept.ge"
               className="text-white/60 hover:text-white transition-colors text-xs sm:text-sm break-all"
               style={{ color: 'rgba(255,255,255,0.6)' }}
             >
-              decoconceptbatumi@gmail.com
+              info@deconcept.ge
             </a>
           </div>
 

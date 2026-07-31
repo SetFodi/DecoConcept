@@ -102,7 +102,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-medium text-[var(--color-accent)] mb-0.5 sm:mb-1 text-sm sm:text-base">{t('address')}</h3>
-                    <p className="text-[var(--color-text-secondary)] text-xs sm:text-sm leading-relaxed">18 Nikoloz Baratashvili Street<br />Batumi, Georgia</p>
+                    <p className="text-[var(--color-text-secondary)] text-xs sm:text-sm leading-relaxed">Vazha Pshavela Avenue 37<br />Tbilisi, Georgia</p>
                   </div>
                 </div>
 
@@ -114,8 +114,8 @@ export default function ContactPage() {
                   </div>
                   <div className="min-w-0">
                     <h3 className="font-medium text-[var(--color-accent)] mb-0.5 sm:mb-1 text-sm sm:text-base">{t('email')}</h3>
-                    <a href="mailto:decoconceptbatumi@gmail.com" className="text-[var(--color-text-secondary)] text-xs sm:text-sm hover:text-[var(--color-accent)] transition-colors break-all">
-                      decoconceptbatumi@gmail.com
+                    <a href="mailto:info@deconcept.ge" className="text-[var(--color-text-secondary)] text-xs sm:text-sm hover:text-[var(--color-accent)] transition-colors break-all">
+                      info@deconcept.ge
                     </a>
                   </div>
                 </div>
@@ -128,8 +128,8 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-medium text-[var(--color-accent)] mb-0.5 sm:mb-1 text-sm sm:text-base">{t('phone')}</h3>
-                    <a href="tel:+995598152727" className="text-[var(--color-text-secondary)] text-xs sm:text-sm hover:text-[var(--color-accent)] transition-colors">
-                      +995 598 15 27 27
+                    <a href="tel:+995577477288" className="text-[var(--color-text-secondary)] text-xs sm:text-sm hover:text-[var(--color-accent)] transition-colors">
+                      +995 577 47 72 88
                     </a>
                   </div>
                 </div>
@@ -208,7 +208,7 @@ export default function ContactPage() {
           >
             <div className="aspect-[16/9] sm:aspect-[21/9] relative">
               <iframe
-                src="https://maps.google.com/maps?q=18+Nikoloz+Baratashvili+Street,Batumi,Georgia&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                src="https://maps.google.com/maps?q=Vazha+Pshavela+Avenue+37,Tbilisi,Georgia&t=&z=16&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -218,7 +218,7 @@ export default function ContactPage() {
                 className="absolute inset-0"
               />
               <a
-                href="https://maps.app.goo.gl/R4AyufVUstwChwpt7"
+                href="https://www.google.com/maps/search/?api=1&query=Vazha+Pshavela+Avenue+37,+Tbilisi,+Georgia"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-[var(--color-surface)] rounded-lg shadow-lg text-xs sm:text-sm font-medium text-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)] active:scale-95 transition-all"
