@@ -11,7 +11,7 @@ export const business = {
   email: "info@deconcept.ge",
   phone: "+995577477288",
   phoneDisplay: "+995 577 47 72 88",
-  whatsapp: "https://wa.me/995598152727",
+  whatsapp: "https://wa.me/995577477288",
   street: "Vazha Pshavela Avenue 37",
   city: "Tbilisi",
   country: "GE",
