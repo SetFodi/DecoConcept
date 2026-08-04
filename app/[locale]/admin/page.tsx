@@ -94,7 +94,7 @@ export default function AdminPage() {
               Deconcept Admin
             </h1>
             <p className="text-xs text-[var(--color-text-muted)]">
-              {tab === 'colors' ? 'Little Greene colour scenes' : 'Blue Dolphin tools catalog'}
+              {tab === 'colors' ? 'Paint catalog — photos & order' : 'Blue Dolphin tools catalog'}
             </p>
           </div>
           {/* Tabs */}

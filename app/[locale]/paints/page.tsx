@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { colors, brands, searchColors, type Color } from '@/lib/colors';
+import { applyColorsConfig, type ColorsConfig } from '@/lib/colorsConfig';
 import ColorCard from '@/components/ColorCard';
 
 type AvailabilityFilter = 'all' | 'exclusive';
@@ -26,11 +27,17 @@ export default function PaintsPage() {
   const [selectedColor, setSelectedColor] = useState<Color | null>(null);
   // Client-managed scene photo overrides (Little Greene), loaded from the admin/Blob store.
   const [sceneOverrides, setSceneOverrides] = useState<Record<number, string>>({});
+  // Client-managed display order per brand, loaded from the admin/Blob store.
+  const [colorsConfig, setColorsConfig] = useState<ColorsConfig | null>(null);
 
   useEffect(() => {
     fetch('/api/scenes')
       .then((r) => r.json())
       .then((d) => setSceneOverrides(d.overrides || {}))
+      .catch(() => {});
+    fetch('/api/colors-config')
+      .then((r) => r.json())
+      .then((d) => setColorsConfig(d.config || null))
       .catch(() => {});
   }, []);
 
@@ -59,8 +66,12 @@ export default function PaintsPage() {
   }, [sidebarOpen, selectedColor]);
 
   const filteredColors = useMemo(() => {
-    let result = searchQuery.trim() ? searchColors(searchQuery) : colors;
-    
+    // Admin-managed order first, so it survives search and the brand filters below.
+    let result = applyColorsConfig(
+      searchQuery.trim() ? searchColors(searchQuery) : colors,
+      colorsConfig
+    );
+
     if (selectedBrand) {
       result = result.filter(c => c.brand === selectedBrand);
     }
@@ -70,7 +81,7 @@ export default function PaintsPage() {
     }
     
     return result;
-  }, [searchQuery, selectedBrand, selectedAvailability]);
+  }, [searchQuery, selectedBrand, selectedAvailability, colorsConfig]);
 
   const handleBrandSelect = (brand: string) => {
     setSelectedBrand(brand);

@@ -1,4 +1,5 @@
 import type { ToolProduct } from './tools';
+import { sortByOrder } from './reorder';
 
 /**
  * Client-managed overrides for the Blue Dolphin tools catalog, stored as one
@@ -6,6 +7,7 @@ import type { ToolProduct } from './tools';
  *
  * - `edits`  : per built-in tool id — changed fields and/or `hidden`.
  * - `added`  : brand-new tools created in the admin (photos live in Blob).
+ * - `order`  : tool ids in display order, set by the admin's reorder mode.
  *
  * The public site merges these over the built-in `toolProducts` list, so with
  * no config (or storage down) the site simply shows the built-in catalog.
@@ -34,6 +36,8 @@ export type CustomTool = {
 export type ToolsConfig = {
   edits: Record<string, ToolEdit>;
   added: CustomTool[];
+  /** Tool ids in display order. Tools missing from it keep their built-in order and go last. */
+  order?: string[];
 };
 
 export const emptyToolsConfig: ToolsConfig = { edits: {}, added: [] };
@@ -66,7 +70,7 @@ export function applyToolsConfig(
       gallery: c.gallery?.length ? c.gallery : [c.image],
     });
   }
-  return merged;
+  return sortByOrder(merged, cfg.order, (t) => t.id);
 }
 
 /** Minimal structural validation for config documents sent to the API. */
@@ -75,6 +79,10 @@ export function isToolsConfig(v: unknown): v is ToolsConfig {
   const o = v as Record<string, unknown>;
   if (!o.edits || typeof o.edits !== 'object' || Array.isArray(o.edits)) return false;
   if (!Array.isArray(o.added)) return false;
+  if (o.order !== undefined) {
+    if (!Array.isArray(o.order)) return false;
+    if (!o.order.every((id) => typeof id === 'string')) return false;
+  }
   return (o.added as unknown[]).every(
     (c) =>
       !!c &&

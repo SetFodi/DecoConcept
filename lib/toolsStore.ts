@@ -1,42 +1,22 @@
-import { list, put, del } from '@vercel/blob';
+import { put, del } from '@vercel/blob';
+import { hasBlobStorage, readBlobDoc, writeBlobDoc } from './blobDoc';
 import { emptyToolsConfig, type ToolsConfig, isToolsConfig } from './toolsConfig';
 
 /**
  * Tools catalog overrides in Vercel Blob:
- * - config document : `tools/config-<random>.json` (only one kept; replaced on save
- *   with a fresh random-suffix URL so the public CDN never serves a stale copy)
+ * - config document : `tools/config-<random>.json` (only one kept — see blobDoc)
  * - uploaded photos : `tools/images/<random>`
  */
 
 const CONFIG_PREFIX = 'tools/config';
 const IMAGE_PREFIX = 'tools/images/';
 
-const hasStorage = () => !!process.env.BLOB_READ_WRITE_TOKEN;
-
 export async function getToolsConfig(): Promise<ToolsConfig> {
-  if (!hasStorage()) return emptyToolsConfig;
-  try {
-    const res = await list({ prefix: CONFIG_PREFIX });
-    if (!res.blobs.length) return emptyToolsConfig;
-    // newest wins if a stale one ever survives a failed delete
-    const newest = res.blobs.reduce((a, b) =>
-      new Date(a.uploadedAt) > new Date(b.uploadedAt) ? a : b
-    );
-    const data = await (await fetch(newest.url, { cache: 'no-store' })).json();
-    return isToolsConfig(data) ? data : emptyToolsConfig;
-  } catch {
-    return emptyToolsConfig;
-  }
+  return readBlobDoc(CONFIG_PREFIX, isToolsConfig, emptyToolsConfig);
 }
 
 export async function saveToolsConfig(cfg: ToolsConfig): Promise<void> {
-  const res = await list({ prefix: CONFIG_PREFIX });
-  await put(`${CONFIG_PREFIX}-new.json`, JSON.stringify(cfg), {
-    access: 'public',
-    addRandomSuffix: true,
-    contentType: 'application/json',
-  });
-  if (res.blobs.length) await del(res.blobs.map((b) => b.url));
+  await writeBlobDoc(CONFIG_PREFIX, cfg);
 }
 
 export async function uploadToolImage(
@@ -53,7 +33,7 @@ export async function uploadToolImage(
 
 /** Delete a previously-uploaded tool photo (only within our image prefix). */
 export async function deleteToolImage(url: string): Promise<void> {
-  if (!hasStorage()) return;
+  if (!hasBlobStorage()) return;
   if (!url.includes(`/${IMAGE_PREFIX}`)) return; // never delete outside the tools area
   try {
     await del(url);

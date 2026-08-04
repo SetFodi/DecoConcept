@@ -8,6 +8,9 @@ import {
   type CustomTool,
 } from '@/lib/toolsConfig';
 import { downscaleImage } from '@/lib/clientImage';
+import { sortByOrder } from '@/lib/reorder';
+import { useReorder } from '@/hooks/useReorder';
+import ReorderControls from './ReorderControls';
 
 /** Row shown in the admin grid: a built-in tool with its edits applied, or a custom tool. */
 type Row = {
@@ -43,6 +46,7 @@ export default function ToolsManager() {
   const [catFilter, setCatFilter] = useState('all');
   const [draft, setDraft] = useState<Draft | null>(null);
   const fileInput = useRef<HTMLInputElement>(null);
+  const reorder = useReorder();
 
   useEffect(() => {
     fetch('/api/tools-config')
@@ -72,17 +76,25 @@ export default function ToolsManager() {
     for (const c of cfg.added) {
       out.push({ ...c, subcategory: c.subcategory ?? '', isCustom: true, isEdited: false, hidden: false });
     }
-    return out;
+    return sortByOrder(out, cfg.order, (r) => r.id);
   }, [cfg]);
+
+  // While reordering, the grid follows the unsaved order instead of the saved one.
+  const ordered = useMemo(
+    () => (reorder.isActive ? sortByOrder(rows, reorder.order, (r) => r.id) : rows),
+    [rows, reorder.isActive, reorder.order]
+  );
 
   const visible = useMemo(() => {
     const q = search.trim().toLowerCase();
-    return rows.filter((r) => {
+    return ordered.filter((r) => {
       if (catFilter !== 'all' && r.category !== catFilter) return false;
       if (q && !`${r.name} ${r.category} ${r.subcategory}`.toLowerCase().includes(q)) return false;
       return true;
     });
-  }, [rows, search, catFilter]);
+  }, [ordered, search, catFilter]);
+
+  const visibleKeys = useMemo(() => visible.map((r) => r.id), [visible]);
 
   async function persist(next: ToolsConfig): Promise<boolean> {
     setSaving(true);
@@ -102,6 +114,10 @@ export default function ToolsManager() {
     } finally {
       setSaving(false);
     }
+  }
+
+  async function saveOrder() {
+    if (await persist({ ...cfg, order: reorder.order })) reorder.stop();
   }
 
   function openEdit(r: Row) {
@@ -246,22 +262,63 @@ export default function ToolsManager() {
             </button>
           ))}
         </div>
-        <button
-          onClick={openNew}
-          className="sm:ml-auto rounded-lg bg-[var(--color-accent)] px-4 py-2.5 text-sm font-medium text-[var(--color-bg)]"
-        >
-          + Add tool
-        </button>
+        {!reorder.isActive && (
+          <div className="flex gap-2 sm:ml-auto">
+            <button
+              onClick={() => reorder.start(rows.map((r) => r.id))}
+              className="rounded-lg border border-[var(--color-border)] px-4 py-2.5 text-sm text-[var(--color-text-secondary)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+            >
+              ⇅ Reorder
+            </button>
+            <button
+              onClick={openNew}
+              className="rounded-lg bg-[var(--color-accent)] px-4 py-2.5 text-sm font-medium text-[var(--color-bg)]"
+            >
+              + Add tool
+            </button>
+          </div>
+        )}
       </div>
+
+      {/* Reorder bar */}
+      {reorder.isActive && (
+        <div className="mb-5 flex flex-col gap-3 rounded-xl border border-[var(--color-accent)]/40 bg-[var(--color-accent)]/10 px-4 py-3 sm:flex-row sm:items-center">
+          <p className="text-sm text-[var(--color-text-secondary)]">
+            Drag a tool onto another to drop it in that spot, or use ← → to nudge it. Search and
+            category filters still work — a tool moves next to the neighbour you can see.
+          </p>
+          <div className="flex gap-2 sm:ml-auto sm:shrink-0">
+            <button
+              onClick={reorder.stop}
+              disabled={saving}
+              className="rounded-lg border border-[var(--color-border)] px-4 py-2.5 text-sm text-[var(--color-text-secondary)] disabled:opacity-50"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={saveOrder}
+              disabled={saving || !reorder.isDirty}
+              className="rounded-lg bg-[var(--color-accent)] px-5 py-2.5 text-sm font-medium text-[var(--color-bg)] disabled:opacity-50"
+            >
+              {saving ? 'Saving…' : 'Save order'}
+            </button>
+          </div>
+        </div>
+      )}
 
       {!loaded ? (
         <p className="py-16 text-center text-[var(--color-text-muted)]">Loading…</p>
       ) : (
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
-          {visible.map((r) => (
+          {visible.map((r, i) => (
             <div
               key={r.id}
-              className={`overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] ${
+              {...(reorder.isActive ? reorder.dragProps(r.id) : {})}
+              className={`overflow-hidden rounded-xl border bg-[var(--color-surface)] ${
+                reorder.draggingKey === r.id
+                  ? 'border-[var(--color-accent)] opacity-40'
+                  : 'border-[var(--color-border)]'
+              } ${reorder.isActive ? 'cursor-grab select-none active:cursor-grabbing' : ''} ${
                 r.hidden ? 'opacity-55' : ''
               }`}
             >
@@ -283,42 +340,50 @@ export default function ToolsManager() {
                   {r.subcategory ? ` · ${r.subcategory}` : ''}
                   {r.sizes ? ` · ${r.sizes}` : ''}
                 </div>
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => openEdit(r)}
-                    disabled={saving}
-                    className="flex-1 rounded-lg bg-[var(--color-accent)] px-3 py-2 text-xs font-medium text-[var(--color-bg)] disabled:opacity-50"
-                  >
-                    Edit
-                  </button>
-                  {r.isCustom ? (
+                {reorder.isActive ? (
+                  <ReorderControls
+                    position={i + 1}
+                    total={visible.length}
+                    onMove={(delta) => reorder.move(r.id, delta, visibleKeys)}
+                  />
+                ) : (
+                  <div className="flex gap-2">
                     <button
-                      onClick={() => deleteCustom(r)}
+                      onClick={() => openEdit(r)}
                       disabled={saving}
-                      className="rounded-lg border border-[var(--color-border)] px-3 py-2 text-xs text-[var(--color-text-secondary)] hover:text-red-500 disabled:opacity-50"
+                      className="flex-1 rounded-lg bg-[var(--color-accent)] px-3 py-2 text-xs font-medium text-[var(--color-bg)] disabled:opacity-50"
                     >
-                      Delete
+                      Edit
                     </button>
-                  ) : (
-                    <button
-                      onClick={() => toggleHidden(r)}
-                      disabled={saving}
-                      className="rounded-lg border border-[var(--color-border)] px-3 py-2 text-xs text-[var(--color-text-secondary)] disabled:opacity-50"
-                    >
-                      {r.hidden ? 'Show' : 'Hide'}
-                    </button>
-                  )}
-                  {r.isEdited && (
-                    <button
-                      onClick={() => resetEdits(r)}
-                      disabled={saving}
-                      title="Reset to built-in values"
-                      className="rounded-lg border border-[var(--color-border)] px-2 py-2 text-xs text-[var(--color-text-secondary)] disabled:opacity-50"
-                    >
-                      ↺
-                    </button>
-                  )}
-                </div>
+                    {r.isCustom ? (
+                      <button
+                        onClick={() => deleteCustom(r)}
+                        disabled={saving}
+                        className="rounded-lg border border-[var(--color-border)] px-3 py-2 text-xs text-[var(--color-text-secondary)] hover:text-red-500 disabled:opacity-50"
+                      >
+                        Delete
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => toggleHidden(r)}
+                        disabled={saving}
+                        className="rounded-lg border border-[var(--color-border)] px-3 py-2 text-xs text-[var(--color-text-secondary)] disabled:opacity-50"
+                      >
+                        {r.hidden ? 'Show' : 'Hide'}
+                      </button>
+                    )}
+                    {r.isEdited && (
+                      <button
+                        onClick={() => resetEdits(r)}
+                        disabled={saving}
+                        title="Reset to built-in values"
+                        className="rounded-lg border border-[var(--color-border)] px-2 py-2 text-xs text-[var(--color-text-secondary)] disabled:opacity-50"
+                      >
+                        ↺
+                      </button>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           ))}
