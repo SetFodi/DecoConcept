@@ -1,18 +1,36 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useLocale } from 'next-intl';
 import ColorManager from '@/components/admin/ColorManager';
+import RoyalPaintProductsManager from '@/components/admin/RoyalPaintProductsManager';
 import ToolsManager from '@/components/admin/ToolsManager';
 
 type Phase = 'loading' | 'login' | 'ready';
-type Tab = 'colors' | 'tools';
+type Tab = 'home-products' | 'colors' | 'tools';
+
+const tabDetails: Record<Tab, { subtitle: string; path: string }> = {
+  'home-products': {
+    subtitle: 'Royal Paint homepage cards',
+    path: '#product-showcase',
+  },
+  colors: {
+    subtitle: 'Paint catalog, photos and order',
+    path: '/paints',
+  },
+  tools: {
+    subtitle: 'Blue Dolphin tools catalog',
+    path: '/tools',
+  },
+};
 
 export default function AdminPage() {
+  const locale = useLocale();
   const [phase, setPhase] = useState<Phase>('loading');
   const [storage, setStorage] = useState(true);
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
-  const [tab, setTab] = useState<Tab>('colors');
+  const [tab, setTab] = useState<Tab>('home-products');
 
   useEffect(() => {
     fetch('/api/admin/session')
@@ -88,19 +106,20 @@ export default function AdminPage() {
     <div className="fixed inset-0 z-[120] overflow-y-auto bg-[var(--color-bg)]">
       {/* Top bar */}
       <header className="sticky top-0 z-10 border-b border-[var(--color-border)] bg-[var(--color-surface)]/95 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3 sm:px-6">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-4 py-3 sm:px-6">
           <div className="min-w-0">
             <h1 className="font-serif text-lg text-[var(--color-accent)] sm:text-xl">
               Deconcept Admin
             </h1>
             <p className="text-xs text-[var(--color-text-muted)]">
-              {tab === 'colors' ? 'Paint catalog — photos & order' : 'Blue Dolphin tools catalog'}
+              {tabDetails[tab].subtitle}
             </p>
           </div>
           {/* Tabs */}
-          <nav className="ml-2 flex gap-1 rounded-full border border-[var(--color-border)] p-1">
+          <nav className="order-3 flex w-full gap-1 overflow-x-auto rounded-full border border-[var(--color-border)] p-1 [scrollbar-width:none] sm:order-none sm:ml-2 sm:w-auto [&::-webkit-scrollbar]:hidden">
             {(
               [
+                ['home-products', 'Home products'],
                 ['colors', 'Colours'],
                 ['tools', 'Tools'],
               ] as [Tab, string][]
@@ -120,7 +139,7 @@ export default function AdminPage() {
           </nav>
           <div className="ml-auto flex items-center gap-2">
             <a
-              href={tab === 'colors' ? '../paints' : '../tools'}
+              href={`/${locale}${tabDetails[tab].path}`}
               className="rounded-lg border border-[var(--color-border)] px-3 py-2 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)]"
             >
               View site
@@ -143,7 +162,13 @@ export default function AdminPage() {
           </div>
         )}
 
-        {tab === 'colors' ? <ColorManager /> : <ToolsManager />}
+        {tab === 'home-products' ? (
+          <RoyalPaintProductsManager />
+        ) : tab === 'colors' ? (
+          <ColorManager />
+        ) : (
+          <ToolsManager />
+        )}
       </main>
     </div>
   );

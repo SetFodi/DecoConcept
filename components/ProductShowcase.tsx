@@ -1,24 +1,32 @@
 'use client';
 
-import { useState, type CSSProperties } from 'react';
-import { useTranslations } from 'next-intl';
+import { useMemo, useState, type CSSProperties } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import {
+  getProductCopy,
+  type RoyalPaintProduct,
+} from '@/lib/royalPaintProducts';
 
 type BrandId = 'little-greene' | 'royal-paint';
 
 type ProductItem = {
+  id?: string;
   label?: string;
+  title?: string;
+  description?: string;
+  isRoyalPaint?: boolean;
   image: string;
   descKey?: string;
-  translationKey?: string;
   scale?: string;
   imageFit?: 'contain' | 'cover';
 };
 
 type ProductCategory = {
   id: string;
-  nameKey: string;
+  nameKey?: string;
+  name?: string;
   accent: string;
   products: ProductItem[];
 };
@@ -100,109 +108,67 @@ const littleGreeneCategories: ProductCategory[] = [
   },
 ];
 
-const royalPaintProducts: ProductItem[] = [
-  {
-    translationKey: 'lavabileSuperOpaca',
-    image: '/images/royal-paint/lavabile-super-opaca-uniform.jpg',
-    imageFit: 'cover',
-  },
-  {
-    translationKey: 'fastClean',
-    image: '/images/royal-paint/fast-clean-uniform.jpg',
-    imageFit: 'cover',
-  },
-  {
-    translationKey: 'smaltoSuperOpaco',
-    image: '/images/royal-paint/smalto-super-opaco-uniform.jpg',
-    imageFit: 'cover',
-  },
-  {
-    translationKey: 'smaltoUltraMatt',
-    image: '/images/royal-paint/smalto-ultra-matt-uniform.jpg',
-    imageFit: 'cover',
-  },
-  {
-    translationKey: 'supreme',
-    image: '/images/royal-paint/supreme-uniform.jpg',
-    imageFit: 'cover',
-  },
-  {
-    translationKey: 'eggShell',
-    image: '/images/royal-paint/egg-shell-uniform.jpg',
-    imageFit: 'cover',
-  },
-];
+const littleGreeneCollection: BrandCollection = {
+  id: 'little-greene',
+  labelKey: 'littleGreene',
+  logo: '/images/LG Logo_Black.png',
+  logoClassName: 'dark:brightness-0 dark:invert',
+  logoAlt: 'Little Greene',
+  categories: littleGreeneCategories,
+};
 
-const royalPaintCategories: ProductCategory[] = [
-  {
-    id: 'all',
-    nameKey: 'allProducts',
-    accent: '#2f4d5f',
-    products: royalPaintProducts,
-  },
-  {
-    id: 'lavabile-super-opaca',
-    nameKey: 'lavabileSuperOpaca',
-    accent: '#344858',
-    products: [royalPaintProducts[0]],
-  },
-  {
-    id: 'fast-clean',
-    nameKey: 'fastClean',
-    accent: '#7c8a6e',
-    products: [royalPaintProducts[1]],
-  },
-  {
-    id: 'smalto-super-opaco',
-    nameKey: 'smaltoSuperOpaco',
-    accent: '#8a8178',
-    products: [royalPaintProducts[2]],
-  },
-  {
-    id: 'smalto-ultra-matt',
-    nameKey: 'smaltoUltraMatt',
-    accent: '#59616b',
-    products: [royalPaintProducts[3]],
-  },
-  {
-    id: 'supreme',
-    nameKey: 'supreme',
-    accent: '#8199a9',
-    products: [royalPaintProducts[4]],
-  },
-  {
-    id: 'egg-shell',
-    nameKey: 'eggShell',
-    accent: '#aa8c9a',
-    products: [royalPaintProducts[5]],
-  },
-];
+const royalPaintAccents = ['#8199a9', '#a48d6f', '#aa8c9a', '#7c8a6e'];
 
-const brandCollections: BrandCollection[] = [
-  {
-    id: 'little-greene',
-    labelKey: 'littleGreene',
-    logo: '/images/LG Logo_Black.png',
-    logoClassName: 'dark:brightness-0 dark:invert',
-    logoAlt: 'Little Greene',
-    categories: littleGreeneCategories,
-  },
-  {
-    id: 'royal-paint',
-    labelKey: 'royalPaint',
-    logo: '/images/royal-paint/royal-paint-logo-navy.png',
-    darkLogo: '/images/royal-paint/royal-paint-logo-white.png',
-    logoAlt: 'Royal Paint',
-    categories: royalPaintCategories,
-  },
-];
+type ProductShowcaseProps = {
+  royalPaintProducts: RoyalPaintProduct[];
+};
 
-export default function ProductShowcase() {
+export default function ProductShowcase({ royalPaintProducts }: ProductShowcaseProps) {
   const t = useTranslations('products');
+  const locale = useLocale();
   const [titleRef, titleRevealed] = useScrollReveal<HTMLDivElement>();
   const [gridRef, gridRevealed] = useScrollReveal<HTMLDivElement>();
   const [selectedBrandId, setSelectedBrandId] = useState<BrandId>('little-greene');
   const [selectedCategoryId, setSelectedCategoryId] = useState('all');
+
+  const brandCollections = useMemo<BrandCollection[]>(() => {
+    const products: ProductItem[] = royalPaintProducts.map((product) => {
+      const copy = getProductCopy(product, locale);
+      return {
+        id: product.id,
+        title: copy.title,
+        description: copy.description,
+        isRoyalPaint: true,
+        image: product.image,
+        imageFit: 'cover',
+      };
+    });
+    const categories: ProductCategory[] = [
+      {
+        id: 'all',
+        nameKey: 'allProducts',
+        accent: '#2f4d5f',
+        products,
+      },
+      ...products.map((product, index) => ({
+        id: product.id || `product-${index}`,
+        name: product.title || '',
+        accent: royalPaintAccents[index % royalPaintAccents.length],
+        products: [product],
+      })),
+    ];
+    return [
+      littleGreeneCollection,
+      {
+        id: 'royal-paint',
+        labelKey: 'royalPaint',
+        logo: '/images/royal-paint/royal-paint-logo-navy.png',
+        darkLogo: '/images/royal-paint/royal-paint-logo-white.png',
+        logoAlt: 'Royal Paint',
+        categories,
+      },
+    ];
+  }, [locale, royalPaintProducts]);
 
   const selectedBrand = brandCollections.find((brand) => brand.id === selectedBrandId) || brandCollections[0];
   const selectedCategory = selectedBrand.categories.find((category) => category.id === selectedCategoryId) || selectedBrand.categories[0];
@@ -213,23 +179,22 @@ export default function ProductShowcase() {
   };
 
   const getProductTitle = (product: ProductItem) => {
-    if (product.translationKey) {
-      return t(`royalProducts.${product.translationKey}.title`);
-    }
-
-    return product.label || '';
+    return product.title || product.label || '';
   };
 
   const getProductDescription = (product: ProductItem) => {
-    if (product.translationKey) {
-      return t(`royalProducts.${product.translationKey}.description`);
-    }
+    if (product.description !== undefined) return product.description;
 
     if (product.descKey) {
       return t(`sizes.${product.descKey}`);
     }
 
-    return t(`categories.${selectedCategory.nameKey}`);
+    return selectedCategory.name || t(`categories.${selectedCategory.nameKey}`);
+  };
+
+  const getCategoryName = (category: ProductCategory) => {
+    if (category.name) return category.name;
+    return category.nameKey ? t(`categories.${category.nameKey}`) : '';
   };
 
   return (
@@ -330,7 +295,7 @@ export default function ProductShowcase() {
                   backgroundColor: selectedCategory.id === category.id ? category.accent : 'transparent',
                 }}
               >
-                {t(`categories.${category.nameKey}`)}
+                {getCategoryName(category)}
               </button>
             ))}
           </div>
@@ -345,14 +310,14 @@ export default function ProductShowcase() {
           {selectedCategory.products.map((product, index) => {
             const productTitle = getProductTitle(product);
             const productDescription = getProductDescription(product);
-            const isRoyalPaintProduct = Boolean(product.translationKey);
+            const isRoyalPaintProduct = Boolean(product.isRoyalPaint);
             const productAccentStyle = {
               '--product-accent': selectedCategory.accent,
             } as CSSProperties;
 
             return (
             <div
-              key={`${selectedCategory.id}-${product.translationKey || product.label}`}
+              key={`${selectedCategory.id}-${product.id || product.label}`}
               className="group relative w-[calc(50%-0.5rem)] sm:w-[200px] lg:w-[240px] animate-fade-in-up"
               style={{
                 animationDelay: `${index * 0.1}s`,
@@ -384,7 +349,7 @@ export default function ProductShowcase() {
 
                   <Image
                     src={product.image}
-                    alt={isRoyalPaintProduct ? productTitle : `${t(`categories.${selectedCategory.nameKey}`)} ${product.label}`}
+                    alt={isRoyalPaintProduct ? productTitle : `${getCategoryName(selectedCategory)} ${product.label}`}
                     fill
                     sizes="(max-width: 640px) 45vw, (max-width: 1024px) 200px, 240px"
                     className={`transition-all duration-700 sm:group-hover:scale-110 ${
