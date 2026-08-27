@@ -8,6 +8,6 @@ export async function GET() {
   const overrides = await getSceneOverrides();
   return NextResponse.json(
     { overrides },
-    { headers: { 'Cache-Control': 'public, max-age=10, stale-while-revalidate=60' } }
+    { headers: { 'Cache-Control': 'no-store' } }
   );
 }

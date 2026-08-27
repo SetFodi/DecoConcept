@@ -1,5 +1,6 @@
 import { put } from '@vercel/blob';
-import { readBlobDoc, writeBlobDoc } from './blobDoc';
+import { blobCacheTags, cacheBlobRead, expireBlobRead } from './blobCache';
+import { hasBlobStorage, loadBlobDoc, writeBlobDoc } from './blobDoc';
 import {
   defaultRoyalPaintProductsConfig,
   isRoyalPaintProductsConfig,
@@ -9,18 +10,34 @@ import {
 const CONFIG_PREFIX = 'homepage/royal-paint/config';
 const IMAGE_PREFIX = 'homepage/royal-paint/images/';
 
+const readCachedRoyalPaintProductsConfig = cacheBlobRead(
+  'royal-paint-products',
+  blobCacheTags.royalPaintProducts,
+  () =>
+    loadBlobDoc(
+      CONFIG_PREFIX,
+      isRoyalPaintProductsConfig,
+      defaultRoyalPaintProductsConfig
+    )
+);
+
 export async function getRoyalPaintProductsConfig(): Promise<RoyalPaintProductsConfig> {
-  return readBlobDoc(
-    CONFIG_PREFIX,
-    isRoyalPaintProductsConfig,
-    defaultRoyalPaintProductsConfig
-  );
+  if (!hasBlobStorage()) return defaultRoyalPaintProductsConfig;
+  try {
+    return await readCachedRoyalPaintProductsConfig();
+  } catch {
+    return defaultRoyalPaintProductsConfig;
+  }
 }
 
 export async function saveRoyalPaintProductsConfig(
   config: RoyalPaintProductsConfig
 ): Promise<void> {
-  await writeBlobDoc(CONFIG_PREFIX, config);
+  try {
+    await writeBlobDoc(CONFIG_PREFIX, config);
+  } finally {
+    expireBlobRead(blobCacheTags.royalPaintProducts);
+  }
 }
 
 export async function uploadRoyalPaintProductImage(

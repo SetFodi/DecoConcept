@@ -11,21 +11,30 @@ import { list, put, del } from '@vercel/blob';
 
 export const hasBlobStorage = (): boolean => !!process.env.BLOB_READ_WRITE_TOKEN;
 
-export async function readBlobDoc<T>(
+/** Read directly from Blob. Errors are left to the caller so they are never cached. */
+export async function loadBlobDoc<T>(
   prefix: string,
   isValid: (value: unknown) => value is T,
   fallback: T
 ): Promise<T> {
   if (!hasBlobStorage()) return fallback;
+  const res = await list({ prefix });
+  if (!res.blobs.length) return fallback;
+  // newest wins if a stale one ever survives a failed delete
+  const newest = res.blobs.reduce((a, b) =>
+    new Date(a.uploadedAt) > new Date(b.uploadedAt) ? a : b
+  );
+  const data = await (await fetch(newest.url, { cache: 'no-store' })).json();
+  return isValid(data) ? data : fallback;
+}
+
+export async function readBlobDoc<T>(
+  prefix: string,
+  isValid: (value: unknown) => value is T,
+  fallback: T
+): Promise<T> {
   try {
-    const res = await list({ prefix });
-    if (!res.blobs.length) return fallback;
-    // newest wins if a stale one ever survives a failed delete
-    const newest = res.blobs.reduce((a, b) =>
-      new Date(a.uploadedAt) > new Date(b.uploadedAt) ? a : b
-    );
-    const data = await (await fetch(newest.url, { cache: 'no-store' })).json();
-    return isValid(data) ? data : fallback;
+    return await loadBlobDoc(prefix, isValid, fallback);
   } catch {
     return fallback;
   }

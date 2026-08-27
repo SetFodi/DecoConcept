@@ -1,5 +1,6 @@
 import { put, del } from '@vercel/blob';
-import { hasBlobStorage, readBlobDoc, writeBlobDoc } from './blobDoc';
+import { hasBlobStorage, loadBlobDoc, writeBlobDoc } from './blobDoc';
+import { blobCacheTags, cacheBlobRead, expireBlobRead } from './blobCache';
 import { emptyToolsConfig, type ToolsConfig, isToolsConfig } from './toolsConfig';
 
 /**
@@ -11,12 +12,27 @@ import { emptyToolsConfig, type ToolsConfig, isToolsConfig } from './toolsConfig
 const CONFIG_PREFIX = 'tools/config';
 const IMAGE_PREFIX = 'tools/images/';
 
+const readCachedToolsConfig = cacheBlobRead(
+  'tools-config',
+  blobCacheTags.tools,
+  () => loadBlobDoc(CONFIG_PREFIX, isToolsConfig, emptyToolsConfig)
+);
+
 export async function getToolsConfig(): Promise<ToolsConfig> {
-  return readBlobDoc(CONFIG_PREFIX, isToolsConfig, emptyToolsConfig);
+  if (!hasBlobStorage()) return emptyToolsConfig;
+  try {
+    return await readCachedToolsConfig();
+  } catch {
+    return emptyToolsConfig;
+  }
 }
 
 export async function saveToolsConfig(cfg: ToolsConfig): Promise<void> {
-  await writeBlobDoc(CONFIG_PREFIX, cfg);
+  try {
+    await writeBlobDoc(CONFIG_PREFIX, cfg);
+  } finally {
+    expireBlobRead(blobCacheTags.tools);
+  }
 }
 
 export async function uploadToolImage(

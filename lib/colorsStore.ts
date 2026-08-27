@@ -1,4 +1,5 @@
-import { readBlobDoc, writeBlobDoc } from './blobDoc';
+import { blobCacheTags, cacheBlobRead, expireBlobRead } from './blobCache';
+import { hasBlobStorage, loadBlobDoc, writeBlobDoc } from './blobDoc';
 import { emptyColorsConfig, isColorsConfig, type ColorsConfig } from './colorsConfig';
 
 /**
@@ -11,10 +12,25 @@ import { emptyColorsConfig, isColorsConfig, type ColorsConfig } from './colorsCo
 
 const CONFIG_PREFIX = 'colors/config';
 
+const readCachedColorsConfig = cacheBlobRead(
+  'colors-config',
+  blobCacheTags.colors,
+  () => loadBlobDoc(CONFIG_PREFIX, isColorsConfig, emptyColorsConfig)
+);
+
 export async function getColorsConfig(): Promise<ColorsConfig> {
-  return readBlobDoc(CONFIG_PREFIX, isColorsConfig, emptyColorsConfig);
+  if (!hasBlobStorage()) return emptyColorsConfig;
+  try {
+    return await readCachedColorsConfig();
+  } catch {
+    return emptyColorsConfig;
+  }
 }
 
 export async function saveColorsConfig(cfg: ColorsConfig): Promise<void> {
-  await writeBlobDoc(CONFIG_PREFIX, cfg);
+  try {
+    await writeBlobDoc(CONFIG_PREFIX, cfg);
+  } finally {
+    expireBlobRead(blobCacheTags.colors);
+  }
 }

@@ -9,6 +9,6 @@ export async function GET() {
   const config = await getColorsConfig();
   return NextResponse.json(
     { config },
-    { headers: { 'Cache-Control': 'public, max-age=10, stale-while-revalidate=60' } }
+    { headers: { 'Cache-Control': 'no-store' } }
   );
 }
